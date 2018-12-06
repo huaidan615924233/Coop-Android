@@ -1,7 +1,9 @@
-package com.coop.android;
+package com.coop.android.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
+import com.coop.android.R;
 
 public class FullScreenActivity extends AppCompatActivity {
 

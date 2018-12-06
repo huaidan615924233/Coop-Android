@@ -11,6 +11,4 @@
         android:layout_height="260dp"
         android:scaleType="fitXY"
         android:src="@mipmap/timg"/>
-
-
 </LinearLayout>
