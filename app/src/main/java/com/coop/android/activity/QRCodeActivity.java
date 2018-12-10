@@ -66,7 +66,7 @@ public class QRCodeActivity extends BaseActivity implements OnBottomDragListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.qrcode_activity, this);
+        setContentView(R.layout.activity_qrcode, this);
 
         intent = getIntent();
         userId = intent.getLongExtra(INTENT_ID, userId);

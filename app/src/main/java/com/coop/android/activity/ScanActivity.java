@@ -57,7 +57,7 @@ public class ScanActivity extends CaptureActivity implements ActivityPresenter, 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.scan_activity);
+        setContentView(R.layout.activity_scan);
         init(this, (SurfaceView) findViewById(R.id.svCameraScan), (ViewfinderView) findViewById(R.id.vfvCameraScan));
 
         //功能归类分区方法，必须调用<<<<<<<<<<

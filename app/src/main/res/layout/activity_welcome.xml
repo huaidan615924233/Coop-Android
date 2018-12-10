@@ -3,18 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    android:orientation="vertical">
     <ImageView
-        android:id="@+id/img_popularize"
         android:layout_width="match_parent"
-        android:layout_height="260dp"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@+id/toolbar_img"
+        android:layout_alignTop="@+id/toptop"
         android:scaleType="fitXY"
-        android:src="@mipmap/timg"/>
-    <Button
-        android:id="@+id/qrcodeBtn"
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="二维码" />
+        android:src="@mipmap/welcome" />
 </LinearLayout>

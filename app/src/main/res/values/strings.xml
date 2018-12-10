@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Co-op</string>
+
+    <string name="txt_guide_title_1">资金到账</string>
+    <string name="txt_guide_title_desc_1">提现方便</string>
+    <string name="txt_guide_title_2">区块链</string>
+    <string name="txt_guide_title_desc_2">创新技术</string>
+    <string name="txt_guide_title_3">企业服务</string>
+    <string name="txt_guide_title_desc_3">助您实现创业梦</string>
+    <string name="txt_guide_button_enter">进入应用</string>
 </resources>

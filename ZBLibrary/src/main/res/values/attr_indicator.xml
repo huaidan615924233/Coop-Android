@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CirclePageIndicator">
+        <attr name="indicator_icon" format="reference" />
+        <attr name="indicator_margin" format="dimension" />
+        <attr name="indicator_smooth" format="enum">
+            <enum name="smooth" value="0" />
+            <enum name="normal" value="1" />
+        </attr>
+    </declare-styleable>
+
+</resources>

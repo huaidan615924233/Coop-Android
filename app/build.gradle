@@ -1,13 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion rootProject.ext.compile_sdk_version
     defaultConfig {
         applicationId "com.coop.android"
-        minSdkVersion 22
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.ext.min_sdk_version
+        targetSdkVersion rootProject.ext.target_sdk_version
+
+        versionCode rootProject.ext.module_version_code
+        versionName rootProject.ext.module_version_name
     }
     buildTypes {
         release {
@@ -18,8 +19,8 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
-    api project(':QRCodeLibrary')
-    api project(':ZBLibrary')
+    implementation project(':QRCodeLibrary')
+    implementation project(':ZBLibrary')
 }
