@@ -42,6 +42,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 /**通用操作类
@@ -463,6 +464,15 @@ public class CommonUtil {
 		return false;
 	}
 
+	/**
+	 * 计算View的宽高
+	 * @param view
+	 */
+	public static void measureWidthAndHeight(View view) {
+		int widthMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+		int heightMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+		view.measure(widthMeasureSpec, heightMeasureSpec);
+	}
 
 
 }

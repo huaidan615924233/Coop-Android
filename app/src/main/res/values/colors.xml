@@ -89,7 +89,13 @@
     <color name="color_afec01">#AFEC01</color>
     <color name="color_65ce00">#65CE00</color>
     <color name="color_d8d8d8">#d8d8d8</color>
-
+    <color name="color_969696">#969696</color>
+    <color name="color_58ACFF">#58ACFF</color>
+    <color name="color_EDEDED">#EDEDED</color>
+    <color name="color_F2F2F2">#F2F2F2</color>
+    <color name="color_FAFAFA">#FAFAFA</color>
+    <color name="color_F0F0F0">#F0F0F0</color>
+    <color name="color_FF5858">#FF5858</color>
     <color name="transparent">#00000000</color>
     <color name="white">#fff</color>
     <color name="background_yellow">#fbd415</color>

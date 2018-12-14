@@ -1,5 +1,7 @@
 package com.coop.android.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -11,7 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.coop.android.R;
-import com.coop.android.utils.SPUtils;
+import com.coop.android.utils.SharedPreferencesUtils;
 
 import java.util.ArrayList;
 
@@ -20,21 +22,29 @@ import zuo.biao.library.ui.indicator.CirclePageIndicator;
 public class GuideActivity extends AppCompatActivity {
     private ViewPager mViewPagerView;
 
-    private SPUtils mSputil;
     private ArrayList<View> mGuideList;
     private CirclePageIndicator mPageIndicator;
     private Button guideBbtn;
+
+    /**
+     * 进入引导页
+     *
+     * @return
+     */
+    public static void newInstance(Context context) {
+        Intent intent = new Intent(context, GuideActivity.class);
+        context.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide);
-        mSputil = SPUtils.getInstance(this);
         mViewPagerView = findViewById(R.id.vpager);
         guideBbtn = findViewById(R.id.id_guide_btn);
-
         mPageIndicator = findViewById(R.id.id_guide_indicator);
 
+        SharedPreferencesUtils.setFirstRun(this, false);
 //
         View view1 = LayoutInflater.from(this).inflate(R.layout.guide_layout_1, null);
         View view2 = LayoutInflater.from(this).inflate(R.layout.guide_layout_1, null);
@@ -79,7 +89,7 @@ public class GuideActivity extends AppCompatActivity {
         guideBbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HomeActivity.newInstance(getApplicationContext());
+                HomeActivity.newInstance(GuideActivity.this);
                 finish();
             }
         });

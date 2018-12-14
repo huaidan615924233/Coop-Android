@@ -4,12 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignBottom="@+id/toolbar_img"
-        android:layout_alignTop="@+id/toptop"
         android:scaleType="fitXY"
         android:src="@mipmap/welcome" />
 </LinearLayout>

@@ -21,6 +21,6 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
-    implementation project(':QRCodeLibrary')
+    implementation project(':lib-zxing')
     implementation project(':ZBLibrary')
 }

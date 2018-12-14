@@ -8,4 +8,49 @@
     <string name="txt_guide_title_3">企业服务</string>
     <string name="txt_guide_title_desc_3">助您实现创业梦</string>
     <string name="txt_guide_button_enter">进入应用</string>
+    <!--各页面名称-->
+    <string name="txt_title_about_us">平台说明</string>
+    <string name="txt_title_update_password">忘记密码</string>
+    <string name="txt_title_set_password">设置密码</string>
+    <string name="txt_title_setting">设置</string>
+    <string name="txt_title_call_me">联系CO-OP官方</string>
+    <string name="txt_title_pay_token">转让通证给</string>
+    <string name="txt_title_input_pwd">请输入转让密码</string>
+    <!--登录注册-->
+    <string name="txt_login_number_one">请验证账户身份:</string>
+    <string name="txt_login_number_two">重新设置6位数密码:</string>
+    <string name="txt_login_phone">输入手机号</string>
+    <string name="txt_login_username_hint">编辑账户昵称 (12字以内)</string>
+    <string name="txt_login_pass">输入验证码</string>
+    <string name="txt_login_getpass">获取验证码</string>
+    <string name="txt_login_servedesc">《服务协议》</string>
+    <string name="txt_login_serve">我查看并同意CO-OP的</string>
+    <string name="txt_login_choose_uses_hint">请选择您的角色选择进入的方式</string>
+    <string name="txt_login_login">登录</string>
+    <string name="txt_login_confim">完成设置</string>
+    <string name="txt_login_wanshanziliao">完善资料并登录后，我们将针对于您的创业项目\t尽快与您取得联系！</string>
+    <!--设置-->
+    <string name="txt_setting_about_us">关于我们</string>
+    <string name="txt_setting_choose_uses">切换角色为资源方</string>
+    <string name="txt_setting_logout">退出登录</string>
+    <!--按钮名称 -->
+    <string name="txt_look_help">查看帮助</string>
+    <string name="txt_scan_btn">扫码</string>
+    <string name="txt_qrcode_btn">展示付款码</string>
+    <string name="txt_uses_enter_btn">我是创业者</string>
+    <string name="txt_uses_partner_btn">我是协作者</string>
+    <string name="txt_set_pass">支付密码设置</string>
+    <string name="txt_call_me">联系我们</string>
+    <string name="txt_setting">设置</string>
+    <string name="txt_copy">复制</string>
+    <string name="txt_call_me_wchat_name">官方微信:</string>
+    <string name="txt_call_me_wchat">CO-OPser</string>
+    <string name="txt_cancel">取消</string>
+    <string name="txt_call_phone">拨打</string>
+    <string name="txt_pay_token">转让</string>
+    <string name="txt_pay_confim">完成转让</string>
+    <string name="txt_next">下一步</string>
+    <string name="txt_forget_password">忘记密码？</string>
+    <string name="txt_password_failed">密码有误，请重新填写！</string>
+    <!--其他-->
 </resources>
