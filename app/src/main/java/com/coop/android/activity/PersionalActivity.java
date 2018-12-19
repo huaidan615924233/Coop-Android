@@ -35,6 +35,7 @@ public class PersionalActivity extends BaseActivity implements View.OnClickListe
     protected Toolbar toolBar;
     private CommonPopupWindow popupWindow;
     private String companyPhone;
+    private int roleType;
 
     /**
      * 启动这个Activity的Intent
@@ -78,7 +79,13 @@ public class PersionalActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void initData() {
-
+        if (roleType == 1) {
+            setPassLL.setVisibility(View.GONE);
+            callMeLL.setBackgroundResource(R.drawable.bg_left_radius_frame_white_to_gray);
+        }else{
+            setPassLL.setVisibility(View.VISIBLE);
+            callMeLL.setBackgroundResource(R.drawable.bg_frame_white_to_gray);
+        }
     }
 
     @Override

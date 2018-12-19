@@ -53,4 +53,6 @@
     <string name="txt_forget_password">忘记密码？</string>
     <string name="txt_password_failed">密码有误，请重新填写！</string>
     <!--其他-->
+    <string name="txt_network_error">网络异常!</string>
+    <string name="txt_server_error">服务器异常!</string>
 </resources>

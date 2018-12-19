@@ -112,9 +112,10 @@
             android:orientation="horizontal">
 
             <CheckBox
+                android:id="@+id/selectCB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checked="false"
+                android:checked="true"
                 android:button="@drawable/login_chb_selector"/>
             <TextView
                 android:layout_width="wrap_content"
