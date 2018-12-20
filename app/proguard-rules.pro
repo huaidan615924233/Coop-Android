@@ -19,3 +19,61 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+-dontusemixedcaseclassnames          #混淆时不使用大小写混合类名
+-dontskipnonpubliclibraryclasses     #不跳过library中的非public的类
+-verbose                             #打印混淆的详细信息
+-dontoptimize                        #不进行优化，建议使用此选项，
+-dontpreverify                       #不进行预校验,Android不需要,可加快混淆速度。
+#-ignorewarnings                      #忽略警告
+#-optimizationpasses 5               #指定代码的压缩级别
+-keepclasseswithmembernames class * { # 保持native方法不被混淆
+    native <methods>;
+}
+-keepclassmembers enum * {
+    public static ** values();
+    public static ** valueOf(java.lang.String);
+}
+#v4包不混淆
+-keep class android.support.v4.app.** { *; }
+-keep interface android.support.v4.app.** { *; }
+# FastJson
+-dontwarn com.alibaba.fastjson.**
+-keep class com.alibaba.fastjson.** { *; }
+-keepattributes Signature
+-keepattributes *Annotation*
+
+# Glide
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
+  **[] $VALUES;
+  public *;
+}
+
+# 极光推送
+-dontoptimize
+-dontpreverify
+-dontwarn cn.jpush.**
+-keep class cn.jpush.** { *; }
+
+# OkHttp
+-dontwarn com.squareup.okhttp3.**
+-keep class com.squareup.okhttp3.** { *;}
+-dontwarn okio.**
+-dontwarn okhttp3.logging.**
+-keep class okhttp3.logging.** { *;}
+
+# Retrofit
+-dontwarn retrofit2.**
+-keep class retrofit2.** { *; }
+-keepattributes Signature
+-keepattributes Exceptions
+
+# Other
+-dontwarn rx.**
+-keep class rx.** { *; }
+
+-keep class com.coop.** { *; }
+-keep class com.uuzuche.** { *; }
+-keep class retrofit_rx.** { *; }
+-keep class zuo.bao.** { *; }
+

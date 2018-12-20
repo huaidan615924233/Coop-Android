@@ -4,28 +4,39 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.coop.android.R;
+import com.coop.android.utils.CheckPermissionUtils;
 import com.coop.android.utils.ConstantUtil;
-import com.coop.android.utils.PermissionsUtils;
 import com.coop.android.utils.ToastUtil;
 import com.coop.android.view.CircleImageView;
 import com.coop.android.view.DrawableButton;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 
-import zuo.biao.library.base.BaseActivity;
+import java.util.List;
 
-public class HomeActivity extends BaseActivity implements View.OnClickListener {
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.AppSettingsDialog;
+import pub.devrel.easypermissions.EasyPermissions;
+import zuo.biao.library.base.BaseActivity;
+import zuo.biao.library.util.Log;
+
+public class HomeActivity extends BaseActivity implements View.OnClickListener, EasyPermissions.PermissionCallbacks {
+    private static final String TAG = "HomeActivity";
     /**
      * 扫描跳转Activity RequestCode
      */
     public static final int REQUEST_CODE = 111;
+    /**
+     * 请求CAMERA权限码
+     */
+    public static final int REQUEST_CAMERA_PERM = 101;
     protected Button button, button2, button3, button4, button5, button6;
     String[] permissions;
     private DrawableButton scanBtn, btnQrcode;
@@ -71,11 +82,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     public void initData() {
-        //相机权限和读写权限
-        permissions = new String[]{Manifest.permission.CAMERA};
-        // PermissionsUtils.showSystemSetting = false;//是否支持显示系统设置权限设置窗口跳转
-        //这里的this不是上下文，是Activity对象！
-        PermissionsUtils.getInstance().chekPermissions(HomeActivity.this, permissions, permissionsResult);
+        //初始化权限
+        CheckPermissionUtils.initPermission(context);
     }
 
     @Override
@@ -109,7 +117,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         } else if (view.getId() == R.id.btnQrcode) {
             startActivity(QrcodeActivity.createIntent(mContext));
         } else if (view.getId() == R.id.btnScan) {
-            startActivityForResult(ScanActivity.createIntent(mContext), REQUEST_CODE);
+            cameraTask();
         } else if (view.getId() == R.id.txtHelp) {
             startActivity(AboutUsActivity.createIntent(mContext));
         } else if (view.getId() == R.id.homeHeaderImg) {
@@ -139,25 +147,50 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         }
     }
 
-    //创建监听权限的接口对象
-    PermissionsUtils.IPermissionsResult permissionsResult = new PermissionsUtils.IPermissionsResult() {
-        @Override
-        public void passPermissons() {
-            scanBtn.setOnClickListener(HomeActivity.this);
-        }
+    /**
+     * EsayPermissions接管权限处理逻辑
+     *
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        // Forward results to EasyPermissions
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
 
-        @Override
-        public void forbitPermissons() {
-//            finish();
-            scanBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(HomeActivity.this, "权限不通过!", Toast.LENGTH_SHORT).show();
-                    PermissionsUtils.getInstance().chekPermissions(HomeActivity.this, permissions, permissionsResult);
-                }
-            });
+    @AfterPermissionGranted(REQUEST_CAMERA_PERM)
+    public void cameraTask() {
+        if (EasyPermissions.hasPermissions(this, Manifest.permission.CAMERA)) {
+            // Have permission, do the thing!
+            startActivityForResult(ScanActivity.createIntent(mContext), REQUEST_CODE);
+        } else {
+            // Ask for one permission
+            EasyPermissions.requestPermissions(this, "需要请求camera权限",
+                    REQUEST_CAMERA_PERM, Manifest.permission.CAMERA);
         }
-    };
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+        Log.e(TAG, "执行onPermissionsGranted()...");
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+        Log.e(TAG, "执行onPermissionsDenied()...");
+        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
+            new AppSettingsDialog.Builder(this, "当前App需要申请camera权限,需要打开设置页面么?")
+                    .setTitle("权限申请")
+                    .setPositiveButton("确认")
+                    .setNegativeButton("取消", null /* click listener */)
+                    .setRequestCode(REQUEST_CAMERA_PERM)
+                    .build()
+                    .show();
+        }
+    }
 
     /**
      * 双击返回键退出程序
@@ -181,4 +214,5 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
 
         return super.onKeyUp(keyCode, event);
     }
+
 }

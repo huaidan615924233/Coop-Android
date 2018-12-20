@@ -14,14 +14,9 @@ ext {
     source_compatibility = JavaVersion.VERSION_1_8
     target_compatibility = JavaVersion.VERSION_1_8
 
-    // 测试签名
-    debug_store_file = "./caidou.jks"
-    debug_store_password = "123456"
-    debug_key_alias = "singsound"
-    debug_key_password = "123456"
     // 正式签名
-    release_store_file = "./caidou.jks"
+    release_store_file = "./coop.jks"
     release_store_password = "123456"
-    release_key_alias = "singsound"
+    release_key_alias = "coop"
     release_key_password = "123456"
 }

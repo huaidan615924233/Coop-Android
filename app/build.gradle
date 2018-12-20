@@ -9,10 +9,40 @@ android {
 
         versionCode rootProject.ext.module_version_code
         versionName rootProject.ext.module_version_name
+
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName()]
+            }
+        }
+    }
+    signingConfigs {
+        _release {
+            storeFile file(rootProject.ext.release_store_file)
+            storePassword rootProject.ext.release_store_password
+            keyAlias rootProject.ext.release_key_alias
+            keyPassword rootProject.ext.release_key_password
+        }
     }
     buildTypes {
+        debug {
+            buildConfigField "boolean", "APP_DEBUG", "true"
+            buildConfigField "String", "APP_BASE_URL", '"http://39.96.36.106:8080/"'
+            minifyEnabled true // 混淆
+            zipAlignEnabled true // Zipalign优化
+            shrinkResources true // 移除无用的resource文件
+            signingConfig signingConfigs._release // 签名
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'  // 加载默认混淆配置文件
+
+        }
         release {
-            minifyEnabled false
+            buildConfigField "boolean", "APP_DEBUG", "false"
+            buildConfigField "String", "APP_BASE_URL", '"http://39.96.36.106:8080/"'
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources true
+            signingConfig signingConfigs._release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

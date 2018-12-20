@@ -6,17 +6,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.coop.android.R;
-import com.coop.android.utils.MeasureUtil;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 
 import zuo.biao.library.base.BaseActivity;
-import zuo.biao.library.util.CommonUtil;
 
 /**
  * Created by MR-Z on 2018/12/11.

@@ -6,6 +6,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -13,22 +14,31 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.coop.android.R;
 import com.coop.android.utils.ConstantUtil;
-import com.coop.android.utils.PermissionsUtils;
 import com.coop.android.utils.ToastUtil;
 import com.coop.android.view.CircleImageView;
 import com.coop.android.view.CommonPopupWindow;
 
+import java.util.List;
+
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.AppSettingsDialog;
+import pub.devrel.easypermissions.EasyPermissions;
 import zuo.biao.library.base.BaseActivity;
 import zuo.biao.library.util.CommonUtil;
+import zuo.biao.library.util.Log;
 
 /**
  * Created by MR-Z on 2018/12/11.
  */
-public class PersionalActivity extends BaseActivity implements View.OnClickListener, CommonPopupWindow.ViewInterface {
+public class PersionalActivity extends BaseActivity implements View.OnClickListener, CommonPopupWindow.ViewInterface, EasyPermissions.PermissionCallbacks {
+    public static final String TAG = "PersionalActivity";
+    /**
+     * 请求CALL_PHONE权限码
+     */
+    public static final int REQUEST_CALL_PHONE_PERM = 101;
     private CircleImageView userHeaderImg;
     private TextView userName, userId;
     private LinearLayout setPassLL, callMeLL, settingLL;
@@ -82,7 +92,7 @@ public class PersionalActivity extends BaseActivity implements View.OnClickListe
         if (roleType == 1) {
             setPassLL.setVisibility(View.GONE);
             callMeLL.setBackgroundResource(R.drawable.bg_left_radius_frame_white_to_gray);
-        }else{
+        } else {
             setPassLL.setVisibility(View.VISIBLE);
             callMeLL.setBackgroundResource(R.drawable.bg_frame_white_to_gray);
         }
@@ -143,10 +153,7 @@ public class PersionalActivity extends BaseActivity implements View.OnClickListe
                 callPhoneTV.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String[] permissions = new String[]{Manifest.permission.CALL_PHONE};
-                        // PermissionsUtils.showSystemSetting = false;//是否支持显示系统设置权限设置窗口跳转
-                        //这里的this不是上下文，是Activity对象！
-                        PermissionsUtils.getInstance().chekPermissions(PersionalActivity.this, permissions, permissionsResult);
+                        callPhoneTask();
                     }
                 });
                 break;
@@ -172,18 +179,50 @@ public class PersionalActivity extends BaseActivity implements View.OnClickListe
         popupWindow.showAtLocation(findViewById(android.R.id.content), Gravity.CENTER, 0, 0);
     }
 
-    //创建监听权限的接口对象
-    PermissionsUtils.IPermissionsResult permissionsResult = new PermissionsUtils.IPermissionsResult() {
-        @Override
-        public void passPermissons() {
-            CommonUtil.call(PersionalActivity.this, companyPhone);
-        }
+    /**
+     * EsayPermissions接管权限处理逻辑
+     *
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        // Forward results to EasyPermissions
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
 
-        @Override
-        public void forbitPermissons() {
-            ToastUtil.showShortToast(PersionalActivity.this, "请开启拨打电话的权限");
+    @AfterPermissionGranted(REQUEST_CALL_PHONE_PERM)
+    public void callPhoneTask() {
+        if (EasyPermissions.hasPermissions(this, Manifest.permission.CALL_PHONE)) {
+            // Have permission, do the thing!
+            CommonUtil.call(PersionalActivity.this, companyPhone);
+        } else {
+            // Ask for one permission
+            EasyPermissions.requestPermissions(this, "需要请求打电话权限",
+                    REQUEST_CALL_PHONE_PERM, Manifest.permission.CALL_PHONE);
         }
-    };
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+        Log.e(TAG, "执行onPermissionsGranted()...");
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+        Log.e(TAG, "执行onPermissionsDenied()...");
+        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
+            new AppSettingsDialog.Builder(this, "当前App需要申请打电话权限,需要打开设置页面么?")
+                    .setTitle("权限申请")
+                    .setPositiveButton("确认")
+                    .setNegativeButton("取消", null /* click listener */)
+                    .setRequestCode(REQUEST_CALL_PHONE_PERM)
+                    .build()
+                    .show();
+        }
+    }
 
     @Override
     public void onBackPressed() {

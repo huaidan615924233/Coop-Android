@@ -33,7 +33,7 @@ public class HttpPostApi extends BaseApi {
         super(listener, activity);
         setShowProgress(isShowProgress);
         setCancel(true);
-        setBaseUrl("http://39.96.36.106:8080/");
+        setBaseUrl(com.coop.android.AppConfigs.APP_BASE_URL);
         setCookieNetWorkTime(60);
         setCookieNoNetWorkTime(24 * 60 * 60);
         requestUrl = url;

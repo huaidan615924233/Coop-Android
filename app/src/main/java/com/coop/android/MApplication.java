@@ -16,6 +16,6 @@ public class MApplication extends Application{
     public void onCreate() {
         super.onCreate();
         ZXingLibrary.initDisplayOpinion(this);
-        RxRetrofitApp.init(this,BuildConfig.DEBUG);
+        RxRetrofitApp.init(this,AppConfigs.APP_DEBUG);
     }
 }
