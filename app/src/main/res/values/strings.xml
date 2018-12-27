@@ -31,7 +31,8 @@
     <string name="txt_login_wanshanziliao">完善资料并登录后，我们将针对于您的创业项目\t尽快与您取得联系！</string>
     <!--设置-->
     <string name="txt_setting_about_us">关于我们</string>
-    <string name="txt_setting_choose_uses">切换角色为资源方</string>
+    <string name="txt_setting_choose_topartner">切换角色为资源方</string>
+    <string name="txt_setting_choose_toenter">切换角色为创业者</string>
     <string name="txt_setting_logout">退出登录</string>
     <!--按钮名称 -->
     <string name="txt_look_help">查看帮助</string>

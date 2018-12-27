@@ -1,5 +1,5 @@
 ext {
-    // TODO 模块的配置
+    appName = "coop"
     module_version_code = 1
     module_version_name = "1.0"
     // 项目配置

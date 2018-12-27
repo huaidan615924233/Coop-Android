@@ -20,6 +20,7 @@ import zuo.biao.library.base.BaseActivity;
 public class ScanActivity extends BaseActivity {
     protected Toolbar toolBar;
     private CaptureFragment captureFragment;
+
     /**
      * 启动这个Activity的Intent
      *
@@ -94,4 +95,10 @@ public class ScanActivity extends BaseActivity {
             finish();
         }
     };
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.bottom_silent, R.anim.bottom_out);
+    }
 }

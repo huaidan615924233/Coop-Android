@@ -6,12 +6,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.coop.android.R;
+import com.coop.android.UserConfigs;
+import com.coop.android.fragment.CoopFragment;
+import com.coop.android.fragment.PartnerFragment;
+import com.coop.android.interfaces.CoopListener;
+import com.coop.android.model.TransBean;
 import com.coop.android.utils.CheckPermissionUtils;
 import com.coop.android.utils.ConstantUtil;
 import com.coop.android.utils.ToastUtil;
@@ -25,26 +33,28 @@ import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
 import zuo.biao.library.base.BaseActivity;
+import zuo.biao.library.ui.AlertDialog;
 import zuo.biao.library.util.Log;
+import zuo.biao.library.util.StringUtil;
 
-public class HomeActivity extends BaseActivity implements View.OnClickListener, EasyPermissions.PermissionCallbacks {
+
+public class HomeActivity extends BaseActivity implements View.OnClickListener, EasyPermissions.PermissionCallbacks, CoopListener, AlertDialog.OnDialogButtonClickListener {
     private static final String TAG = "HomeActivity";
     /**
      * 扫描跳转Activity RequestCode
      */
     public static final int REQUEST_CODE = 111;
-    /**
-     * 请求CAMERA权限码
-     */
-    public static final int REQUEST_CAMERA_PERM = 101;
-    protected Button button, button2, button3, button4, button5, button6;
-    String[] permissions;
-    private DrawableButton scanBtn, btnQrcode;
+
+    private DrawableButton scanBtn, qrcodeBtn;
     private TextView helpTxt;
     private TextView homeUserName;
     private CircleImageView homeHeaderImg;
     //记录用户首次点击返回键的时间
     private long firstTime = 0;
+    private FragmentManager fragmentManager;
+    private FragmentTransaction transition;
+    private CoopFragment coopFragment;
+    private PartnerFragment partnerFragment;
 
     /**
      * 进入主页
@@ -60,62 +70,61 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initView();
-        initData();
         initEvent();
     }
 
     @Override
     public void initView() {
         setContentView(R.layout.activity_home);
-        button = findViewById(R.id.button);
-        button2 = findViewById(R.id.button2);
-        button3 = findViewById(R.id.button3);
-        button4 = findViewById(R.id.button4);
-        button5 = findViewById(R.id.button5);
-        button6 = findViewById(R.id.button6);
         helpTxt = findViewById(R.id.txtHelp);
         scanBtn = findViewById(R.id.btnScan);
-        btnQrcode = findViewById(R.id.btnQrcode);
+        qrcodeBtn = findViewById(R.id.btnQrcode);
         homeUserName = findViewById(R.id.homeUserName);
         homeHeaderImg = findViewById(R.id.homeHeaderImg);
+        //初始化权限
+        CheckPermissionUtils.initPermission(context);
+        fragmentManager = getSupportFragmentManager();
     }
 
     @Override
     public void initData() {
-        //初始化权限
-        CheckPermissionUtils.initPermission(context);
+        homeUserName.setText(UserConfigs.getInstance().getNickName());
+        if (ConstantUtil.ENTERIDEN.equals(UserConfigs.getInstance().getLastLoginRole())) {
+            scanBtn.setVisibility(View.VISIBLE);
+            qrcodeBtn.setVisibility(View.GONE);
+            coopFragment = CoopFragment.createInstance();
+            coopFragment.setCoopListener(this);
+            transition = fragmentManager.beginTransaction();
+            transition.replace(R.id.container, coopFragment).commitAllowingStateLoss();
+            transition.show(coopFragment);
+        } else {
+            qrcodeBtn.setVisibility(View.VISIBLE);
+            scanBtn.setVisibility(View.GONE);
+            partnerFragment = PartnerFragment.createInstance();
+            transition = fragmentManager.beginTransaction();
+            transition.replace(R.id.container, partnerFragment).commitAllowingStateLoss();
+            transition.show(partnerFragment);
+        }
     }
 
     @Override
     public void initEvent() {
-        button.setOnClickListener(HomeActivity.this);
-        button2.setOnClickListener(HomeActivity.this);
-        button3.setOnClickListener(HomeActivity.this);
-        button4.setOnClickListener(HomeActivity.this);
-        button5.setOnClickListener(HomeActivity.this);
-        button6.setOnClickListener(HomeActivity.this);
         helpTxt.setOnClickListener(HomeActivity.this);
         scanBtn.setOnClickListener(HomeActivity.this);
-        btnQrcode.setOnClickListener(HomeActivity.this);
+        qrcodeBtn.setOnClickListener(HomeActivity.this);
         homeHeaderImg.setOnClickListener(HomeActivity.this);
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        initData();
+    }
+
+    @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.button) {
-            startActivity(UpdatePasswordActivity.createIntent(mContext, ConstantUtil.UPDATEPASSWORD));
-        } else if (view.getId() == R.id.button2) {
-            startActivity(LoginActivity.createIntent(mContext));
-        } else if (view.getId() == R.id.button3) {
-            startActivity(SettingActivity.createIntent(mContext));
-        } else if (view.getId() == R.id.button4) {
-            startActivity(LoginChooseActivity.createIntent(mContext));
-        } else if (view.getId() == R.id.button5) {
-            startActivity(PayTokenActivity.createIntent(mContext, "真格基金"));
-        } else if (view.getId() == R.id.button6) {
+        if (view.getId() == R.id.btnQrcode) {
             startActivity(AddTransactionDescActivity.createIntent(mContext));
-        } else if (view.getId() == R.id.btnQrcode) {
-            startActivity(QrcodeActivity.createIntent(mContext));
         } else if (view.getId() == R.id.btnScan) {
             cameraTask();
         } else if (view.getId() == R.id.txtHelp) {
@@ -139,9 +148,33 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
                 }
                 if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
                     String result = bundle.getString(CodeUtils.RESULT_STRING);
-                    ToastUtil.showShortToast(mContext, "解析结果:" + result);
+                    Log.e(TAG, "解析结果:" + result);
+                    TransBean transBean = new TransBean();
+                    try {
+                        JSONObject jsonObject = JSON.parseObject(result);
+                        transBean.setProjectName(jsonObject.getString("userName"));
+                        transBean.setInveCustId(jsonObject.getString("userId"));
+                        transBean.setInveRemark(jsonObject.getString("desc"));
+                        if (StringUtil.isEmpty(jsonObject.getString("desc")) || StringUtil.isEmpty(jsonObject.getString("userId"))
+                                || StringUtil.isEmpty(jsonObject.getString("userName"))) {
+                            ToastUtil.showShortToast(mContext, "二维码不正确!");
+                            return;
+                        }
+                    } catch (Exception e) {
+                        ToastUtil.showShortToast(mContext, "二维码不正确!");
+                        return;
+                    }
+                    if (coopFragment == null || coopFragment.getProject() == null) {
+                        ToastUtil.showShortToast(mContext, "当前无项目，不支持扫码！");
+                        return;
+                    }
+                    transBean.setProjectId(coopFragment.getProject().getId());
+                    transBean.setProjectToken(coopFragment.getProject().getProjectToken());
+                    transBean.setStockPercent(String.format("%.0f", Double.parseDouble(coopFragment.getProject().getStockPercent()) * 100) + "%");
+                    transBean.setProjectTokenPrice(coopFragment.getProject().getProjectPercent());
+                    startActivity(PayTokenActivity.createIntent(mContext, transBean));
                 } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
-                    ToastUtil.showShortToast(mContext, "解析二维码失败");
+                    ToastUtil.showShortToast(mContext, "解析二维码失败!");
                 }
             }
         }
@@ -161,15 +194,20 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
     }
 
-    @AfterPermissionGranted(REQUEST_CAMERA_PERM)
+    @AfterPermissionGranted(ConstantUtil.PERMISSIONS_REQUEST_CAMERA_PERM)
     public void cameraTask() {
         if (EasyPermissions.hasPermissions(this, Manifest.permission.CAMERA)) {
             // Have permission, do the thing!
+            if (StringUtil.isEmpty(UserConfigs.getInstance().getSalt())) {
+                new AlertDialog(mContext, "提示", "还没有设置支付密码，是否去设置？", true, 0, HomeActivity.this).show();
+                return;
+            }
             startActivityForResult(ScanActivity.createIntent(mContext), REQUEST_CODE);
+            overridePendingTransition(R.anim.bottom_in, R.anim.bottom_silent);
         } else {
             // Ask for one permission
             EasyPermissions.requestPermissions(this, "需要请求camera权限",
-                    REQUEST_CAMERA_PERM, Manifest.permission.CAMERA);
+                    ConstantUtil.PERMISSIONS_REQUEST_CAMERA_PERM, Manifest.permission.CAMERA);
         }
     }
 
@@ -186,10 +224,15 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
                     .setTitle("权限申请")
                     .setPositiveButton("确认")
                     .setNegativeButton("取消", null /* click listener */)
-                    .setRequestCode(REQUEST_CAMERA_PERM)
+                    .setRequestCode(ConstantUtil.PERMISSIONS_REQUEST_CAMERA_PERM)
                     .build()
                     .show();
         }
+    }
+
+    @Override
+    public void setScanVisibility(boolean isShow) {
+        scanBtn.setVisibility(isShow == true ? View.VISIBLE : View.GONE);
     }
 
     /**
@@ -215,4 +258,10 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
         return super.onKeyUp(keyCode, event);
     }
 
+    @Override
+    public void onDialogButtonClick(int requestCode, boolean isPositive) {
+        if (isPositive) {
+            toActivity(UpdatePasswordActivity.createIntent(mContext, ConstantUtil.SETPASSWORD));
+        }
+    }
 }

@@ -38,12 +38,14 @@
             android:background="@drawable/edit_password_background"
             android:gravity="center_vertical"
             android:orientation="horizontal">
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/dp_5"
                 android:src="@mipmap/phone_logo" />
+
             <EditText
                 android:id="@+id/phoneEV"
                 android:layout_width="0dp"
@@ -52,9 +54,10 @@
                 android:background="@color/color_transparent"
                 android:ellipsize="end"
                 android:gravity="center_vertical"
-                android:maxLines="1"
                 android:hint="@string/txt_login_phone"
                 android:inputType="number"
+                android:maxLength="11"
+                android:maxLines="1"
                 android:textSize="@dimen/sp_14" />
         </LinearLayout>
 
@@ -80,10 +83,11 @@
                 android:background="@color/color_transparent"
                 android:ellipsize="end"
                 android:gravity="center_vertical"
-                android:maxLines="1"
                 android:hint="@string/txt_login_pass"
                 android:inputType="number"
-                android:textSize="@dimen/sp_14"/>
+                android:maxLength="6"
+                android:maxLines="1"
+                android:textSize="@dimen/sp_14" />
 
             <View
                 android:id="@+id/right_line"
@@ -103,11 +107,12 @@
                 android:textColor="@color/color_58ACFF"
                 android:textSize="@dimen/sp_13" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
             android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -115,8 +120,9 @@
                 android:id="@+id/selectCB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checked="true"
-                android:button="@drawable/login_chb_selector"/>
+                android:button="@drawable/login_chb_selector"
+                android:checked="true" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -125,6 +131,7 @@
                 android:gravity="center"
                 android:text="@string/txt_login_serve"
                 android:textSize="@dimen/sp_13" />
+
             <TextView
                 android:id="@+id/serveDescTV"
                 android:layout_width="wrap_content"
@@ -135,6 +142,7 @@
                 android:textColor="@color/color_58ACFF"
                 android:textSize="@dimen/sp_13" />
         </LinearLayout>
+
         <Button
             android:id="@+id/loginBtn"
             android:layout_width="match_parent"

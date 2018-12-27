@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 public class SharedPreferencesUtils {
 
     public static final String FIRSTRUN = "FIRSTRUN";
+    public static final String USERINFO = "USERINFO";
 
     public static boolean getFirstRun(Context context) {
         SharedPreferences sp = context.getSharedPreferences(FIRSTRUN, Context.MODE_PRIVATE);
@@ -20,5 +21,21 @@ public class SharedPreferencesUtils {
         SharedPreferences.Editor editor = sp.edit();
         editor.putBoolean(FIRSTRUN, values);
         editor.apply();
+    }
+
+    public static String getUserInfo(Context context) {
+        SharedPreferences sp = context.getSharedPreferences(USERINFO, Context.MODE_PRIVATE);
+        return sp.getString(USERINFO, "");
+    }
+
+    public static void setUserInfo(Context context, String values) {
+        SharedPreferences sp = context.getSharedPreferences(USERINFO, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString(USERINFO, values);
+        editor.apply();
+    }
+
+    public static boolean hasUserInfo(Context context) {
+        return "".equals(getUserInfo(context)) ? false : true;
     }
 }

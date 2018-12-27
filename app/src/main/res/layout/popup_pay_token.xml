@@ -61,7 +61,7 @@
                 android:textSize="@dimen/sp_14" />
 
             <TextView
-                android:id="@+id/companyWchat"
+                android:id="@+id/pwdErrorTV"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginRight="@dimen/dp_10"
@@ -103,7 +103,7 @@
                 android:background="@color/color_F2F2F2" />
 
             <TextView
-                android:id="@+id/callPhoneTV"
+                android:id="@+id/payTV"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

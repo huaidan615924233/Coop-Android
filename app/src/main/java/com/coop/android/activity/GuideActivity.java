@@ -75,7 +75,7 @@ public class GuideActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                if (position < mGuideList.size()-1) {
+                if (position < mGuideList.size() - 1) {
                     guideBbtn.setVisibility(View.INVISIBLE);
                 } else {
                     guideBbtn.setVisibility(View.VISIBLE);
@@ -89,7 +89,7 @@ public class GuideActivity extends AppCompatActivity {
         guideBbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HomeActivity.newInstance(GuideActivity.this);
+                startActivity(LoginActivity.createIntent(GuideActivity.this, false));
                 finish();
             }
         });

@@ -43,7 +43,7 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/phoneEV"
+                android:id="@+id/userNameET"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"

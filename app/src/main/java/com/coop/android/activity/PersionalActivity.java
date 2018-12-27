@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.coop.android.R;
+import com.coop.android.UserConfigs;
 import com.coop.android.utils.ConstantUtil;
 import com.coop.android.utils.ToastUtil;
 import com.coop.android.view.CircleImageView;
@@ -35,17 +36,12 @@ import zuo.biao.library.util.Log;
  */
 public class PersionalActivity extends BaseActivity implements View.OnClickListener, CommonPopupWindow.ViewInterface, EasyPermissions.PermissionCallbacks {
     public static final String TAG = "PersionalActivity";
-    /**
-     * 请求CALL_PHONE权限码
-     */
-    public static final int REQUEST_CALL_PHONE_PERM = 101;
     private CircleImageView userHeaderImg;
     private TextView userName, userId;
     private LinearLayout setPassLL, callMeLL, settingLL;
     protected Toolbar toolBar;
     private CommonPopupWindow popupWindow;
     private String companyPhone;
-    private int roleType;
 
     /**
      * 启动这个Activity的Intent
@@ -62,7 +58,6 @@ public class PersionalActivity extends BaseActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_persional);
         initView();
-        initData();
         initEvent();
     }
 
@@ -89,13 +84,21 @@ public class PersionalActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void initData() {
-        if (roleType == 1) {
-            setPassLL.setVisibility(View.GONE);
-            callMeLL.setBackgroundResource(R.drawable.bg_left_radius_frame_white_to_gray);
-        } else {
+        userName.setText(UserConfigs.getInstance().getNickName());
+        userId.setText("ID:" + UserConfigs.getInstance().getCustNo());
+        if (ConstantUtil.ENTERIDEN.equals(UserConfigs.getInstance().getLastLoginRole())) {
             setPassLL.setVisibility(View.VISIBLE);
             callMeLL.setBackgroundResource(R.drawable.bg_frame_white_to_gray);
+        } else {
+            setPassLL.setVisibility(View.GONE);
+            callMeLL.setBackgroundResource(R.drawable.bg_left_radius_frame_white_to_gray);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initData();
     }
 
     @Override
@@ -193,7 +196,7 @@ public class PersionalActivity extends BaseActivity implements View.OnClickListe
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
     }
 
-    @AfterPermissionGranted(REQUEST_CALL_PHONE_PERM)
+    @AfterPermissionGranted(ConstantUtil.PERMISSIONS_REQUEST_CALL_PHONE_PERM)
     public void callPhoneTask() {
         if (EasyPermissions.hasPermissions(this, Manifest.permission.CALL_PHONE)) {
             // Have permission, do the thing!
@@ -201,7 +204,7 @@ public class PersionalActivity extends BaseActivity implements View.OnClickListe
         } else {
             // Ask for one permission
             EasyPermissions.requestPermissions(this, "需要请求打电话权限",
-                    REQUEST_CALL_PHONE_PERM, Manifest.permission.CALL_PHONE);
+                    ConstantUtil.PERMISSIONS_REQUEST_CALL_PHONE_PERM, Manifest.permission.CALL_PHONE);
         }
     }
 
@@ -218,7 +221,7 @@ public class PersionalActivity extends BaseActivity implements View.OnClickListe
                     .setTitle("权限申请")
                     .setPositiveButton("确认")
                     .setNegativeButton("取消", null /* click listener */)
-                    .setRequestCode(REQUEST_CALL_PHONE_PERM)
+                    .setRequestCode(ConstantUtil.PERMISSIONS_REQUEST_CALL_PHONE_PERM)
                     .build()
                     .show();
         }

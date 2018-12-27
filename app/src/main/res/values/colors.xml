@@ -96,6 +96,10 @@
     <color name="color_FAFAFA">#FAFAFA</color>
     <color name="color_F0F0F0">#F0F0F0</color>
     <color name="color_FF5858">#FF5858</color>
+    <color name="color_909090">#909090</color>
+    <color name="color_F7F7F7">#F7F7F7</color>
+    <color name="color_FE6671">#FE6671</color>
+    <color name="color_3DD89B">#3DD89B</color>
     <color name="transparent">#00000000</color>
     <color name="white">#fff</color>
     <color name="background_yellow">#fbd415</color>

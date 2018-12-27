@@ -6,92 +6,43 @@
     android:layout_height="match_parent"
     android:background="@color/color_EDEDED">
 
-    <RelativeLayout
-        android:id="@+id/rlTop"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="fitXY"
-            android:src="@mipmap/home_background" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_20"
-            android:orientation="horizontal">
-
-            <com.coop.android.view.CircleImageView
-                android:id="@+id/homeHeaderImg"
-                android:layout_width="@dimen/dp_40"
-                android:layout_height="@dimen/dp_40"
-                android:layout_margin="@dimen/dp_20"
-                android:src="@mipmap/default_home_header" />
-
-            <TextView
-                android:id="@+id/homeUserName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="张先生"
-                android:textColor="@color/white"
-                android:textSize="@dimen/sp_16" />
-        </LinearLayout>
-
-    </RelativeLayout>
-
-    <ScrollView
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/llBottom"
-        android:layout_marginTop="@dimen/dp_103">
+        android:scaleType="fitXY"
+        android:src="@mipmap/home_background" />
 
-        <LinearLayout
-            android:id="@+id/llMainList"
-            android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/userLL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_20"
+        android:orientation="horizontal">
+
+        <com.coop.android.view.CircleImageView
+            android:id="@+id/homeHeaderImg"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:layout_margin="@dimen/dp_20"
+            android:src="@mipmap/default_home_header" />
+
+        <TextView
+            android:id="@+id/homeUserName"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_gravity="center"
+            android:text="张先生"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_16" />
+    </LinearLayout>
 
-            <Button
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:text="setPassWord" />
-
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:text="Login" />
-
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:text="Setting" />
-
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:text="LoginChoose" />
-
-            <Button
-                android:id="@+id/button5"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:text="PayToken" />
-
-            <Button
-                android:id="@+id/button6"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:text="AddTransaction" />
-        </LinearLayout>
-    </ScrollView>
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/llBottom"
+        android:layout_below="@+id/userLL"
+        android:layout_marginBottom="@dimen/dp_30" />
 
     <LinearLayout
         android:id="@+id/llBottom"

@@ -15,7 +15,7 @@ import rx.functions.Func1;
  * 请求数据统一封装类
  * Created by WZG on 2016/7/16.
  */
-public abstract class BaseApi<T> implements Func1<BaseResultEntity<T>, T> {
+public abstract class BaseApi<T> implements Func1<T, T> {
     //rx生命周期管理
     private SoftReference<Activity> activity;
     /*回调*/
@@ -42,11 +42,13 @@ public abstract class BaseApi<T> implements Func1<BaseResultEntity<T>, T> {
     private long retryIncreaseDelay = 10;
     /*缓存url-可手动设置*/
     private String cacheUrl;
+    private String token;
 
-    public BaseApi(HttpOnNextListener listener, Activity activity) {
+    public BaseApi(HttpOnNextListener listener, Activity activity, String token) {
         setListener(listener);
         setActivity(activity);
         setShowProgress(true);
+        setToken(token);
     }
 
     /**
@@ -166,11 +168,11 @@ public abstract class BaseApi<T> implements Func1<BaseResultEntity<T>, T> {
     }
 
     @Override
-    public T call(BaseResultEntity<T> httpResult) {
-        if (httpResult.getCode() == 0) {
-            throw new HttpTimeException(httpResult.getMessage());
+    public T call(T httpResult) {
+        if (httpResult == null) {
+            throw new HttpTimeException(null);
         }
-        return httpResult.getData();
+        return httpResult;
     }
 
 
@@ -180,5 +182,13 @@ public abstract class BaseApi<T> implements Func1<BaseResultEntity<T>, T> {
 
     public void setCacheUrl(String cacheUrl) {
         this.cacheUrl = cacheUrl;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

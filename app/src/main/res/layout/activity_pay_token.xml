@@ -18,9 +18,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
             android:background="@drawable/bg_top_radius_fafafa"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -36,20 +37,22 @@
             android:background="@drawable/bg_bottom_radius_f0f0f0"
             android:gravity="center_vertical"
             android:orientation="horizontal">
+
             <EditText
-                android:paddingLeft="@dimen/dp_10"
-                android:id="@+id/descEV"
+                android:id="@+id/descET"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@color/color_transparent"
                 android:ellipsize="end"
                 android:gravity="center_vertical"
-                android:maxLines="1"
                 android:hint="如：为我提供了商业资讯服务"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/dp_10"
                 android:textSize="@dimen/sp_14" />
         </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -61,8 +64,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
             android:background="@drawable/bg_top_radius_fafafa"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
 
@@ -73,8 +76,8 @@
                 android:layout_marginLeft="@dimen/dp_10"
                 android:paddingBottom="@dimen/dp_5"
                 android:paddingTop="@dimen/dp_5"
-                android:textColor="@color/color_58ACFF"
-                android:text="通证剩余量200000（发行占比2%，通证单价:0.2元）" />
+                android:text="通证剩余量200000（发行占比2%，通证单价:0.2元）"
+                android:textColor="@color/color_58ACFF" />
         </LinearLayout>
 
         <LinearLayout
@@ -83,36 +86,39 @@
             android:background="@drawable/bg_bottom_radius_f0f0f0"
             android:gravity="center_vertical"
             android:orientation="horizontal">
+
             <EditText
-                android:paddingLeft="@dimen/dp_10"
-                android:id="@+id/phoneEV"
+                android:id="@+id/payTokenNumberET"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@color/color_transparent"
                 android:ellipsize="end"
                 android:gravity="center_vertical"
-                android:maxLines="1"
                 android:hint="请输入转让通证"
                 android:inputType="number"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/dp_10"
                 android:textSize="@dimen/sp_14" />
         </LinearLayout>
     </LinearLayout>
+
     <TextView
         android:layout_width="wrap_content"
-        android:layout_marginTop="@dimen/dp_30"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dp_30"
         android:gravity="center"
         android:text="完成转让后，您托付给CO-OP平台的通证将成功转⾄\n对⽅账户中，一旦完成转让 不不可反悔!"
         android:textSize="@dimen/sp_13" />
+
     <Button
         android:id="@+id/payConfimBtn"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
-        android:layout_marginTop="@dimen/dp_5"
         android:layout_marginLeft="@dimen/dp_40"
         android:layout_marginRight="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_5"
         android:background="@drawable/btn_background_border"
         android:text="@string/txt_pay_confim"
         android:textColor="@color/white"

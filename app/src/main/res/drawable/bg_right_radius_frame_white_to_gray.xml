@@ -4,6 +4,9 @@
     <item>
         <shape>
             <solid android:color="@color/color_EDEDED" />
+            <corners
+                android:bottomRightRadius="@dimen/dp_5"
+                android:topRightRadius="@dimen/dp_5" />
         </shape>
     </item>
     <!-- 主体背景颜色值 -->

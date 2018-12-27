@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.widget.Toast;
 
 import retrofit_rx.Api.BaseApi;
+import retrofit_rx.Api.BaseResultEntity;
 import retrofit_rx.listener.HttpOnNextListener;
 
 import java.lang.ref.SoftReference;
@@ -21,7 +22,7 @@ import rx.Subscriber;
  * 调用者自己对请求数据进行处理
  * Created by WZG on 2016/7/16.
  */
-public class ProgressSubscriber<T> extends Subscriber<T> {
+public class ProgressSubscriber<T extends BaseResultEntity<R>, R> extends Subscriber<T> {
     /*是否弹框*/
     private boolean showPorgress = true;
     /* 软引用回调接口*/
@@ -150,7 +151,7 @@ public class ProgressSubscriber<T> extends Subscriber<T> {
     @Override
     public void onNext(T t) {
         if (mSubscriberOnNextListener.get() != null) {
-            mSubscriberOnNextListener.get().onNext(t);
+            mSubscriberOnNextListener.get().onNext(t.getData(), t.getCode());
         }
     }
 

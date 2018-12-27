@@ -54,11 +54,12 @@
             android:src="@mipmap/choose_uses" />
 
         <TextView
+            android:id="@+id/chooseUsesTV"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_5"
             android:layout_weight="1"
-            android:text="@string/txt_setting_choose_uses" />
+            android:text="@string/txt_setting_choose_topartner" />
 
         <ImageView
             android:layout_width="wrap_content"

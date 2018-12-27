@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,22 +17,36 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.coop.android.R;
+import com.coop.android.UserConfigs;
+import com.coop.android.http.api.HttpPostApi;
+import com.coop.android.model.TransBean;
 import com.coop.android.utils.ConstantUtil;
+import com.coop.android.utils.Md5EncryptionHelper;
+import com.coop.android.utils.ToastUtil;
 import com.coop.android.view.CommonPopupWindow;
 import com.coop.android.view.PwdEditText;
 
+import retrofit_rx.http.HttpManager;
+import retrofit_rx.listener.HttpOnNextListener;
 import zuo.biao.library.base.BaseActivity;
+import zuo.biao.library.ui.AlertDialog;
 import zuo.biao.library.util.CommonUtil;
+import zuo.biao.library.util.Log;
+import zuo.biao.library.util.StringUtil;
 
 /**
  * Created by MR-Z on 2018/12/11.
  */
-public class PayTokenActivity extends BaseActivity implements View.OnClickListener, CommonPopupWindow.ViewInterface {
-    private String projectName;
+public class PayTokenActivity extends BaseActivity implements View.OnClickListener, CommonPopupWindow.ViewInterface, AlertDialog.OnDialogButtonClickListener {
+    private static final String TAG = "PayTokenActivity";
+    private TransBean transBean;
     protected Toolbar toolBar;
     private Button payConfimBtn;
     private CommonPopupWindow popupWindow;
+
     private TextView payDescTV;
+    private TextView pwdErrorTV;
+    private EditText descET, payTokenNumberET;
 
     /**
      * 启动这个Activity的Intent
@@ -39,8 +54,8 @@ public class PayTokenActivity extends BaseActivity implements View.OnClickListen
      * @param context
      * @return
      */
-    public static Intent createIntent(Context context, String projectName) {
-        return new Intent(context, PayTokenActivity.class).putExtra("projectName", projectName);
+    public static Intent createIntent(Context context, TransBean transBean) {
+        return new Intent(context, PayTokenActivity.class).putExtra("transBean", transBean);
     }
 
     @Override
@@ -48,7 +63,7 @@ public class PayTokenActivity extends BaseActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pay_token);
         intent = getIntent();
-        projectName = intent.getStringExtra("projectName");
+        transBean = intent.getParcelableExtra("transBean");
         initView();
         initData();
         initEvent();
@@ -56,7 +71,7 @@ public class PayTokenActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void initView() {
-        tvBaseTitle.setText(getString(R.string.txt_title_pay_token) + projectName);
+        tvBaseTitle.setText(getString(R.string.txt_title_pay_token) + transBean.getProjectName());
         toolBar = findViewById(R.id.toolbar_img);
         toolBar.setNavigationIcon(R.mipmap.back_left_btn);
         toolBar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -65,11 +80,25 @@ public class PayTokenActivity extends BaseActivity implements View.OnClickListen
                 if (popupWindow != null && popupWindow.isShowing()) {
                     return;
                 }
+                if (!StringUtil.isEmpty(descET.getText().toString())) {
+                    new AlertDialog(mContext, "提示", "您确定要放弃本次的股份转让吗?", true, 0, new AlertDialog.OnDialogButtonClickListener() {
+                        @Override
+                        public void onDialogButtonClick(int requestCode, boolean isPositive) {
+                            if (isPositive)
+                                finish();
+                        }
+                    }).show();
+                    return;
+                }
                 finish();
             }
         });
         payConfimBtn = findViewById(R.id.payConfimBtn);
         payDescTV = findViewById(R.id.payDescTV);
+        payDescTV.setText("通证剩余量" + transBean.getProjectToken() +
+                "（发行占比" + transBean.getStockPercent() + "，通证单价:" + transBean.getProjectTokenPrice() + "元）");
+        descET = findViewById(R.id.descET);
+        payTokenNumberET = findViewById(R.id.payTokenNumberET);
     }
 
     @Override
@@ -86,10 +115,25 @@ public class PayTokenActivity extends BaseActivity implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.payConfimBtn:
-                showAll(v);
+                payToken(descET.getText().toString(), payTokenNumberET.getText().toString(), v);
                 break;
             default:
                 break;
+        }
+    }
+
+    //获取验证码信息，判断是否有手机号码
+    private void payToken(String desc, String transToken, View v) {
+        if (StringUtil.isEmpty(desc)) {
+            Log.e(TAG, "mobile=" + desc);
+            new AlertDialog(mContext, "提示", "请输入备注信息", true, 0, this).show();
+        } else if (StringUtil.isEmpty(transToken)) {
+            new AlertDialog(mContext, "提示", "请输入转让通证数量", true, 0, this).show();
+        } else {
+            transBean.setEntrCustId(UserConfigs.getInstance().getId());
+            transBean.setEntrRemark(desc);
+            transBean.setTokenNum(transToken);
+            showAll(v);
         }
     }
 
@@ -106,8 +150,33 @@ public class PayTokenActivity extends BaseActivity implements View.OnClickListen
                         }
                     }
                 });
-                PwdEditText pwdET = view.findViewById(R.id.inputPwdEV);
-                showSoftInputFromWindow(context,pwdET);
+                final PwdEditText pwdET = view.findViewById(R.id.inputPwdEV);
+                showSoftInputFromWindow(context, pwdET);
+                TextView forgetPwdTV = view.findViewById(R.id.forgetPwdTV);
+                forgetPwdTV.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(UpdatePasswordActivity.createIntent(mContext, ConstantUtil.UPDATEPASSWORD));
+                    }
+                });
+                pwdErrorTV = view.findViewById(R.id.pwdErrorTV);
+                pwdErrorTV.setText("");
+                TextView payTV = view.findViewById(R.id.payTV);
+                payTV.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (StringUtil.isEmpty(pwdET.getText().toString()) || pwdET.getText().toString().length() < 6) {
+                            pwdErrorTV.setText(getResources().getString(R.string.txt_password_failed));
+                            return;
+                        }
+                        transBean.setPayPassword(Md5EncryptionHelper.getMD5WithSalt(pwdET.getText().toString(), UserConfigs.getInstance().getSalt()));
+
+                        HttpPostApi postEntity = new HttpPostApi(payOnNextListener, context, HttpPostApi.COOP_TRANS, true);
+                        postEntity.setTransBean(transBean);
+                        HttpManager manager = HttpManager.getInstance();
+                        manager.doHttpDeal(postEntity);
+                    }
+                });
                 break;
             default:
                 break;
@@ -149,8 +218,69 @@ public class PayTokenActivity extends BaseActivity implements View.OnClickListen
         editText.setFocusableInTouchMode(true);
         editText.requestFocus();
         InputMethodManager inputManager =
-                (InputMethodManager)editText.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                (InputMethodManager) editText.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         inputManager.showSoftInput(editText, 0);
 //        activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+    }
+
+    @Override
+    public void onDialogButtonClick(int requestCode, boolean isPositive) {
+
+    }
+
+    HttpOnNextListener payOnNextListener = new HttpOnNextListener<String>() {
+
+        @Override
+        public void onNext(String string, int code) {
+            if (code == 700) {
+                ToastUtil.showShortToast(getApplicationContext(), "Token失效，请重新登录!");
+                startActivity(LoginActivity.createIntent(mContext, true));
+                return;
+            }
+            if (code == 501) {
+                ToastUtil.showShortToast(getApplicationContext(), "Token不足!");
+                return;
+            }
+            if (code == 502) {
+                pwdErrorTV.setText(getResources().getString(R.string.txt_password_failed));
+                return;
+            }
+            if (code == 503) {
+                ToastUtil.showShortToast(getApplicationContext(), "不能转让给自己!");
+                return;
+            }
+            ToastUtil.showShortToast(getApplicationContext(), "转让成功!");
+            finish();
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            ToastUtil.showShortToast(getApplicationContext(), getResources().getString(R.string.txt_server_error));
+            Log.e(TAG, getResources().getString(R.string.txt_server_error) + e.getMessage());
+        }
+    };
+
+    /**
+     * 返回提示
+     *
+     * @param keyCode
+     * @param event
+     * @return
+     */
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+            if (!StringUtil.isEmpty(descET.getText().toString())) {
+                new AlertDialog(mContext, "提示", "您确定要放弃本次的股份转让吗?", true, 0, new AlertDialog.OnDialogButtonClickListener() {
+                    @Override
+                    public void onDialogButtonClick(int requestCode, boolean isPositive) {
+                        if (isPositive)
+                            finish();
+                    }
+                }).show();
+                return true;
+            }
+        }
+        return super.onKeyUp(keyCode, event);
     }
 }

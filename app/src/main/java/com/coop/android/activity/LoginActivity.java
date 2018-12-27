@@ -7,15 +7,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
 import com.coop.android.R;
+import com.coop.android.UserConfigs;
 import com.coop.android.http.api.HttpPostApi;
 import com.coop.android.model.LoginResponseBean;
+import com.coop.android.utils.SharedPreferencesUtils;
 import com.coop.android.utils.ToastUtil;
 
 import retrofit_rx.http.HttpManager;
@@ -32,6 +37,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     private TextView getVerifyEV, serveDescTV;
     private Button loginBtn;
     private CheckBox selectCB;
+    //记录用户首次点击返回键的时间
+    private long firstTime = 0;
+    private boolean isTokenFailed = false;
 
     /**
      * 启动这个Activity的Intent
@@ -39,8 +47,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
      * @param context
      * @return
      */
-    public static Intent createIntent(Context context) {
-        return new Intent(context, LoginActivity.class);
+    public static Intent createIntent(Context context, boolean isTokenFailed) {
+        return new Intent(context, LoginActivity.class).putExtra("isTokenFailed", isTokenFailed);
     }
 
     @SuppressLint("HandlerLeak")
@@ -60,12 +68,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             }
         }
     };
-    private String userinfomsg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        intent = getIntent();
+        isTokenFailed = intent.getBooleanExtra("isTokenFailed", false);
         initView();
         initEvent();
         initData();
@@ -155,6 +164,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     private void requestVerifyCode(String mobile) {
         HttpPostApi postEntity = new HttpPostApi(verifyOnNextListener, this, HttpPostApi.GET_VERIFY, true);
         postEntity.setPhoneNumber(mobile);
+        postEntity.setType(1);
         HttpManager manager = HttpManager.getInstance();
         manager.doHttpDeal(postEntity);
         startCountBack();
@@ -180,8 +190,25 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     HttpOnNextListener loginOnNextListener = new HttpOnNextListener<LoginResponseBean>() {
 
         @Override
-        public void onNext(LoginResponseBean loginResponseBean) {
-            ToastUtil.showShortToast(getApplicationContext(), "接口请求成功！" + loginResponseBean.toString());
+        public void onNext(LoginResponseBean loginResponseBean, int code) {
+            if (code == 500) {
+                ToastUtil.showShortToast(getApplicationContext(), "验证码错误！");
+                return;
+            }
+            ToastUtil.showShortToast(getApplicationContext(), "登录成功！");
+            String userInfoJson = JSON.toJSONString(loginResponseBean);
+            SharedPreferencesUtils.setUserInfo(mContext, userInfoJson);
+            UserConfigs.loadUserInfo(userInfoJson);
+            if (TextUtils.isEmpty(loginResponseBean.getUser().getLastLoginRole()))
+                startActivity(LoginChooseActivity.createIntent(mContext));
+            else {
+                if (isTokenFailed)  //如果token失效，则返回之前页面,否则跳转主页
+                    finish();
+                else {
+                    HomeActivity.newInstance(mContext);
+                    finish();
+                }
+            }
         }
 
         @Override
@@ -193,7 +220,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     HttpOnNextListener verifyOnNextListener = new HttpOnNextListener<String>() {
 
         @Override
-        public void onNext(String string) {
+        public void onNext(String string, int code) {
             ToastUtil.showShortToast(getApplicationContext(), "验证码已发送!");
         }
 
@@ -203,4 +230,26 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             Log.e(TAG, getResources().getString(R.string.txt_server_error) + e.getMessage());
         }
     };
+
+    /**
+     * 双击返回键退出程序
+     *
+     * @param keyCode
+     * @param event
+     * @return
+     */
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+            long secondTime = System.currentTimeMillis();
+            if (secondTime - firstTime > 2000) {
+                ToastUtil.showShortToast(mContext, "再按一次退出程序");
+                firstTime = secondTime;
+                return true;
+            } else {
+                System.exit(0);
+            }
+        }
+        return super.onKeyUp(keyCode, event);
+    }
 }

@@ -2,9 +2,13 @@ package com.coop.android.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.KeyEvent;
 
 import com.coop.android.R;
+import com.coop.android.UserConfigs;
 import com.coop.android.utils.SharedPreferencesUtils;
+import com.coop.android.utils.ToastUtil;
 
 
 /**
@@ -12,8 +16,9 @@ import com.coop.android.utils.SharedPreferencesUtils;
  * 在获取用户信息之后才会进入下一个页面
  */
 public class WelcomeActivity extends Activity {
-    public static final String EXTRA_SYSTEM_INFO = "WelcomeActivity";
     private static final String TAG = "WelcomeActivity";
+    //记录用户首次点击返回键的时间
+    private long firstTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +43,39 @@ public class WelcomeActivity extends Activity {
         if (isFirstRun()) {
             GuideActivity.newInstance(this);
             finish();
-        }else{
-            HomeActivity.newInstance(this);
+        } else if (!SharedPreferencesUtils.hasUserInfo(this)) {
+            startActivity(LoginActivity.createIntent(this, false));
+            finish();
+        } else {
+            String userInfo = SharedPreferencesUtils.getUserInfo(this);
+            UserConfigs.loadUserInfo(userInfo);
+            if (TextUtils.isEmpty(UserConfigs.getInstance().getLastLoginRole()))
+                startActivity(LoginChooseActivity.createIntent(this));
+            else
+                HomeActivity.newInstance(this);
             finish();
         }
     }
 
-
+    /**
+     * 双击返回键退出程序
+     *
+     * @param keyCode
+     * @param event
+     * @return
+     */
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+            long secondTime = System.currentTimeMillis();
+            if (secondTime - firstTime > 2000) {
+                ToastUtil.showShortToast(WelcomeActivity.this, "再按一次退出程序");
+                firstTime = secondTime;
+                return true;
+            } else {
+                System.exit(0);
+            }
+        }
+        return super.onKeyUp(keyCode, event);
+    }
 }
