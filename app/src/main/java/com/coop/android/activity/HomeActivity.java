@@ -33,14 +33,13 @@ import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
 import zuo.biao.library.base.BaseActivity;
-import zuo.biao.library.swichlayout.SwichLayoutInterFace;
 import zuo.biao.library.swichlayout.SwitchLayout;
 import zuo.biao.library.ui.AlertDialog;
 import zuo.biao.library.util.Log;
 import zuo.biao.library.util.StringUtil;
 
 
-public class HomeActivity extends BaseActivity implements View.OnClickListener, SwichLayoutInterFace, EasyPermissions.PermissionCallbacks, CoopListener, AlertDialog.OnDialogButtonClickListener {
+public class HomeActivity extends BaseActivity implements View.OnClickListener, EasyPermissions.PermissionCallbacks, CoopListener, AlertDialog.OnDialogButtonClickListener {
     private static final String TAG = "HomeActivity";
     /**
      * 扫描跳转Activity RequestCode
@@ -71,7 +70,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
     @Override
     protected void onRestart() {
         super.onRestart();
-        SwitchLayout.RotateHorizontal(this, false, null);
+//        SwitchLayout.RotateHorizontal(this, false, null);
+        SwitchLayout.get3DRotateFromRight(this, false, null);
     }
 
     @Override
@@ -274,15 +274,5 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
         if (isPositive) {
             toActivity(UpdatePasswordActivity.createIntent(mContext, ConstantUtil.SETPASSWORD));
         }
-    }
-
-    @Override
-    public void setEnterSwichLayout() {
-
-    }
-
-    @Override
-    public void setExitSwichLayout() {
-
     }
 }

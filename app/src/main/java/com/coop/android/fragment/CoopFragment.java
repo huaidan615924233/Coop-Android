@@ -36,6 +36,7 @@ import java.util.Date;
 import retrofit_rx.http.HttpManager;
 import retrofit_rx.listener.HttpOnNextListener;
 import zuo.biao.library.base.BaseFragment;
+import zuo.biao.library.swichlayout.SwitchLayout;
 import zuo.biao.library.util.Log;
 import zuo.biao.library.util.StringUtil;
 
@@ -118,7 +119,18 @@ public class CoopFragment extends BaseFragment implements OnLoadmoreListener, On
 
     @Override
     public void initEvent() {
-
+        statusLLOne.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SwitchLayout.get3DRotateFromRight(context, statusLLOne, false, null);
+            }
+        });
+        statusLLTwo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SwitchLayout.get3DRotateFromRight(context, statusLLTwo, false, null);
+            }
+        });
     }
 
     HttpOnNextListener coopProjectListOnNextListener = new HttpOnNextListener<CoopResponseBean>() {

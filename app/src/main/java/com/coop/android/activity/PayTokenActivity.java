@@ -243,6 +243,7 @@ public class PayTokenActivity extends BaseActivity implements View.OnClickListen
             }
             if (code == 502) {
                 pwdErrorTV.setText(getResources().getString(R.string.txt_password_failed));
+                ToastUtil.showShortToast(getApplicationContext(), getResources().getString(R.string.txt_password_failed));
                 return;
             }
             if (code == 503) {

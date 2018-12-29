@@ -5,6 +5,7 @@ import android.animation.Animator.AnimatorListener;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -244,17 +245,17 @@ public abstract class SwitchLayout {
     public static void get3DRotateFromRight(Activity context,
                                             boolean isCloseActivity, Interpolator interpolator) {
         activity = context;
+        //计算中心点
         WindowManager wm = activity.getWindowManager();
-
-        int width = wm.getDefaultDisplay().getWidth();
-        int height = wm.getDefaultDisplay().getHeight();
-        FlipAnimation rotate3dAnim = new FlipAnimation(width / 2, height / 2,
-                true);
+        final float centerX = wm.getDefaultDisplay().getWidth() / 2.0f;
+        final float centerY = wm.getDefaultDisplay().getHeight() / 2.0f;
+        final Rotate3dAnimation rotation = new Rotate3dAnimation(context, 180, 0, centerX, centerY, 0.0f, false);
+        rotation.setDuration(animDuration);
+        rotation.setFillAfter(true);
         if (interpolator != null) {
-            rotate3dAnim.setInterpolator(interpolator);
+            rotation.setInterpolator(interpolator);
         }
-        rotate3dAnim.setDuration(animDuration);
-        anim = rotate3dAnim;
+        anim = rotation;
         if (isCloseActivity) {
             anim.setAnimationListener(animListener);
         }
@@ -262,16 +263,19 @@ public abstract class SwitchLayout {
         getRootView(activity).startAnimation(anim);
     }
 
-    public static void get3DRotateFromRight(View view, boolean isCloseActivity,
+    public static void get3DRotateFromRight(Activity context, View view, boolean isCloseActivity,
                                             Interpolator interpolator) {
-        FlipAnimation rotate3dAnim = new FlipAnimation(
-                (view.getLeft() + (view.getWidth() / 2)) / 2,
-                (view.getTop() + (view.getHeight() / 2)), true);
+        activity = context;
+        //计算中心点
+        final float centerX = view.getWidth() / 2.0f;
+        final float centerY = view.getHeight() / 2.0f;
+        final Rotate3dAnimation rotation = new Rotate3dAnimation(context, 180, 0, centerX, centerY, 0.0f, false);
+        rotation.setDuration(animDuration);
+        rotation.setFillAfter(true);
         if (interpolator != null) {
-            rotate3dAnim.setInterpolator(interpolator);
+            rotation.setInterpolator(interpolator);
         }
-        rotate3dAnim.setDuration(animDuration);
-        anim = rotate3dAnim;
+        anim = rotation;
         if (isCloseActivity) {
             anim.setAnimationListener(animListener);
         }
