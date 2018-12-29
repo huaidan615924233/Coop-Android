@@ -8,12 +8,15 @@
     <LinearLayout
         android:id="@+id/statusLLOne"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="@dimen/dp_25"
+        android:layout_marginRight="@dimen/dp_25"
         android:background="@drawable/bg_frame_white_to_gray_radius"
         android:gravity="center"
         android:orientation="vertical"
-        android:layout_marginLeft="@dimen/dp_25"
-        android:layout_marginRight="@dimen/dp_25"
+        android:paddingBottom="@dimen/dp_30"
+        android:paddingTop="@dimen/dp_60"
         android:visibility="gone">
 
         <ImageView
@@ -48,12 +51,15 @@
     <LinearLayout
         android:id="@+id/statusLLTwo"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bg_frame_white_to_gray_radius"
-        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:layout_marginLeft="@dimen/dp_25"
         android:layout_marginRight="@dimen/dp_25"
+        android:background="@drawable/bg_frame_white_to_gray_radius"
+        android:gravity="center"
         android:orientation="vertical"
+        android:paddingBottom="@dimen/dp_30"
+        android:paddingTop="@dimen/dp_60"
         android:visibility="gone">
 
         <ImageView

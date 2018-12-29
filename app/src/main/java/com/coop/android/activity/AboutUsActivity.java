@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
+import com.coop.android.BuildConfig;
 import com.coop.android.R;
 import com.coop.android.utils.TextViewSpanUtil;
 
@@ -19,7 +20,7 @@ import zuo.biao.library.ui.ExpandableTextView;
  */
 public class AboutUsActivity extends BaseActivity {
     protected Toolbar toolBar;
-    private TextView aboutDesc, expandTV;
+    private TextView aboutDesc, versionDescTV;
     private boolean isExpanded = false;
     private String aboutUs;
 
@@ -44,29 +45,14 @@ public class AboutUsActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        aboutUs = "\t\t标题平台说明平台说明平台说明平台说明平台说明平台说明平台说明平台说明平台说明平台说明平台说明\n" +
-                "平台说明平台说明平台说明平台说明平台说明平台说明平台说明平台说明平台说明平台说明平台说明平台说明\n" +
-                "平台说明平台说\n明平台说明平台说明平台说明平台说明平台说明平台说明平台说明平台说明平台说明平台说明平\n台说明平台说明平台说明";
+        aboutUs = "\t\t我们希望通过区块链技术与专业的服务帮助创业者解决在早期创业者遇到的各种问题。协助创业者以新的方式进行各项资源对接与交易，加速项目早期发展。";
         tvBaseTitle.setText(getString(R.string.txt_title_about_us));
         toolBar = findViewById(R.id.toolbar_img);
         toolBar.setNavigationIcon(R.mipmap.back_left_btn);
         aboutDesc = findViewById(R.id.aboutDesc);
-        expandTV = findViewById(R.id.expandTV);
+        versionDescTV = findViewById(R.id.versionDescTV);
         aboutDesc.setText(aboutUs);
-        expandTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isExpanded) {
-                    isExpanded = false;
-                    aboutDesc.setMaxLines(2);// 收起
-                    expandTV.setText("展开全部");
-                } else {
-                    isExpanded = true;
-                    aboutDesc.setMaxLines(Integer.MAX_VALUE);// 展开
-                    expandTV.setText("收起全部");
-                }
-            }
-        });
+        versionDescTV.setText(getResources().getString(R.string.app_name) + "@_v" + BuildConfig.VERSION_NAME);
     }
 
     @Override

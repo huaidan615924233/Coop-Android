@@ -33,12 +33,14 @@ import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
 import zuo.biao.library.base.BaseActivity;
+import zuo.biao.library.swichlayout.SwichLayoutInterFace;
+import zuo.biao.library.swichlayout.SwitchLayout;
 import zuo.biao.library.ui.AlertDialog;
 import zuo.biao.library.util.Log;
 import zuo.biao.library.util.StringUtil;
 
 
-public class HomeActivity extends BaseActivity implements View.OnClickListener, EasyPermissions.PermissionCallbacks, CoopListener, AlertDialog.OnDialogButtonClickListener {
+public class HomeActivity extends BaseActivity implements View.OnClickListener, SwichLayoutInterFace, EasyPermissions.PermissionCallbacks, CoopListener, AlertDialog.OnDialogButtonClickListener {
     private static final String TAG = "HomeActivity";
     /**
      * 扫描跳转Activity RequestCode
@@ -67,6 +69,12 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
     }
 
     @Override
+    protected void onRestart() {
+        super.onRestart();
+        SwitchLayout.RotateHorizontal(this, false, null);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initView();
@@ -76,6 +84,9 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
     @Override
     public void initView() {
         setContentView(R.layout.activity_home);
+//        if(NavigationBarUtil.hasNavigationBar(this)){
+//            NavigationBarUtil.initActivity(findViewById(android.R.id.content));
+//        }
         helpTxt = findViewById(R.id.txtHelp);
         scanBtn = findViewById(R.id.btnScan);
         qrcodeBtn = findViewById(R.id.btnQrcode);
@@ -109,7 +120,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
 
     @Override
     public void initEvent() {
-        helpTxt.setOnClickListener(HomeActivity.this);
+//        helpTxt.setOnClickListener(HomeActivity.this);
         scanBtn.setOnClickListener(HomeActivity.this);
         qrcodeBtn.setOnClickListener(HomeActivity.this);
         homeHeaderImg.setOnClickListener(HomeActivity.this);
@@ -263,5 +274,15 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
         if (isPositive) {
             toActivity(UpdatePasswordActivity.createIntent(mContext, ConstantUtil.SETPASSWORD));
         }
+    }
+
+    @Override
+    public void setEnterSwichLayout() {
+
+    }
+
+    @Override
+    public void setExitSwichLayout() {
+
     }
 }
