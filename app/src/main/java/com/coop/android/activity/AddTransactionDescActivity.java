@@ -1,3 +1,27 @@
+//
+//                       _oo0oo_
+//                      o8888888o
+//                      88" . "88
+//                      (| -_- |)
+//                      0\  =  /0
+//                    ___/`---'\___
+//                  .' \|     |// '.
+//                 / \|||  :  |||// \
+//                / _||||| -:- |||||- \
+//               |   | \  -  /// |     |
+//               | \_|  ''\---/''  |_/ |
+//               \  .-\__  '-'  ___/-. /
+//             ___'. .'  /--.--\  `. .'___
+//          ."" '<  `.___\_<|>_/___.' >' "".
+//         | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+//         \  \ `_.   \_ __\ /__ _/   .-` /  /
+//     =====`-.____`.___ \_____/___.-`___.-'=====
+//                       `=---='
+//
+//
+//     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//
+//               佛祖保佑         永无BUG
 package com.coop.android.activity;
 
 import android.content.Context;
@@ -12,6 +36,7 @@ import android.widget.EditText;
 
 import com.coop.android.R;
 import com.coop.android.utils.ToastUtil;
+import com.umeng.analytics.MobclickAgent;
 
 import zuo.biao.library.base.BaseActivity;
 import zuo.biao.library.ui.AlertDialog;
@@ -123,5 +148,19 @@ public class AddTransactionDescActivity extends BaseActivity implements View.OnC
             }
         }
         return super.onKeyUp(keyCode, event);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("二维码添加备注页面");
+        MobclickAgent.onResume(this); //统计时长
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("二维码添加备注页面");
+        MobclickAgent.onPause(this);
     }
 }

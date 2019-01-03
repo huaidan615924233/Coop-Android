@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!-- 网络状态权限 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -21,8 +23,15 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:supportsRtl="true"
         android:theme="@style/Theme.mainTransparent">
+
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="5c2c55d4f1f556e2d1000023" />
+        <!--<meta-data android:value="Channel ID" android:name="UMENG_CHANNEL"/>-->
+
         <activity
             android:name=".activity.WelcomeActivity"
             android:screenOrientation="portrait"

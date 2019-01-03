@@ -1,3 +1,27 @@
+//
+//                       _oo0oo_
+//                      o8888888o
+//                      88" . "88
+//                      (| -_- |)
+//                      0\  =  /0
+//                    ___/`---'\___
+//                  .' \|     |// '.
+//                 / \|||  :  |||// \
+//                / _||||| -:- |||||- \
+//               |   | \  -  /// |     |
+//               | \_|  ''\---/''  |_/ |
+//               \  .-\__  '-'  ___/-. /
+//             ___'. .'  /--.--\  `. .'___
+//          ."" '<  `.___\_<|>_/___.' >' "".
+//         | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+//         \  \ `_.   \_ __\ /__ _/   .-` /  /
+//     =====`-.____`.___ \_____/___.-`___.-'=====
+//                       `=---='
+//
+//
+//     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//
+//               佛祖保佑         永无BUG
 package com.coop.android.activity;
 
 import android.content.Context;
@@ -14,6 +38,7 @@ import android.widget.TextView;
 
 import com.coop.android.R;
 import com.coop.android.utils.SharedPreferencesUtils;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
 
@@ -135,5 +160,18 @@ public class GuideActivity extends AppCompatActivity {
         public boolean isViewFromObject(View view, Object object) {
             return view == object;
         }
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("欢迎页面");
+        MobclickAgent.onResume(this); //统计时长
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("欢迎页面");
+        MobclickAgent.onPause(this);
     }
 }

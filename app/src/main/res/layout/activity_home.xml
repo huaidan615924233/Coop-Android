@@ -92,6 +92,7 @@
             android:layout_marginBottom="@dimen/dp_35"
             android:drawableLeft="@mipmap/help"
             android:paddingLeft="@dimen/dp_5"
-            android:text="@string/txt_look_help" />
+            android:text="@string/txt_look_help"
+            android:visibility="invisible" />
     </LinearLayout>
 </RelativeLayout>

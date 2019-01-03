@@ -1,3 +1,27 @@
+//
+//                       _oo0oo_
+//                      o8888888o
+//                      88" . "88
+//                      (| -_- |)
+//                      0\  =  /0
+//                    ___/`---'\___
+//                  .' \|     |// '.
+//                 / \|||  :  |||// \
+//                / _||||| -:- |||||- \
+//               |   | \  -  /// |     |
+//               | \_|  ''\---/''  |_/ |
+//               \  .-\__  '-'  ___/-. /
+//             ___'. .'  /--.--\  `. .'___
+//          ."" '<  `.___\_<|>_/___.' >' "".
+//         | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+//         \  \ `_.   \_ __\ /__ _/   .-` /  /
+//     =====`-.____`.___ \_____/___.-`___.-'=====
+//                       `=---='
+//
+//
+//     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//
+//               佛祖保佑         永无BUG
 package com.coop.android.activity;
 
 import android.content.Context;
@@ -11,6 +35,7 @@ import android.widget.TextView;
 import com.coop.android.BuildConfig;
 import com.coop.android.R;
 import com.coop.android.utils.TextViewSpanUtil;
+import com.umeng.analytics.MobclickAgent;
 
 import zuo.biao.library.base.BaseActivity;
 import zuo.biao.library.ui.ExpandableTextView;
@@ -68,5 +93,19 @@ public class AboutUsActivity extends BaseActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("关于页面");
+        MobclickAgent.onResume(this); //统计时长
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("关于页面");
+        MobclickAgent.onPause(this);
     }
 }

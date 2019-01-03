@@ -1,3 +1,27 @@
+//
+//                       _oo0oo_
+//                      o8888888o
+//                      88" . "88
+//                      (| -_- |)
+//                      0\  =  /0
+//                    ___/`---'\___
+//                  .' \|     |// '.
+//                 / \|||  :  |||// \
+//                / _||||| -:- |||||- \
+//               |   | \  -  /// |     |
+//               | \_|  ''\---/''  |_/ |
+//               \  .-\__  '-'  ___/-. /
+//             ___'. .'  /--.--\  `. .'___
+//          ."" '<  `.___\_<|>_/___.' >' "".
+//         | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+//         \  \ `_.   \_ __\ /__ _/   .-` /  /
+//     =====`-.____`.___ \_____/___.-`___.-'=====
+//                       `=---='
+//
+//
+//     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//
+//               佛祖保佑         永无BUG
 package com.coop.android.activity;
 
 import android.content.Context;
@@ -16,6 +40,7 @@ import com.coop.android.model.UserInfo;
 import com.coop.android.utils.ConstantUtil;
 import com.coop.android.utils.SharedPreferencesUtils;
 import com.coop.android.utils.ToastUtil;
+import com.umeng.analytics.MobclickAgent;
 
 import retrofit_rx.http.HttpManager;
 import retrofit_rx.listener.HttpOnNextListener;
@@ -147,7 +172,7 @@ public class LoginChooseActivity extends BaseActivity implements View.OnClickLis
             SharedPreferencesUtils.setUserInfo(mContext, userInfo);
             UserConfigs.loadUserInfo(userInfo);
 //            ToastUtil.showShortToast(getApplicationContext(), "角色创建成功!");
-            HomeActivity.newInstance(mContext);
+            HomeActivity.newInstance(mContext, false);
             finish();
         }
 
@@ -157,4 +182,18 @@ public class LoginChooseActivity extends BaseActivity implements View.OnClickLis
             Log.e(TAG, getResources().getString(R.string.txt_server_error) + e.getMessage());
         }
     };
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("选择角色页面");
+        MobclickAgent.onResume(this); //统计时长
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("选择角色页面");
+        MobclickAgent.onPause(this);
+    }
 }

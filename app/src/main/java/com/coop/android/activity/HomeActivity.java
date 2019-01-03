@@ -1,3 +1,27 @@
+//
+//                       _oo0oo_
+//                      o8888888o
+//                      88" . "88
+//                      (| -_- |)
+//                      0\  =  /0
+//                    ___/`---'\___
+//                  .' \|     |// '.
+//                 / \|||  :  |||// \
+//                / _||||| -:- |||||- \
+//               |   | \  -  /// |     |
+//               | \_|  ''\---/''  |_/ |
+//               \  .-\__  '-'  ___/-. /
+//             ___'. .'  /--.--\  `. .'___
+//          ."" '<  `.___\_<|>_/___.' >' "".
+//         | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+//         \  \ `_.   \_ __\ /__ _/   .-` /  /
+//     =====`-.____`.___ \_____/___.-`___.-'=====
+//                       `=---='
+//
+//
+//     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//
+//               佛祖保佑         永无BUG
 package com.coop.android.activity;
 
 import android.Manifest;
@@ -25,6 +49,7 @@ import com.coop.android.utils.ConstantUtil;
 import com.coop.android.utils.ToastUtil;
 import com.coop.android.view.CircleImageView;
 import com.coop.android.view.DrawableButton;
+import com.umeng.analytics.MobclickAgent;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 
 import java.util.List;
@@ -56,13 +81,15 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
     private FragmentTransaction transition;
     private CoopFragment coopFragment;
     private PartnerFragment partnerFragment;
+    public static boolean isChooseUser = false;
 
     /**
      * 进入主页
      *
      * @return
      */
-    public static void newInstance(Context context) {
+    public static void newInstance(Context context, boolean isChooseUser) {
+        HomeActivity.isChooseUser = isChooseUser;
         Intent intent = new Intent(context, HomeActivity.class);
         context.startActivity(intent);
     }
@@ -71,7 +98,10 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
     protected void onRestart() {
         super.onRestart();
 //        SwitchLayout.RotateHorizontal(this, false, null);
-        SwitchLayout.get3DRotateFromRight(this, false, null);
+        if (isChooseUser) {
+            isChooseUser = false;
+            SwitchLayout.get3DRotateFromRight(this, false, null);
+        }
     }
 
     @Override
@@ -124,12 +154,6 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
         scanBtn.setOnClickListener(HomeActivity.this);
         qrcodeBtn.setOnClickListener(HomeActivity.this);
         homeHeaderImg.setOnClickListener(HomeActivity.this);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        initData();
     }
 
     @Override
@@ -213,6 +237,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
                 new AlertDialog(mContext, "提示", "还没有设置支付密码，是否去设置？", true, 0, HomeActivity.this).show();
                 return;
             }
+            //扫码事件统计
+            MobclickAgent.onEvent(mContext, "onClick", "扫码");
             startActivityForResult(ScanActivity.createIntent(mContext), REQUEST_CODE);
             overridePendingTransition(R.anim.bottom_in, R.anim.bottom_silent);
         } else {
@@ -274,5 +300,18 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
         if (isPositive) {
             toActivity(UpdatePasswordActivity.createIntent(mContext, ConstantUtil.SETPASSWORD));
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initData();
+        MobclickAgent.onResume(this); //统计时长
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this); //统计时长
     }
 }

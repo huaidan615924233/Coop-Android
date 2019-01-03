@@ -1,5 +1,9 @@
 package com.coop.android.utils;
 
+import android.content.Context;
+
+import com.umeng.commonsdk.statistics.common.DeviceConfig;
+
 import java.math.BigDecimal;
 import java.text.Format;
 
@@ -91,5 +95,16 @@ public class NumUtils {
     public static void main(String str[]) {
 //        System.out.print(formatNum("1000.00", false));
         System.out.print(String.format("%.0f", Double.parseDouble("1.00")) + "");
+    }
+    public static String[] getTestDeviceInfo(Context context){
+        String[] deviceInfo = new String[2];
+        try {
+            if(context != null){
+                deviceInfo[0] = DeviceConfig.getDeviceIdForGeneral(context);
+                deviceInfo[1] = DeviceConfig.getMac(context);
+            }
+        } catch (Exception e){
+        }
+        return deviceInfo;
     }
 }

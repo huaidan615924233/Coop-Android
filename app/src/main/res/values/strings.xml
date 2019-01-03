@@ -9,7 +9,7 @@
     <string name="txt_guide_title_desc_3">助您实现创业梦</string>
     <string name="txt_guide_button_enter">进入应用</string>
     <!--各页面名称-->
-    <string name="txt_title_about_us">平台说明</string>
+    <string name="txt_title_about_us">关于我们</string>
     <string name="txt_title_update_password">忘记密码</string>
     <string name="txt_title_set_password">设置密码</string>
     <string name="txt_title_setting">设置</string>

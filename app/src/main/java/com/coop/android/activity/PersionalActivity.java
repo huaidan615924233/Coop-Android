@@ -1,3 +1,27 @@
+//
+//                       _oo0oo_
+//                      o8888888o
+//                      88" . "88
+//                      (| -_- |)
+//                      0\  =  /0
+//                    ___/`---'\___
+//                  .' \|     |// '.
+//                 / \|||  :  |||// \
+//                / _||||| -:- |||||- \
+//               |   | \  -  /// |     |
+//               | \_|  ''\---/''  |_/ |
+//               \  .-\__  '-'  ___/-. /
+//             ___'. .'  /--.--\  `. .'___
+//          ."" '<  `.___\_<|>_/___.' >' "".
+//         | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+//         \  \ `_.   \_ __\ /__ _/   .-` /  /
+//     =====`-.____`.___ \_____/___.-`___.-'=====
+//                       `=---='
+//
+//
+//     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//
+//               佛祖保佑         永无BUG
 package com.coop.android.activity;
 
 import android.Manifest;
@@ -21,6 +45,7 @@ import com.coop.android.utils.ConstantUtil;
 import com.coop.android.utils.ToastUtil;
 import com.coop.android.view.CircleImageView;
 import com.coop.android.view.CommonPopupWindow;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.List;
 
@@ -93,12 +118,6 @@ public class PersionalActivity extends BaseActivity implements View.OnClickListe
             setPassLL.setVisibility(View.GONE);
             callMeLL.setBackgroundResource(R.drawable.bg_left_radius_frame_white_to_gray);
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        initData();
     }
 
     @Override
@@ -234,6 +253,20 @@ public class PersionalActivity extends BaseActivity implements View.OnClickListe
             return;
         }
         super.onBackPressed();
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        initData();
+        MobclickAgent.onPageStart("个人中心页面");
+        MobclickAgent.onResume(this); //统计时长
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("个人中心页面");
+        MobclickAgent.onPause(this);
     }
 }
 

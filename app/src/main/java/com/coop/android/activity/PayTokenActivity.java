@@ -1,3 +1,27 @@
+//
+//                       _oo0oo_
+//                      o8888888o
+//                      88" . "88
+//                      (| -_- |)
+//                      0\  =  /0
+//                    ___/`---'\___
+//                  .' \|     |// '.
+//                 / \|||  :  |||// \
+//                / _||||| -:- |||||- \
+//               |   | \  -  /// |     |
+//               | \_|  ''\---/''  |_/ |
+//               \  .-\__  '-'  ___/-. /
+//             ___'. .'  /--.--\  `. .'___
+//          ."" '<  `.___\_<|>_/___.' >' "".
+//         | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+//         \  \ `_.   \_ __\ /__ _/   .-` /  /
+//     =====`-.____`.___ \_____/___.-`___.-'=====
+//                       `=---='
+//
+//
+//     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//
+//               佛祖保佑         永无BUG
 package com.coop.android.activity;
 
 import android.app.Activity;
@@ -25,6 +49,7 @@ import com.coop.android.utils.Md5EncryptionHelper;
 import com.coop.android.utils.ToastUtil;
 import com.coop.android.view.CommonPopupWindow;
 import com.coop.android.view.PwdEditText;
+import com.umeng.analytics.MobclickAgent;
 
 import retrofit_rx.http.HttpManager;
 import retrofit_rx.listener.HttpOnNextListener;
@@ -250,6 +275,8 @@ public class PayTokenActivity extends BaseActivity implements View.OnClickListen
                 ToastUtil.showShortToast(getApplicationContext(), "不能转让给自己!");
                 return;
             }
+            //转让成功事件统计
+            MobclickAgent.onEvent(mContext, "onClick", "转让成功");
             ToastUtil.showShortToast(getApplicationContext(), "转让成功!");
             finish();
         }
@@ -283,5 +310,19 @@ public class PayTokenActivity extends BaseActivity implements View.OnClickListen
             }
         }
         return super.onKeyUp(keyCode, event);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("支付Token页面");
+        MobclickAgent.onResume(this); //统计时长
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("支付Token页面");
+        MobclickAgent.onPause(this);
     }
 }

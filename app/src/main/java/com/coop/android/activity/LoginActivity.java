@@ -1,3 +1,27 @@
+//
+//                       _oo0oo_
+//                      o8888888o
+//                      88" . "88
+//                      (| -_- |)
+//                      0\  =  /0
+//                    ___/`---'\___
+//                  .' \|     |// '.
+//                 / \|||  :  |||// \
+//                / _||||| -:- |||||- \
+//               |   | \  -  /// |     |
+//               | \_|  ''\---/''  |_/ |
+//               \  .-\__  '-'  ___/-. /
+//             ___'. .'  /--.--\  `. .'___
+//          ."" '<  `.___\_<|>_/___.' >' "".
+//         | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+//         \  \ `_.   \_ __\ /__ _/   .-` /  /
+//     =====`-.____`.___ \_____/___.-`___.-'=====
+//                       `=---='
+//
+//
+//     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//
+//               佛祖保佑         永无BUG
 package com.coop.android.activity;
 
 import android.annotation.SuppressLint;
@@ -22,6 +46,7 @@ import com.coop.android.http.api.HttpPostApi;
 import com.coop.android.model.LoginResponseBean;
 import com.coop.android.utils.SharedPreferencesUtils;
 import com.coop.android.utils.ToastUtil;
+import com.umeng.analytics.MobclickAgent;
 
 import retrofit_rx.http.HttpManager;
 import retrofit_rx.listener.HttpOnNextListener;
@@ -199,13 +224,15 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             String userInfoJson = JSON.toJSONString(loginResponseBean);
             SharedPreferencesUtils.setUserInfo(mContext, userInfoJson);
             UserConfigs.loadUserInfo(userInfoJson);
+            //统计登录成功
+            MobclickAgent.onProfileSignIn(UserConfigs.getInstance().getId());
             if (TextUtils.isEmpty(loginResponseBean.getUser().getLastLoginRole()))
                 startActivity(LoginChooseActivity.createIntent(mContext));
             else {
                 if (isTokenFailed)  //如果token失效，则返回之前页面,否则跳转主页
                     finish();
                 else {
-                    HomeActivity.newInstance(mContext);
+                    HomeActivity.newInstance(mContext,false);
                     finish();
                 }
             }
@@ -251,5 +278,19 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             }
         }
         return super.onKeyUp(keyCode, event);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("登录页面");
+        MobclickAgent.onResume(this); //统计时长
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("登录页面");
+        MobclickAgent.onPause(this);
     }
 }

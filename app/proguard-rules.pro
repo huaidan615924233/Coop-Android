@@ -33,6 +33,9 @@
     public static ** values();
     public static ** valueOf(java.lang.String);
 }
+#-keep public class com.coop.android.R$*{
+#public static final int *;
+#}
 #v4包不混淆
 -keep class android.support.v4.app.** { *; }
 -keep interface android.support.v4.app.** { *; }
@@ -76,4 +79,14 @@
 -keep class com.uuzuche.** { *; }
 -keep class retrofit_rx.** { *; }
 -keep class zuo.bao.** { *; }
+
+# 友盟
+-keep class com.umeng.** {*;}
+-keepclassmembers class * {
+   public <init> (org.json.JSONObject);
+}
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
 

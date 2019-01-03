@@ -60,4 +60,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     implementation project(':lib-zxing')
     implementation project(':ZBLibrary')
+    //友盟统计
+    api 'com.umeng.sdk:common:latest.integration'
+    api 'com.umeng.sdk:analytics:latest.integration'
+    api 'com.umeng.umsdk:utdid:latest.integration'
 }

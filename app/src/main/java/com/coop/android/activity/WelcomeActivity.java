@@ -1,3 +1,27 @@
+//
+//                       _oo0oo_
+//                      o8888888o
+//                      88" . "88
+//                      (| -_- |)
+//                      0\  =  /0
+//                    ___/`---'\___
+//                  .' \|     |// '.
+//                 / \|||  :  |||// \
+//                / _||||| -:- |||||- \
+//               |   | \  -  /// |     |
+//               | \_|  ''\---/''  |_/ |
+//               \  .-\__  '-'  ___/-. /
+//             ___'. .'  /--.--\  `. .'___
+//          ."" '<  `.___\_<|>_/___.' >' "".
+//         | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+//         \  \ `_.   \_ __\ /__ _/   .-` /  /
+//     =====`-.____`.___ \_____/___.-`___.-'=====
+//                       `=---='
+//
+//
+//     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//
+//               佛祖保佑         永无BUG
 package com.coop.android.activity;
 
 import android.app.Activity;
@@ -9,6 +33,7 @@ import com.coop.android.R;
 import com.coop.android.UserConfigs;
 import com.coop.android.utils.SharedPreferencesUtils;
 import com.coop.android.utils.ToastUtil;
+import com.umeng.analytics.MobclickAgent;
 
 
 /**
@@ -24,6 +49,8 @@ public class WelcomeActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+        MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
+        MobclickAgent.openActivityDurationTrack(false);
         enterHomeActivity();
     }
 
@@ -52,7 +79,7 @@ public class WelcomeActivity extends Activity {
             if (TextUtils.isEmpty(UserConfigs.getInstance().getLastLoginRole()))
                 startActivity(LoginChooseActivity.createIntent(this));
             else
-                HomeActivity.newInstance(this);
+                HomeActivity.newInstance(this,false);
             finish();
         }
     }
@@ -77,5 +104,18 @@ public class WelcomeActivity extends Activity {
             }
         }
         return super.onKeyUp(keyCode, event);
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("加载页面");
+        MobclickAgent.onResume(this); //统计时长
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("加载页面");
+        MobclickAgent.onPause(this);
     }
 }
