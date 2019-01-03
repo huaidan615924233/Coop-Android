@@ -32,6 +32,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
+import com.coop.android.CBaseActivity;
 import com.coop.android.R;
 import com.coop.android.http.api.HttpPostApi;
 import com.coop.android.model.ProjectBean;
@@ -47,14 +48,13 @@ import java.util.Date;
 
 import retrofit_rx.http.HttpManager;
 import retrofit_rx.listener.HttpOnNextListener;
-import zuo.biao.library.base.BaseActivity;
 import zuo.biao.library.util.Log;
 import zuo.biao.library.util.StringUtil;
 
 /**
  * Created by MR-Z on 2018/12/11.
  */
-public class ProjectInfoActivity extends BaseActivity {
+public class ProjectInfoActivity extends CBaseActivity {
     private static final String TAG = "ProjectInfoActivity";
     protected Toolbar toolBar;
     private String projectId;

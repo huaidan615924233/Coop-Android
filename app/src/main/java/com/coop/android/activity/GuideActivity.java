@@ -36,6 +36,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.coop.android.CBaseActivity;
 import com.coop.android.R;
 import com.coop.android.utils.SharedPreferencesUtils;
 import com.umeng.analytics.MobclickAgent;
@@ -44,7 +45,7 @@ import java.util.ArrayList;
 
 import zuo.biao.library.ui.indicator.CirclePageIndicator;
 
-public class GuideActivity extends AppCompatActivity {
+public class GuideActivity extends CBaseActivity {
     private ViewPager mViewPagerView;
 
     private ArrayList<View> mGuideList;
@@ -65,6 +66,12 @@ public class GuideActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide);
+        initView();
+        initData();
+        initEvent();
+    }
+    @Override
+    public void initView() {
         mViewPagerView = findViewById(R.id.vpager);
         guideBbtn = findViewById(R.id.id_guide_btn);
         mPageIndicator = findViewById(R.id.id_guide_indicator);
@@ -83,15 +90,16 @@ public class GuideActivity extends AppCompatActivity {
         mGuideList.add(view2);
         mGuideList.add(view3);
 //        guideList.add(view4);
+    }
 
+    @Override
+    public void initData() {
         mViewPagerView.setAdapter(new ViewPageAdapter(mGuideList));
         mViewPagerView.setCurrentItem(0);
         mPageIndicator.setViewPager(mViewPagerView);
-        setListener();
-
     }
-
-    protected void setListener() {
+    @Override
+    public void initEvent() {
 
         mViewPagerView.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

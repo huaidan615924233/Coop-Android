@@ -39,6 +39,7 @@ import android.widget.TextView;
 
 
 import com.alibaba.fastjson.JSON;
+import com.coop.android.CBaseActivity;
 import com.coop.android.R;
 import com.coop.android.UserConfigs;
 import com.coop.android.http.api.HttpPostApi;
@@ -52,7 +53,6 @@ import com.umeng.analytics.MobclickAgent;
 
 import retrofit_rx.http.HttpManager;
 import retrofit_rx.listener.HttpOnNextListener;
-import zuo.biao.library.base.BaseActivity;
 import zuo.biao.library.ui.AlertDialog;
 import zuo.biao.library.util.Log;
 import zuo.biao.library.util.StringUtil;
@@ -60,7 +60,7 @@ import zuo.biao.library.util.StringUtil;
 /**
  * Created by MR-Z on 2018/12/11.
  */
-public class UpdatePasswordActivity extends BaseActivity implements View.OnClickListener, AlertDialog.OnDialogButtonClickListener {
+public class UpdatePasswordActivity extends CBaseActivity implements View.OnClickListener, AlertDialog.OnDialogButtonClickListener {
     public static final String TAG = "UpdatePasswordActivity";
     private int type;
     protected Toolbar toolBar;

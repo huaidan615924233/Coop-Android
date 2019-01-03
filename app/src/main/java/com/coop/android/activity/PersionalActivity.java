@@ -39,6 +39,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.coop.android.CBaseActivity;
 import com.coop.android.R;
 import com.coop.android.UserConfigs;
 import com.coop.android.utils.ConstantUtil;
@@ -52,14 +53,13 @@ import java.util.List;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
-import zuo.biao.library.base.BaseActivity;
 import zuo.biao.library.util.CommonUtil;
 import zuo.biao.library.util.Log;
 
 /**
  * Created by MR-Z on 2018/12/11.
  */
-public class PersionalActivity extends BaseActivity implements View.OnClickListener, CommonPopupWindow.ViewInterface, EasyPermissions.PermissionCallbacks {
+public class PersionalActivity extends CBaseActivity implements View.OnClickListener, CommonPopupWindow.ViewInterface, EasyPermissions.PermissionCallbacks {
     public static final String TAG = "PersionalActivity";
     private CircleImageView userHeaderImg;
     private TextView userName, userId;

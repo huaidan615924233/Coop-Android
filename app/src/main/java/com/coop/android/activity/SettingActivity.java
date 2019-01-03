@@ -27,13 +27,13 @@ package com.coop.android.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
+import com.coop.android.CBaseActivity;
 import com.coop.android.R;
 import com.coop.android.UserConfigs;
 import com.coop.android.http.api.HttpPostApi;
@@ -46,14 +46,13 @@ import com.umeng.analytics.MobclickAgent;
 
 import retrofit_rx.http.HttpManager;
 import retrofit_rx.listener.HttpOnNextListener;
-import zuo.biao.library.base.BaseActivity;
 import zuo.biao.library.ui.AlertDialog;
 import zuo.biao.library.util.Log;
 
 /**
  * Created by MR-Z on 2018/12/11.
  */
-public class SettingActivity extends BaseActivity implements View.OnClickListener, AlertDialog.OnDialogButtonClickListener {
+public class SettingActivity extends CBaseActivity implements View.OnClickListener, AlertDialog.OnDialogButtonClickListener {
     private static final String TAG = "SettingActivity";
     protected Toolbar toolBar;
     private LinearLayout logoutLL, chooseUsesLL, aboutUsLL;

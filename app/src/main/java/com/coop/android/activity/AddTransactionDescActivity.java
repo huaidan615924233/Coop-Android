@@ -34,18 +34,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.coop.android.CBaseActivity;
 import com.coop.android.R;
 import com.coop.android.utils.ToastUtil;
 import com.umeng.analytics.MobclickAgent;
 
-import zuo.biao.library.base.BaseActivity;
 import zuo.biao.library.ui.AlertDialog;
 import zuo.biao.library.util.StringUtil;
 
 /**
  * Created by MR-Z on 2018/12/11.
  */
-public class AddTransactionDescActivity extends BaseActivity implements View.OnClickListener {
+public class AddTransactionDescActivity extends CBaseActivity implements View.OnClickListener {
     protected Toolbar toolBar;
     private EditText descET;
     private Button nextBtn;

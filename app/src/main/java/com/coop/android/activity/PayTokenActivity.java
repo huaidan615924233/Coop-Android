@@ -34,12 +34,12 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.coop.android.CBaseActivity;
 import com.coop.android.R;
 import com.coop.android.UserConfigs;
 import com.coop.android.http.api.HttpPostApi;
@@ -53,7 +53,6 @@ import com.umeng.analytics.MobclickAgent;
 
 import retrofit_rx.http.HttpManager;
 import retrofit_rx.listener.HttpOnNextListener;
-import zuo.biao.library.base.BaseActivity;
 import zuo.biao.library.ui.AlertDialog;
 import zuo.biao.library.util.CommonUtil;
 import zuo.biao.library.util.Log;
@@ -62,7 +61,7 @@ import zuo.biao.library.util.StringUtil;
 /**
  * Created by MR-Z on 2018/12/11.
  */
-public class PayTokenActivity extends BaseActivity implements View.OnClickListener, CommonPopupWindow.ViewInterface, AlertDialog.OnDialogButtonClickListener {
+public class PayTokenActivity extends CBaseActivity implements View.OnClickListener, CommonPopupWindow.ViewInterface, AlertDialog.OnDialogButtonClickListener {
     private static final String TAG = "PayTokenActivity";
     private TransBean transBean;
     protected Toolbar toolBar;

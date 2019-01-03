@@ -30,19 +30,18 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.LinearLayout;
 
+import com.coop.android.CBaseActivity;
 import com.coop.android.R;
 import com.umeng.analytics.MobclickAgent;
 import com.uuzuche.lib_zxing.activity.CaptureFragment;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 
-import zuo.biao.library.base.BaseActivity;
 
 /**
  * 定制化显示扫描界面
  */
-public class ScanActivity extends BaseActivity {
+public class ScanActivity extends CBaseActivity {
     protected Toolbar toolBar;
     private CaptureFragment captureFragment;
 
@@ -126,6 +125,7 @@ public class ScanActivity extends BaseActivity {
         super.finish();
         overridePendingTransition(R.anim.bottom_silent, R.anim.bottom_out);
     }
+
     @Override
     public void onResume() {
         super.onResume();

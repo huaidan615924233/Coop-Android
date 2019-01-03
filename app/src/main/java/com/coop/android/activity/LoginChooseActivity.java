@@ -32,6 +32,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.alibaba.fastjson.JSON;
+import com.coop.android.CBaseActivity;
 import com.coop.android.R;
 import com.coop.android.UserConfigs;
 import com.coop.android.http.api.HttpPostApi;
@@ -44,14 +45,13 @@ import com.umeng.analytics.MobclickAgent;
 
 import retrofit_rx.http.HttpManager;
 import retrofit_rx.listener.HttpOnNextListener;
-import zuo.biao.library.base.BaseActivity;
 import zuo.biao.library.util.Log;
 import zuo.biao.library.util.StringUtil;
 
 /**
  * Created by MR-Z on 2018/12/11.
  */
-public class LoginChooseActivity extends BaseActivity implements View.OnClickListener {
+public class LoginChooseActivity extends CBaseActivity implements View.OnClickListener {
     public static final String TAG = "LoginChooseActivity";
     private EditText userNameET;
     private Button usesOneBtn, usesTwoBtn;

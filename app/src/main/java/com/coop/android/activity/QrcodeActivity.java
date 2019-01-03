@@ -35,18 +35,18 @@ import android.widget.ImageView;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.coop.android.CBaseActivity;
 import com.coop.android.R;
 import com.coop.android.UserConfigs;
 import com.umeng.analytics.MobclickAgent;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 
-import zuo.biao.library.base.BaseActivity;
 import zuo.biao.library.util.Log;
 
 /**
  * Created by MR-Z on 2018/12/11.
  */
-public class QrcodeActivity extends BaseActivity {
+public class QrcodeActivity extends CBaseActivity {
     public static final String TAG = "QrcodeActivity";
     protected Toolbar toolBar;
     private ImageView qrcodeImg;

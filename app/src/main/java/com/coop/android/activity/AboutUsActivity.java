@@ -26,24 +26,20 @@ package com.coop.android.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
 import com.coop.android.BuildConfig;
+import com.coop.android.CBaseActivity;
 import com.coop.android.R;
-import com.coop.android.utils.TextViewSpanUtil;
 import com.umeng.analytics.MobclickAgent;
-
-import zuo.biao.library.base.BaseActivity;
-import zuo.biao.library.ui.ExpandableTextView;
 
 /**
  * Created by MR-Z on 2018/12/11.
  */
-public class AboutUsActivity extends BaseActivity {
+public class AboutUsActivity extends CBaseActivity {
     protected Toolbar toolBar;
     private TextView aboutDesc, versionDescTV;
     private boolean isExpanded = false;

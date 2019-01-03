@@ -31,6 +31,8 @@ import android.view.KeyEvent;
 
 import com.coop.android.R;
 import com.coop.android.UserConfigs;
+import com.coop.android.utils.AppStatus;
+import com.coop.android.utils.AppStatusManager;
 import com.coop.android.utils.SharedPreferencesUtils;
 import com.coop.android.utils.ToastUtil;
 import com.umeng.analytics.MobclickAgent;
@@ -67,6 +69,8 @@ public class WelcomeActivity extends Activity {
      * 进入到启动页面
      */
     private void enterHomeActivity() {
+        //app状态改为正常
+        AppStatusManager.getInstance().setAppStatus(AppStatus.STATUS_NORMAL);
         if (isFirstRun()) {
             GuideActivity.newInstance(this);
             finish();
@@ -79,7 +83,7 @@ public class WelcomeActivity extends Activity {
             if (TextUtils.isEmpty(UserConfigs.getInstance().getLastLoginRole()))
                 startActivity(LoginChooseActivity.createIntent(this));
             else
-                HomeActivity.newInstance(this,false);
+                HomeActivity.newInstance(this, false);
             finish();
         }
     }
@@ -105,6 +109,7 @@ public class WelcomeActivity extends Activity {
         }
         return super.onKeyUp(keyCode, event);
     }
+
     @Override
     public void onResume() {
         super.onResume();

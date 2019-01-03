@@ -44,6 +44,8 @@ import com.coop.android.fragment.CoopFragment;
 import com.coop.android.fragment.PartnerFragment;
 import com.coop.android.interfaces.CoopListener;
 import com.coop.android.model.TransBean;
+import com.coop.android.utils.AppStatus;
+import com.coop.android.utils.AppStatusManager;
 import com.coop.android.utils.CheckPermissionUtils;
 import com.coop.android.utils.ConstantUtil;
 import com.coop.android.utils.ToastUtil;
@@ -107,6 +109,13 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (AppStatusManager.getInstance().getAppStatus() == AppStatus.STATUS_RECYCLE) {
+            //跳到闪屏页
+            Intent intent = new Intent(this, WelcomeActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
         initView();
         initEvent();
     }
