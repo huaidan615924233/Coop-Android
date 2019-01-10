@@ -87,7 +87,7 @@ public class CoopAdapter extends RecyclerView.Adapter<CoopAdapter.FeedHolder> {
                 Log.e(TAG, e.getMessage());
             }
         }
-        holder.tranTokenTV.setText(NumUtils.formatNum(bean.getTokenNum(), false));
+        holder.tranTokenTV.setText(bean.getTokenNum());
         holder.hasTokenTV.setText(bean.getBalanceAmount());
         holder.tranDescTV.setText(bean.getPayRemark());
         holder.rootView.setOnClickListener(new View.OnClickListener() {

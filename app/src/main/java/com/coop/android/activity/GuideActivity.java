@@ -70,14 +70,13 @@ public class GuideActivity extends CBaseActivity {
         initData();
         initEvent();
     }
+
     @Override
     public void initView() {
         mViewPagerView = findViewById(R.id.vpager);
         guideBbtn = findViewById(R.id.id_guide_btn);
         mPageIndicator = findViewById(R.id.id_guide_indicator);
 
-        SharedPreferencesUtils.setFirstRun(this, false);
-//
         View view1 = LayoutInflater.from(this).inflate(R.layout.guide_layout_1, null);
         View view2 = LayoutInflater.from(this).inflate(R.layout.guide_layout_1, null);
         View view3 = LayoutInflater.from(this).inflate(R.layout.guide_layout_1, null);
@@ -98,6 +97,7 @@ public class GuideActivity extends CBaseActivity {
         mViewPagerView.setCurrentItem(0);
         mPageIndicator.setViewPager(mViewPagerView);
     }
+
     @Override
     public void initEvent() {
 
@@ -122,6 +122,7 @@ public class GuideActivity extends CBaseActivity {
         guideBbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferencesUtils.setFirstRun(mContext, false);
                 startActivity(LoginActivity.createIntent(GuideActivity.this, false));
                 finish();
             }
@@ -169,6 +170,7 @@ public class GuideActivity extends CBaseActivity {
             return view == object;
         }
     }
+
     @Override
     public void onResume() {
         super.onResume();

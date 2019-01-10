@@ -105,7 +105,7 @@ public class PayTokenActivity extends CBaseActivity implements View.OnClickListe
                     return;
                 }
                 if (!StringUtil.isEmpty(descET.getText().toString())) {
-                    new AlertDialog(mContext, "提示", "您确定要放弃本次的股份转让吗?", true, 0, new AlertDialog.OnDialogButtonClickListener() {
+                    new AlertDialog(mContext, "提示", "您确定要放弃本次的通证转让吗?", true, 0, new AlertDialog.OnDialogButtonClickListener() {
                         @Override
                         public void onDialogButtonClick(int requestCode, boolean isPositive) {
                             if (isPositive)
@@ -257,7 +257,7 @@ public class PayTokenActivity extends CBaseActivity implements View.OnClickListe
         @Override
         public void onNext(String string, int code) {
             if (code == 700) {
-                ToastUtil.showShortToast(getApplicationContext(), "Token失效，请重新登录!");
+                ToastUtil.showShortToast(getApplicationContext(), "登录失效，请重新登录!");
                 startActivity(LoginActivity.createIntent(mContext, true));
                 return;
             }
@@ -298,7 +298,7 @@ public class PayTokenActivity extends CBaseActivity implements View.OnClickListe
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
             if (!StringUtil.isEmpty(descET.getText().toString())) {
-                new AlertDialog(mContext, "提示", "您确定要放弃本次的股份转让吗?", true, 0, new AlertDialog.OnDialogButtonClickListener() {
+                new AlertDialog(mContext, "提示", "您确定要放弃本次的通证转让吗?", true, 0, new AlertDialog.OnDialogButtonClickListener() {
                     @Override
                     public void onDialogButtonClick(int requestCode, boolean isPositive) {
                         if (isPositive)

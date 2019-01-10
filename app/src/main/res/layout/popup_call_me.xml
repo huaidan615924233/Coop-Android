@@ -30,7 +30,7 @@
             android:layout_marginBottom="@dimen/dp_15"
             android:layout_marginTop="@dimen/dp_15"
             android:gravity="center"
-            android:text="400-1888-888"
+            android:text="136-9114-0462"
             android:textColor="@color/black"
             android:textSize="@dimen/sp_14" />
 

@@ -73,7 +73,7 @@ public class CoopFragment extends BaseFragment implements OnLoadmoreListener, On
     private RecyclerView listRV;
     private SmartRefreshLayout refreshLayout;
     private CoopAdapter coopAdapter;
-    private TextView projectNameTV, projectTimeTV, projectTotalTV, tokenTotalTV, tokenPerTV;
+    private TextView projectNameTV, projectTimeTV, projectTotalTV, tokenTotalTV, tokenPerTV,projectLabelTV;
     private LinearLayout projectView, statusLLOne, statusLLTwo;
     private CoopListener coopListener;
     private ProjectBean projectBean;   //当前项目
@@ -110,6 +110,7 @@ public class CoopFragment extends BaseFragment implements OnLoadmoreListener, On
         projectTotalTV = findViewById(R.id.projectTotalTV);
         tokenTotalTV = findViewById(R.id.tokenTotalTV);
         tokenPerTV = findViewById(R.id.tokenPerTV);
+        projectLabelTV = findViewById(R.id.projectLabelTV);
         projectView = findViewById(R.id.projectView);
         statusLLOne = findViewById(R.id.statusLLOne);
         statusLLTwo = findViewById(R.id.statusLLTwo);
@@ -163,7 +164,7 @@ public class CoopFragment extends BaseFragment implements OnLoadmoreListener, On
         @Override
         public void onNext(CoopResponseBean coopResponseBean, int code) {
             if (code == 700) {
-                ToastUtil.showShortToast(context, "Token失效，请重新登录!");
+                ToastUtil.showShortToast(context, "登录失效，请重新登录!");
                 startActivity(LoginActivity.createIntent(context, true));
                 return;
             }
@@ -215,6 +216,7 @@ public class CoopFragment extends BaseFragment implements OnLoadmoreListener, On
                     startActivity(ProjectInfoActivity.createIntent(context, projectBean.getId()));
                 }
             });
+            projectLabelTV.setText(projectBean.getType());
             projectTotalTV.setText(NumUtils.formatNum(projectBean.getProjectAmount(), false));
             tokenTotalTV.setText(projectBean.getProjectToken());
             coopAdapter = new CoopAdapter(context, projectBean.getList());

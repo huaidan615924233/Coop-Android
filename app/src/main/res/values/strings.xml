@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">Co-op</string>
 
-    <string name="txt_guide_title_1">资金到账</string>
-    <string name="txt_guide_title_desc_1">提现方便</string>
-    <string name="txt_guide_title_2">区块链</string>
-    <string name="txt_guide_title_desc_2">创新技术</string>
-    <string name="txt_guide_title_3">企业服务</string>
-    <string name="txt_guide_title_desc_3">助您实现创业梦</string>
+    <string name="txt_guide_title_1">创业服务</string>
+    <string name="txt_guide_title_desc_1">用全新方式助力创业</string>
+    <string name="txt_guide_title_2">区块链技术</string>
+    <string name="txt_guide_title_desc_2">用区块链技术，保护股权交易安全</string>
+    <string name="txt_guide_title_3">全新交易方式</string>
+    <string name="txt_guide_title_desc_3">无现金，以企业未来价值交易获得所需资源</string>
     <string name="txt_guide_button_enter">进入应用</string>
     <!--各页面名称-->
     <string name="txt_title_about_us">关于我们</string>
@@ -37,7 +37,7 @@
     <!--按钮名称 -->
     <string name="txt_look_help">查看帮助</string>
     <string name="txt_scan_btn">扫码</string>
-    <string name="txt_qrcode_btn">展示付款码</string>
+    <string name="txt_qrcode_btn">展示协作码</string>
     <string name="txt_uses_enter_btn">我是创业者</string>
     <string name="txt_uses_partner_btn">我是协作者</string>
     <string name="txt_set_pass">支付密码设置</string>
@@ -45,7 +45,7 @@
     <string name="txt_setting">设置</string>
     <string name="txt_copy">复制</string>
     <string name="txt_call_me_wchat_name">官方微信:</string>
-    <string name="txt_call_me_wchat">CO-OPser</string>
+    <string name="txt_call_me_wchat">CO-OPservice</string>
     <string name="txt_cancel">取消</string>
     <string name="txt_call_phone">拨打</string>
     <string name="txt_pay_token">转让</string>

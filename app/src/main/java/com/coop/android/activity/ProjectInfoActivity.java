@@ -58,7 +58,7 @@ public class ProjectInfoActivity extends CBaseActivity {
     private static final String TAG = "ProjectInfoActivity";
     protected Toolbar toolBar;
     private String projectId;
-    private TextView projectNameTV, projectTimeTV, tokenPerTV, projectTotalTV, tokenTotalTV, projectDescTV, projectMemberNameTV, expandTV;
+    private TextView projectNameTV, projectTimeTV, tokenPerTV, projectTotalTV, tokenTotalTV, projectDescTV, projectMemberNameTV, expandTV, projectLabelTV;
     private CircleImageView projectHeaderImg;
     private SmartRefreshLayout refreshLayout;
     private boolean isExpanded = false;
@@ -94,6 +94,7 @@ public class ProjectInfoActivity extends CBaseActivity {
         projectTotalTV = findViewById(R.id.projectTotalTV);
         tokenTotalTV = findViewById(R.id.tokenTotalTV);
         projectDescTV = findViewById(R.id.projectDescTV);
+        projectLabelTV = findViewById(R.id.projectLabelTV);
         projectMemberNameTV = findViewById(R.id.projectMemberNameTV);
         projectHeaderImg = findViewById(R.id.projectHeaderImg);
         expandTV = findViewById(R.id.expandTV);
@@ -126,7 +127,7 @@ public class ProjectInfoActivity extends CBaseActivity {
         @Override
         public void onNext(ProjectDetailResponseBean projectDetailResponseBean, int code) {
             if (code == 700) {
-                ToastUtil.showShortToast(getApplicationContext(), "Token失效，请重新登录!");
+                ToastUtil.showShortToast(getApplicationContext(), "登录失效，请重新登录!");
                 startActivity(LoginActivity.createIntent(mContext, true));
                 return;
             }
@@ -144,9 +145,10 @@ public class ProjectInfoActivity extends CBaseActivity {
                     Log.e(TAG, e.getMessage());
                 }
             }
+            projectLabelTV.setText(projectBean.getType());
             projectTotalTV.setText(NumUtils.formatNum(projectBean.getProjectAmount(), false));
             tokenTotalTV.setText(projectBean.getProjectToken());
-            projectMemberNameTV.setText(projectBean.getName());
+            projectMemberNameTV.setText(projectBean.getNickName());
             projectDescTV.setText(projectBean.getRemark());
             if (projectDescTV.getLineCount() > 2) {
                 projectDescTV.setMaxLines(2);// 收起
@@ -188,6 +190,7 @@ public class ProjectInfoActivity extends CBaseActivity {
             Log.e(TAG, getResources().getString(R.string.txt_server_error) + e.getMessage());
         }
     };
+
     @Override
     public void onResume() {
         super.onResume();

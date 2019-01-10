@@ -153,7 +153,7 @@ public class SettingActivity extends CBaseActivity implements View.OnClickListen
         @Override
         public void onNext(String string, int code) {
             if (code == 700) {
-                ToastUtil.showShortToast(getApplicationContext(), "Token失效，请重新登录!");
+                ToastUtil.showShortToast(getApplicationContext(), "登录失效，请重新登录!");
                 startActivity(LoginActivity.createIntent(mContext, true));
                 return;
             }

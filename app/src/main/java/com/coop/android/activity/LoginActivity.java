@@ -216,7 +216,7 @@ public class LoginActivity extends CBaseActivity implements View.OnClickListener
 
         @Override
         public void onNext(LoginResponseBean loginResponseBean, int code) {
-            if (code == 500) {
+            if (code == 508) {
                 ToastUtil.showShortToast(getApplicationContext(), "验证码错误！");
                 return;
             }

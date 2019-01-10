@@ -150,7 +150,7 @@ public class PartnerFragment extends BaseFragment implements OnLoadmoreListener,
         @Override
         public void onNext(CoopPartnerResponseBean coopPartnerResponseBean, int code) {
             if (code == 700) {
-                ToastUtil.showShortToast(context, "Token失效，请重新登录!");
+                ToastUtil.showShortToast(context, "登录失效，请重新登录!");
                 startActivity(LoginActivity.createIntent(context, true));
                 return;
             }

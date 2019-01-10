@@ -27,6 +27,8 @@ package com.coop.android.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -42,6 +44,9 @@ import com.coop.android.utils.ConstantUtil;
 import com.coop.android.utils.SharedPreferencesUtils;
 import com.coop.android.utils.ToastUtil;
 import com.umeng.analytics.MobclickAgent;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import retrofit_rx.http.HttpManager;
 import retrofit_rx.listener.HttpOnNextListener;
@@ -81,6 +86,7 @@ public class LoginChooseActivity extends CBaseActivity implements View.OnClickLi
         userNameET = findViewById(R.id.userNameET);
         usesOneBtn = findViewById(R.id.usesOneBtn);
         usesTwoBtn = findViewById(R.id.usesTwoBtn);
+        userNameET.setFilters(new InputFilter[]{inputFilter});
     }
 
     @Override
@@ -140,6 +146,21 @@ public class LoginChooseActivity extends CBaseActivity implements View.OnClickLi
         }
     }
 
+    InputFilter inputFilter = new InputFilter() {
+        Pattern pattern = Pattern.compile("[^a-zA-Z0-9_\\u4E00-\\u9FA5]");
+
+        @Override
+        public CharSequence filter(CharSequence charSequence, int i, int i1, Spanned spanned, int i2, int i3) {
+            Matcher matcher = pattern.matcher(charSequence);
+            if (!matcher.find()) {
+                return null;
+            } else {
+                ToastUtil.showShortToast(mContext, "只能输入汉字,英文,数字和下划线");
+                return "";
+            }
+        }
+    };
+
     private void addRole(String roleType) {
         if (StringUtil.isEmpty(userNameET.getText().toString())) {
             ToastUtil.showShortToast(mContext, "请输入用户昵称!");
@@ -158,7 +179,7 @@ public class LoginChooseActivity extends CBaseActivity implements View.OnClickLi
         @Override
         public void onNext(String string, int code) {
             if (code == 700) {
-                ToastUtil.showShortToast(getApplicationContext(), "Token失效，请重新登录!");
+                ToastUtil.showShortToast(getApplicationContext(), "登录失效，请重新登录!");
                 startActivity(LoginActivity.createIntent(mContext, true));
                 return;
             }

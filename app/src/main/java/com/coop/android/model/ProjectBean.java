@@ -31,6 +31,15 @@ public class ProjectBean {
     private String tokenName;
     private String type;
     private String custRoleId;
+    private String nickName;
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
 
     public List<TransInfoBean> getList() {
         return list;
@@ -260,6 +269,7 @@ public class ProjectBean {
                 ", tokenName='" + tokenName + '\'' +
                 ", type='" + type + '\'' +
                 ", custRoleId='" + custRoleId + '\'' +
+                ", nickName='" + nickName + '\'' +
                 '}';
     }
 }

@@ -58,7 +58,7 @@
                     android:id="@+id/projectNameTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="WOW!"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_19" />
 
@@ -76,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:text="成立于2018年11月10日"
+                android:text=""
                 android:textColor="@color/color_909090" />
         </LinearLayout>
 
@@ -141,7 +141,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="1986万"
+                    android:text=""
                     android:textColor="@color/color_FE6671"
                     android:textSize="@dimen/sp_17"
                     android:textStyle="bold" />
@@ -163,7 +163,7 @@
                     android:id="@+id/tokenTotalTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="200000"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_17"
                     android:textStyle="bold" />
@@ -186,7 +186,7 @@
                     android:id="@+id/tokenPerTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2%"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_17"
                     android:textStyle="bold" />
@@ -247,7 +247,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/dp_5"
-                android:text="WOW!"
+                android:text=""
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_19" />
         </LinearLayout>
@@ -286,7 +286,7 @@
             android:layout_marginLeft="@dimen/dp_15"
             android:layout_marginRight="@dimen/dp_15"
             android:layout_marginTop="@dimen/dp_10"
-            android:text="WOW!\nWOW!\nWOW!\nWOW!"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="@dimen/sp_13" />
 

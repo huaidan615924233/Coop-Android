@@ -66,7 +66,7 @@ public class AboutUsActivity extends CBaseActivity {
 
     @Override
     public void initView() {
-        aboutUs = "\t\t我们希望通过区块链技术与专业的服务帮助创业者解决在早期创业者遇到的各种问题。协助创业者以新的方式进行各项资源对接与交易，加速项目早期发展。";
+        aboutUs = "\t\t我们希望通过区块链技术与专业的服务帮助创业者解决在早期创业中遇到的各种问题。协助创业者以新的方式进行各项资源对接与交易，加速项目早期发展。";
         tvBaseTitle.setText(getString(R.string.txt_title_about_us));
         toolBar = findViewById(R.id.toolbar_img);
         toolBar.setNavigationIcon(R.mipmap.back_left_btn);

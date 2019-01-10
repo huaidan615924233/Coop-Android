@@ -83,7 +83,7 @@ public class PartnerAdapter extends RecyclerView.Adapter<PartnerAdapter.FeedHold
                 Log.e(TAG, e.getMessage());
             }
         }
-        holder.tranTokenTV.setText(NumUtils.formatNum(bean.getTokenNum(), false));
+        holder.tranTokenTV.setText(bean.getTokenNum());
         holder.tranDescTV.setText(bean.getReceiveRemark());
         holder.rootView.setOnClickListener(new View.OnClickListener() {
             @Override
