@@ -32,11 +32,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
+import com.coop.android.AppConfigs;
 import com.coop.android.CBaseActivity;
 import com.coop.android.R;
+import com.coop.android.UserConfigs;
 import com.coop.android.http.api.HttpPostApi;
 import com.coop.android.model.ProjectBean;
 import com.coop.android.model.ProjectDetailResponseBean;
+import com.coop.android.utils.GlideUtils;
 import com.coop.android.utils.NumUtils;
 import com.coop.android.utils.ToastUtil;
 import com.coop.android.view.CircleImageView;
@@ -145,6 +148,8 @@ public class ProjectInfoActivity extends CBaseActivity {
                     Log.e(TAG, e.getMessage());
                 }
             }
+            String photourl = AppConfigs.APP_BASE_URL + HttpPostApi.KAPTCHA + projectBean.getAuthorizeUrl();
+            GlideUtils.loadImage(mContext, photourl, projectHeaderImg, R.mipmap.default_home_header);
             projectLabelTV.setText(projectBean.getType());
             projectTotalTV.setText(NumUtils.formatNum(projectBean.getProjectAmount(), false));
             tokenTotalTV.setText(projectBean.getProjectToken());

@@ -48,6 +48,7 @@ public class HttpPostApi extends BaseApi {
     public static final String PROJECT_DETAIL = "coopApi/project/detail";
     public static final String SET_PAY_PASSWORD = "coopApi/password/pay/update";
     public static final String COOP_TRANS = "coopApi/account/trans";
+    public static final String KAPTCHA = "kaptcha/";
     private String requestUrl;
     //    接口需要传入的参数 可自定义不同类型
     private String phoneNumber;

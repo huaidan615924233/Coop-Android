@@ -27,27 +27,36 @@ package com.coop.android.activity;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.bumptech.glide.Glide;
+import com.coop.android.AppConfigs;
+import com.coop.android.BuildConfig;
 import com.coop.android.R;
 import com.coop.android.UserConfigs;
 import com.coop.android.fragment.CoopFragment;
 import com.coop.android.fragment.PartnerFragment;
+import com.coop.android.http.api.HttpPostApi;
 import com.coop.android.interfaces.CoopListener;
 import com.coop.android.model.TransBean;
 import com.coop.android.utils.AppStatus;
 import com.coop.android.utils.AppStatusManager;
 import com.coop.android.utils.CheckPermissionUtils;
 import com.coop.android.utils.ConstantUtil;
+import com.coop.android.utils.GlideUtils;
 import com.coop.android.utils.ToastUtil;
 import com.coop.android.view.CircleImageView;
 import com.coop.android.view.DrawableButton;
@@ -139,6 +148,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
     @Override
     public void initData() {
         homeUserName.setText(UserConfigs.getInstance().getNickName());
+        String photourl = AppConfigs.APP_BASE_URL + HttpPostApi.KAPTCHA + UserConfigs.getInstance().getAvatar();
+        GlideUtils.loadImage(mContext, photourl, homeHeaderImg, R.mipmap.default_home_header);
         if (ConstantUtil.ENTERIDEN.equals(UserConfigs.getInstance().getLastLoginRole())) {
             scanBtn.setVisibility(View.VISIBLE);
             qrcodeBtn.setVisibility(View.GONE);

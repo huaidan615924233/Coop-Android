@@ -39,10 +39,13 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.coop.android.AppConfigs;
 import com.coop.android.CBaseActivity;
 import com.coop.android.R;
 import com.coop.android.UserConfigs;
+import com.coop.android.http.api.HttpPostApi;
 import com.coop.android.utils.ConstantUtil;
+import com.coop.android.utils.GlideUtils;
 import com.coop.android.utils.ToastUtil;
 import com.coop.android.view.CircleImageView;
 import com.coop.android.view.CommonPopupWindow;
@@ -110,6 +113,8 @@ public class PersionalActivity extends CBaseActivity implements View.OnClickList
     @Override
     public void initData() {
         userName.setText(UserConfigs.getInstance().getNickName());
+        String photourl = AppConfigs.APP_BASE_URL + HttpPostApi.KAPTCHA + UserConfigs.getInstance().getAvatar();
+        GlideUtils.loadImage(mContext, photourl, userHeaderImg, R.mipmap.default_home_header);
         userId.setText("ID:" + UserConfigs.getInstance().getCustNo());
         if (ConstantUtil.ENTERIDEN.equals(UserConfigs.getInstance().getLastLoginRole())) {
             setPassLL.setVisibility(View.VISIBLE);
@@ -254,6 +259,7 @@ public class PersionalActivity extends CBaseActivity implements View.OnClickList
         }
         super.onBackPressed();
     }
+
     @Override
     public void onResume() {
         super.onResume();

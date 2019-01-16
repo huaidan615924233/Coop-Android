@@ -33,10 +33,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.coop.android.AppConfigs;
 import com.coop.android.R;
+import com.coop.android.UserConfigs;
 import com.coop.android.activity.ProjectInfoActivity;
+import com.coop.android.http.api.HttpPostApi;
 import com.coop.android.model.TransInfoBean;
+import com.coop.android.utils.GlideUtils;
 import com.coop.android.utils.NumUtils;
+import com.coop.android.view.CircleImageView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -87,6 +92,8 @@ public class CoopAdapter extends RecyclerView.Adapter<CoopAdapter.FeedHolder> {
                 Log.e(TAG, e.getMessage());
             }
         }
+        String photourl = AppConfigs.APP_BASE_URL + HttpPostApi.KAPTCHA + bean.getInveAvatar();
+        GlideUtils.loadImage(context, photourl, holder.userHeaderImg, R.mipmap.default_home_header);
         holder.tranTokenTV.setText(bean.getTokenNum());
         holder.hasTokenTV.setText(bean.getBalanceAmount());
         holder.tranDescTV.setText(bean.getPayRemark());
@@ -108,6 +115,7 @@ public class CoopAdapter extends RecyclerView.Adapter<CoopAdapter.FeedHolder> {
         TextView userNameTV, tranTokenTV, tranTimeTV, hasTokenTV, tranDescTV;
         ImageView leftLabelIV;
         LinearLayout rootView;
+        CircleImageView userHeaderImg;
 
         public FeedHolder(View itemView) {
             super(itemView);
@@ -118,6 +126,7 @@ public class CoopAdapter extends RecyclerView.Adapter<CoopAdapter.FeedHolder> {
             leftLabelIV = itemView.findViewById(R.id.leftLabelIV);
             tranDescTV = itemView.findViewById(R.id.tranDescTV);
             rootView = itemView.findViewById(R.id.rootView);
+            userHeaderImg = itemView.findViewById(R.id.userHeaderImg);
         }
     }
 }
