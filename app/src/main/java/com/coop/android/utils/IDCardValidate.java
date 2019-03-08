@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.Hashtable;
 
 public class IDCardValidate {
-    public static final String[] ValCodeArr = {"1", "0", "X", "9", "8", "7", "6", "5", "4", "3", "2"};
+    public static final String[] ValCodeArr = {"1", "0", "x", "9", "8", "7", "6", "5", "4", "3", "2"};
     public static final String[] Wi = {"7", "9", "10", "5", "8", "4", "2", "1", "6", "3", "7", "9", "10", "5", "8", "4", "2"};
     // 身份证的最小出生日期,1900年1月1日
     private final static Date MINIMAL_BIRTH_DATE = new Date(-2209017600000L);
@@ -91,7 +91,10 @@ public class IDCardValidate {
             return false;
         }
         //校验身份证最后一位 身份证校验码
-        if (!calculateVerifyCode(Ai).equals(String.valueOf(Ai.charAt(NEW_CARD_NUMBER_LENGTH - 1)))) {
+        String Ai1 = Ai.toUpperCase();
+        String Ai2 = Ai.toLowerCase();
+        if (!calculateVerifyCode(Ai1).equals(String.valueOf(Ai1.charAt(NEW_CARD_NUMBER_LENGTH - 1)))
+                && !calculateVerifyCode(Ai2).equals(String.valueOf(Ai2.charAt(NEW_CARD_NUMBER_LENGTH - 1)))) {
             //CHECKCODE_ERROR
             return false;
         }

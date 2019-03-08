@@ -84,7 +84,7 @@
                 android:ellipsize="end"
                 android:gravity="center_vertical"
                 android:hint="@string/txt_login_name_hint"
-                android:maxLines="1"
+                android:maxLength="5"
                 android:paddingLeft="@dimen/dp_10"
                 android:textSize="@dimen/sp_14" />
         </LinearLayout>

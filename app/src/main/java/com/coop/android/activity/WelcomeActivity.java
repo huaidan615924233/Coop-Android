@@ -80,7 +80,9 @@ public class WelcomeActivity extends Activity {
         } else {
             String userInfo = SharedPreferencesUtils.getUserInfo(this);
             UserConfigs.loadUserInfo(userInfo);
-            if (TextUtils.isEmpty(UserConfigs.getInstance().getLastLoginRole()))
+            if (TextUtils.isEmpty(UserConfigs.getInstance().getCardNo()))
+                startActivity(LoginIdenActivity.createIntent(this));
+            else if (TextUtils.isEmpty(UserConfigs.getInstance().getLastLoginRole()))
                 startActivity(LoginChooseActivity.createIntent(this));
             else
                 HomeActivity.newInstance(this, false);

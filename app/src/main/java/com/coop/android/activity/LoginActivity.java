@@ -232,6 +232,8 @@ public class LoginActivity extends CBaseActivity implements View.OnClickListener
             MobclickAgent.onProfileSignIn(UserConfigs.getInstance().getId());
             if (TextUtils.isEmpty(UserConfigs.getInstance().getCardNo()))
                 startActivity(LoginIdenActivity.createIntent(mContext));
+            else if (TextUtils.isEmpty(UserConfigs.getInstance().getLastLoginRole()))
+                startActivity(LoginChooseActivity.createIntent(mContext));
             else {
                 if (isTokenFailed)  //如果token失效，则返回之前页面,否则跳转主页
                     finish();

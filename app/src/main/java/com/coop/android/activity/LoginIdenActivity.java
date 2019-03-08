@@ -50,6 +50,7 @@ import com.umeng.analytics.MobclickAgent;
 import retrofit_rx.http.HttpManager;
 import retrofit_rx.listener.HttpOnNextListener;
 import zuo.biao.library.util.Log;
+import zuo.biao.library.util.StringUtil;
 
 /**
  * Created by MR-Z on 2018/12/11.
@@ -121,8 +122,9 @@ public class LoginIdenActivity extends CBaseActivity implements View.OnClickList
     InputFilter inputFilter = new InputFilter() {
         @Override
         public CharSequence filter(CharSequence charSequence, int i, int i1, Spanned spanned, int i2, int i3) {
-            if (userIdenNumberET.getText().toString().length() == 18) {
-                if (IDCardValidate.validate_effective(userIdenNumberET.getText().toString())) {
+            String userIdenNumber = userIdenNumberET.getText().toString() + charSequence.toString();
+            if (userIdenNumber.length() == 18) {
+                if (IDCardValidate.validate_effective(userIdenNumber)) {
                     nextBtn.setEnabled(true);
                     nextBtn.setBackgroundResource(R.drawable.btn_background_border);
                     idenLableTV.setText("身份证");
@@ -133,11 +135,17 @@ public class LoginIdenActivity extends CBaseActivity implements View.OnClickList
                     idenLableTV.setText("请输入正确的身份证号码");
                     idenLableTV.setTextColor(getResources().getColor(R.color.color_FE6671));
                 }
-            } else if (userIdenNumberET.getText().toString().length() >= 18) {
+            } else if (userIdenNumber.length() > 18) {
                 return "";
-            } else {
+            } else if (userIdenNumber.length() < 18) {
+                nextBtn.setEnabled(false);
+                nextBtn.setBackgroundResource(R.drawable.btn_background_unenable_border);
                 idenLableTV.setText("身份证");
                 idenLableTV.setTextColor(getResources().getColor(R.color.color_999999));
+            }
+            if (i1 == 0) {  //删除操作
+                nextBtn.setEnabled(false);
+                nextBtn.setBackgroundResource(R.drawable.btn_background_unenable_border);
             }
             return null;
         }
@@ -161,6 +169,15 @@ public class LoginIdenActivity extends CBaseActivity implements View.OnClickList
                 startActivity(LoginActivity.createIntent(mContext, true));
                 return;
             }
+            if (code == 501) {
+                ToastUtil.showShortToast(getApplicationContext(), "姓名与身份证不匹配!");
+                return;
+            }
+            if (code == 502) {
+                ToastUtil.showShortToast(getApplicationContext(), "无此身份证号码!");
+                return;
+            }
+
             String userInfo = SharedPreferencesUtils.getUserInfo(mContext);
             LoginResponseBean user = JSON.parseObject(userInfo, LoginResponseBean.class);
             String idenString = "";
