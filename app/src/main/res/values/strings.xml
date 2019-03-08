@@ -23,7 +23,8 @@
     <string name="txt_title_trans_detail">交易详情</string>
     <!--登录注册-->
     <string name="txt_login_number_one">请验证账户身份:</string>
-    <string name="txt_login_number_two">重新设置6位数密码:</string>
+    <string name="txt_login_number_two">请设置6位数交易密码:</string>
+    <string name="txt_login_forget_pwd">重新设置6位数密码:</string>
     <string name="txt_login_phone">输入手机号</string>
     <string name="txt_login_username_hint">编辑账户昵称 (12字以内)</string>
     <string name="txt_login_pass">输入验证码</string>

@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.coop.android.CBaseActivity;
 import com.coop.android.R;
 import com.coop.android.utils.MyRemotePDFViewPager;
+import com.coop.android.utils.ToastUtil;
 import com.umeng.analytics.MobclickAgent;
 
 import es.voghdev.pdfviewpager.library.adapter.PDFPagerAdapter;
@@ -93,6 +94,7 @@ public class PDFDatabaseActivity extends CBaseActivity implements DownloadFile.L
         pdf_root.removeAllViewsInLayout();
         pdf_root.addView(remotePDFViewPager, LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
+        ToastUtil.showLongToast(mContext, "左右滑动查看");
     }
 
     /*加载失败调用*/

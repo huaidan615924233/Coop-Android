@@ -78,6 +78,7 @@ public class TransDetailForEnterActivity extends CBaseActivity implements View.O
     private AgreementAdapter adapter;
     private CommonPopupWindow popupWindow;
     private TextView checkBlockChinaBtn;
+    private String hashStr;
 
     /**
      * 启动这个Activity的Intent
@@ -146,6 +147,7 @@ public class TransDetailForEnterActivity extends CBaseActivity implements View.O
             else
                 hasTokenTV.setText(String.valueOf(transDetailBean.getInveBalanceAmount()));
             blockChinaHashTV.setText(transDetailBean.getTransHash());
+            hashStr = transDetailBean.getTransHash();
             heightTV.setText(transDetailBean.getTransHeight());
 
             String projectTime = transDetailBean.getTransTimestamp();
@@ -221,7 +223,7 @@ public class TransDetailForEnterActivity extends CBaseActivity implements View.O
                 .setWidthAndHeight(ViewGroup.LayoutParams.MATCH_PARENT, popView.getMeasuredHeight())
                 .setBackGroundLevel(0.5f)//取值范围0.0f-1.0f 值越小越暗
                 .setAnimationStyle(R.style.AnimUp)
-                .setOutsideTouchable(false)
+                .setOutsideTouchable(true)
                 .setViewOnclickListener(this)
                 .create();
         popupWindow.showAtLocation(findViewById(android.R.id.content), Gravity.CENTER, 0, 0);
@@ -232,6 +234,7 @@ public class TransDetailForEnterActivity extends CBaseActivity implements View.O
         switch (layoutResId) {
             case R.layout.popup_trans_info:
                 final TextView blockChinaHashTV = view.findViewById(R.id.blockChinaHashTV);
+                blockChinaHashTV.setText(hashStr);
                 LinearLayout blockChinaHashLL = view.findViewById(R.id.blockChinaHashLL);
                 blockChinaHashLL.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override

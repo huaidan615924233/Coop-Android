@@ -157,7 +157,7 @@ public class ProjectInfoFragment extends BaseFragment {
                     Log.e(TAG, e.getMessage());
                 }
             }
-            String photourl = AppConfigs.APP_BASE_URL + HttpPostApi.KAPTCHA + projectBean.getAuthorizeUrl();
+            String photourl = AppConfigs.APP_BASE_URL + HttpPostApi.KAPTCHA + projectBean.getLogo();
             GlideUtils.loadImage(context, photourl, projectHeaderImg, R.mipmap.default_home_header);
             projectLabelTV.setText(projectBean.getType());
             projectTotalTV.setText(NumUtils.formatNum(projectBean.getProjectAmount(), false));

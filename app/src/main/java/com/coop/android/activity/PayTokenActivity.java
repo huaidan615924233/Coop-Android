@@ -151,6 +151,13 @@ public class PayTokenActivity extends CBaseActivity implements View.OnClickListe
 
     //获取验证码信息，判断是否有手机号码
     private void payToken(String desc, String transToken, View v) {
+        try {
+            Integer.parseInt(transToken);
+        } catch (Exception e) {
+            new AlertDialog(mContext, "提示", "输入的转让数量太大", true, 0, this).show();
+            Log.e(TAG, e.getMessage());
+            return;
+        }
         if (StringUtil.isEmpty(desc)) {
             Log.e(TAG, "mobile=" + desc);
             new AlertDialog(mContext, "提示", "请输入备注信息", true, 0, this).show();

@@ -66,7 +66,7 @@ public class UpdatePasswordActivity extends CBaseActivity implements View.OnClic
     protected Toolbar toolBar;
     private int countSeconds = 60;//倒计时秒数
     private EditText phoneEV, passwordEV, setPassEV;
-    private TextView getVerifyEV;
+    private TextView getVerifyEV,twoLabelTV;
     private Button setPwdBtn;
 
     /**
@@ -110,10 +110,15 @@ public class UpdatePasswordActivity extends CBaseActivity implements View.OnClic
 
     @Override
     public void initView() {
-        if (type == ConstantUtil.UPDATEPASSWORD)
+        twoLabelTV = findViewById(R.id.twoLabelTV);
+        if (type == ConstantUtil.UPDATEPASSWORD) {
             tvBaseTitle.setText(getString(R.string.txt_title_update_password));
-        else
+            twoLabelTV.setText(getString(R.string.txt_login_forget_pwd));
+        }
+        else {
             tvBaseTitle.setText(getString(R.string.txt_title_set_password));
+            twoLabelTV.setText(getString(R.string.txt_login_number_two));
+        }
         toolBar = findViewById(R.id.toolbar_img);
         toolBar.setNavigationIcon(R.mipmap.back_left_btn);
         toolBar.setNavigationOnClickListener(new View.OnClickListener() {

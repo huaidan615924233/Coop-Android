@@ -196,7 +196,7 @@ public class TransInfoFragment extends BaseFragment implements View.OnClickListe
         int id = v.getId();
         switch (id) {
             case R.id.checkBlockChinaBtn:
-                ((TransDetailActivity) context).showAll(v, "");
+                ((TransDetailActivity) context).showAll(v, blockChinaHashTV.getText().toString());
                 break;
             default:
                 break;

@@ -69,9 +69,9 @@ public class TransDetailActivity extends CBaseActivity implements CommonPopupWin
     private String projectId;
     private String transNo;
     private String account;
-    ;
     private ImageView backIV;
     private CommonPopupWindow popupWindow;
+    private String hashStr;
 
     /**
      * 启动这个Activity的Intent
@@ -105,7 +105,7 @@ public class TransDetailActivity extends CBaseActivity implements CommonPopupWin
         tabLayout = findViewById(R.id.tablayout);
         viewPager = findViewById(R.id.tab_viewpager);
         mTabTitles.add("交易详情");
-        mTabTitles.add("对应项目");
+        mTabTitles.add("项目详情");
 //        tabLayout.setTabMode(TabLayout.MODE_FIXED);
         //设置tablayout距离上下左右的距离
         //tab_title.setPadding(20,20,20,20);
@@ -141,6 +141,7 @@ public class TransDetailActivity extends CBaseActivity implements CommonPopupWin
 
     //全屏弹出
     public void showAll(View view, String hashStr) {
+        this.hashStr = hashStr;
         if (popupWindow != null && popupWindow.isShowing()) return;
         View popView = LayoutInflater.from(context).inflate(R.layout.popup_trans_info, null);
         //测量View的宽高
@@ -150,7 +151,7 @@ public class TransDetailActivity extends CBaseActivity implements CommonPopupWin
                 .setWidthAndHeight(ViewGroup.LayoutParams.MATCH_PARENT, popView.getMeasuredHeight())
                 .setBackGroundLevel(0.5f)//取值范围0.0f-1.0f 值越小越暗
                 .setAnimationStyle(R.style.AnimUp)
-                .setOutsideTouchable(false)
+                .setOutsideTouchable(true)
                 .setViewOnclickListener(this)
                 .create();
         popupWindow.showAtLocation(findViewById(android.R.id.content), Gravity.CENTER, 0, 0);
@@ -161,6 +162,7 @@ public class TransDetailActivity extends CBaseActivity implements CommonPopupWin
         switch (layoutResId) {
             case R.layout.popup_trans_info:
                 final TextView blockChinaHashTV = view.findViewById(R.id.blockChinaHashTV);
+                blockChinaHashTV.setText(hashStr);
                 LinearLayout blockChinaHashLL = view.findViewById(R.id.blockChinaHashLL);
                 blockChinaHashLL.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
