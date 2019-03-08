@@ -29,12 +29,15 @@ package com.coop.android;
 public class AppConfigs {
     public static final boolean APP_DEBUG = BuildConfig.APP_DEBUG;
     public static final String APP_BASE_URL;
+    public static final String APP_BASE_FILE_URL;
     static {
         // 判断是不是测试环境
         if (APP_DEBUG) {
             APP_BASE_URL = BuildConfig.APP_BASE_URL;
+            APP_BASE_FILE_URL = BuildConfig.APP_BASE_FILE_URL;
         }else{
             APP_BASE_URL = BuildConfig.APP_BASE_URL;
+            APP_BASE_FILE_URL = BuildConfig.APP_BASE_FILE_URL;
         }
     }
 }

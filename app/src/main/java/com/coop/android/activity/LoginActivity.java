@@ -124,6 +124,7 @@ public class LoginActivity extends CBaseActivity implements View.OnClickListener
     public void initEvent() {
         getVerifyEV.setOnClickListener(this);
         loginBtn.setOnClickListener(this);
+        serveDescTV.setOnClickListener(this);
     }
 
 
@@ -141,6 +142,9 @@ public class LoginActivity extends CBaseActivity implements View.OnClickListener
                 break;
             case R.id.loginBtn:
                 login();
+                break;
+            case R.id.serveDescTV:
+                startActivity(UserAgreementActivity.createIntent(mContext));
                 break;
             default:
                 break;
@@ -226,13 +230,13 @@ public class LoginActivity extends CBaseActivity implements View.OnClickListener
             UserConfigs.loadUserInfo(userInfoJson);
             //统计登录成功
             MobclickAgent.onProfileSignIn(UserConfigs.getInstance().getId());
-            if (TextUtils.isEmpty(loginResponseBean.getUser().getLastLoginRole()))
-                startActivity(LoginChooseActivity.createIntent(mContext));
+            if (TextUtils.isEmpty(UserConfigs.getInstance().getCardNo()))
+                startActivity(LoginIdenActivity.createIntent(mContext));
             else {
                 if (isTokenFailed)  //如果token失效，则返回之前页面,否则跳转主页
                     finish();
                 else {
-                    HomeActivity.newInstance(mContext,false);
+                    HomeActivity.newInstance(mContext, false);
                     finish();
                 }
             }

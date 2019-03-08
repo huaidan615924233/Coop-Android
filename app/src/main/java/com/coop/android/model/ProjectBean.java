@@ -7,6 +7,7 @@ import java.util.List;
  */
 public class ProjectBean {
     private List<TransInfoBean> list;
+    private List<AgreementBean> file_list;
     private String id;
     private String name;
     private String address;
@@ -32,6 +33,14 @@ public class ProjectBean {
     private String type;
     private String custRoleId;
     private String nickName;
+
+    public List<AgreementBean> getFile_list() {
+        return file_list;
+    }
+
+    public void setFile_list(List<AgreementBean> file_list) {
+        this.file_list = file_list;
+    }
 
     public String getNickName() {
         return nickName;
@@ -245,6 +254,7 @@ public class ProjectBean {
     public String toString() {
         return "ProjectBean{" +
                 "list=" + list +
+                ", file_list=" + file_list +
                 ", id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +

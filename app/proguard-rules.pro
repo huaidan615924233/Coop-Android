@@ -90,3 +90,7 @@
     public static ** valueOf(java.lang.String);
 }
 
+# pdf
+-dontwarn es.voghdev.pdfviewpager.**
+-keep class es.voghdev.pdfviewpager.** { *; }
+

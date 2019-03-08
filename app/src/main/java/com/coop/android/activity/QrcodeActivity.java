@@ -78,7 +78,7 @@ public class QrcodeActivity extends CBaseActivity {
     public void initView() {
         toolBar = findViewById(R.id.toolbar_img);
         toolBar.setNavigationIcon(R.mipmap.back_down_btn);
-        qrcodeImg = (ImageView) findViewById(R.id.image_content);
+        qrcodeImg = findViewById(R.id.image_content);
     }
 
     @Override
@@ -88,6 +88,7 @@ public class QrcodeActivity extends CBaseActivity {
         jsonObject.put("userName", UserConfigs.getInstance().getNickName());
         jsonObject.put("desc", paymentDesc);
         jsonObject.put("userId", UserConfigs.getInstance().getId());
+        jsonObject.put("name", UserConfigs.getInstance().getName());
         String textContent = JSON.toJSONString(jsonObject);
         Log.e(TAG, textContent);
         mBitmap = CodeUtils.createImage(textContent, 500, 500, BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
@@ -109,6 +110,7 @@ public class QrcodeActivity extends CBaseActivity {
         super.finish();
         overridePendingTransition(R.anim.bottom_silent, R.anim.bottom_out);
     }
+
     @Override
     public void onResume() {
         super.onResume();

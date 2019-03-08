@@ -86,7 +86,7 @@
             android:layout_height="@dimen/dp_60"
             android:background="@drawable/bg_bottom_radius_f0f0f0"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"> 3
 
             <EditText
                 android:id="@+id/payTokenNumberET"

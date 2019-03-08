@@ -210,8 +210,9 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
                         transBean.setProjectName(jsonObject.getString("userName"));
                         transBean.setInveCustId(jsonObject.getString("userId"));
                         transBean.setInveRemark(jsonObject.getString("desc"));
+                        transBean.setName(jsonObject.getString("name"));
                         if (StringUtil.isEmpty(jsonObject.getString("desc")) || StringUtil.isEmpty(jsonObject.getString("userId"))
-                                || StringUtil.isEmpty(jsonObject.getString("userName"))) {
+                                || StringUtil.isEmpty(jsonObject.getString("userName")) || StringUtil.isEmpty(jsonObject.getString("name"))) {
                             ToastUtil.showShortToast(mContext, "二维码不正确!");
                             return;
                         }

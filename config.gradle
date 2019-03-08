@@ -1,7 +1,7 @@
 ext {
     appName = "coop"
-    module_version_code = 1
-    module_version_name = "1.0"
+    module_version_code = 2
+    module_version_name = "2.0"
     // 项目配置
     compile_sdk_version = 28
     build_tools_version = "26.0.2"

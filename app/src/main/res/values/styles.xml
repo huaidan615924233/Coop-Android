@@ -18,10 +18,12 @@
         <!--在Android 4.4之前的版本上运行，直接跟随系统主题-->
         <!--全透明效果-->
     </style>
+
     <style name="AnimDown" parent="@android:style/Animation">
         <item name="android:windowEnterAnimation">@anim/push_scale_in</item>
         <item name="android:windowExitAnimation">@anim/push_scale_out</item>
     </style>
+
     <style name="AnimUp" parent="@android:style/Animation">
         <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
         <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
@@ -35,5 +37,9 @@
     <style name="AnimRight" parent="@android:style/Animation">
         <item name="android:windowEnterAnimation">@anim/push_scale_right_in</item>
         <item name="android:windowExitAnimation">@anim/push_scale_right_out</item>
+    </style>
+
+    <style name="MyTabLayoutTextAppearance" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textSize">@dimen/sp_18</item>
     </style>
 </resources>

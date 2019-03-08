@@ -51,6 +51,9 @@ import com.coop.android.view.CommonPopupWindow;
 import com.coop.android.view.PwdEditText;
 import com.umeng.analytics.MobclickAgent;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import retrofit_rx.http.HttpManager;
 import retrofit_rx.listener.HttpOnNextListener;
 import zuo.biao.library.ui.AlertDialog;
@@ -274,9 +277,12 @@ public class PayTokenActivity extends CBaseActivity implements View.OnClickListe
                 ToastUtil.showShortToast(getApplicationContext(), "不能转让给自己!");
                 return;
             }
+            String date = new SimpleDateFormat("yyyy年MM月dd日").format(new Date(System.currentTimeMillis()));
+            context.startActivity(TransVoucherActivity.createIntent(context, "(wo)", transBean.getProjectName(),
+                    transBean.getTokenNum(), date, UserConfigs.getInstance().getName(), transBean.getName()));
             //转让成功事件统计
             MobclickAgent.onEvent(mContext, "onClick", "转让成功");
-            ToastUtil.showShortToast(getApplicationContext(), "转让成功!");
+//            ToastUtil.showShortToast(getApplicationContext(), "转让成功!");
             finish();
         }
 

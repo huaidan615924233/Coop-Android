@@ -35,12 +35,10 @@ import android.widget.TextView;
 
 import com.coop.android.AppConfigs;
 import com.coop.android.R;
-import com.coop.android.UserConfigs;
-import com.coop.android.activity.ProjectInfoActivity;
+import com.coop.android.activity.TransDetailForEnterActivity;
 import com.coop.android.http.api.HttpPostApi;
 import com.coop.android.model.TransInfoBean;
 import com.coop.android.utils.GlideUtils;
-import com.coop.android.utils.NumUtils;
 import com.coop.android.view.CircleImageView;
 
 import java.text.SimpleDateFormat;
@@ -100,7 +98,7 @@ public class CoopAdapter extends RecyclerView.Adapter<CoopAdapter.FeedHolder> {
         holder.rootView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(ProjectInfoActivity.createIntent(context, bean.getProjectId()));
+                context.startActivity(TransDetailForEnterActivity.createIntent(context, bean.getTransNo(),bean.getEntrId()));
             }
         });
     }

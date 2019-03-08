@@ -55,7 +55,7 @@ import zuo.biao.library.util.Log;
 public class SettingActivity extends CBaseActivity implements View.OnClickListener, AlertDialog.OnDialogButtonClickListener {
     private static final String TAG = "SettingActivity";
     protected Toolbar toolBar;
-    private LinearLayout logoutLL, chooseUsesLL, aboutUsLL;
+    private LinearLayout logoutLL, chooseUsesLL, aboutUsLL, userIdenLL;
     private TextView chooseUsesTV;
     private String roleType;
 
@@ -88,6 +88,7 @@ public class SettingActivity extends CBaseActivity implements View.OnClickListen
                 finish();
             }
         });
+        userIdenLL = findViewById(R.id.userIdenLL);
         aboutUsLL = findViewById(R.id.aboutUsLL);
         logoutLL = findViewById(R.id.logoutLL);
         chooseUsesLL = findViewById(R.id.chooseUsesLL);
@@ -107,7 +108,8 @@ public class SettingActivity extends CBaseActivity implements View.OnClickListen
 
     @Override
     public void initEvent() {
-        aboutUsLL.setOnClickListener(SettingActivity.this);
+        userIdenLL.setOnClickListener(this);
+        aboutUsLL.setOnClickListener(this);
         logoutLL.setOnClickListener(this);
         chooseUsesLL.setOnClickListener(this);
     }
@@ -115,6 +117,9 @@ public class SettingActivity extends CBaseActivity implements View.OnClickListen
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.userIdenLL:
+                toActivity(UserIdenActivity.createIntent(SettingActivity.this));
+                break;
             case R.id.aboutUsLL:
                 toActivity(AboutUsActivity.createIntent(SettingActivity.this));
                 break;

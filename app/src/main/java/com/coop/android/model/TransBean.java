@@ -18,22 +18,10 @@ public class TransBean implements Parcelable {
     private String projectToken;
     private String stockPercent;
     private String projectTokenPrice;
-    public TransBean() {
-        super();
-    }
+    private String name;
 
-    public TransBean(String projectName, String projectId, String entrCustId, String inveCustId, String entrRemark, String inveRemark, String tokenNum, String payPassword, String projectToken, String stockPercent, String projectTokenPrice) {
-        this.projectName = projectName;
-        this.projectId = projectId;
-        this.entrCustId = entrCustId;
-        this.inveCustId = inveCustId;
-        this.entrRemark = entrRemark;
-        this.inveRemark = inveRemark;
-        this.tokenNum = tokenNum;
-        this.payPassword = payPassword;
-        this.projectToken = projectToken;
-        this.stockPercent = stockPercent;
-        this.projectTokenPrice = projectTokenPrice;
+    public TransBean() {
+
     }
 
     protected TransBean(Parcel in) {
@@ -48,6 +36,7 @@ public class TransBean implements Parcelable {
         projectToken = in.readString();
         stockPercent = in.readString();
         projectTokenPrice = in.readString();
+        name = in.readString();
     }
 
     @Override
@@ -63,6 +52,7 @@ public class TransBean implements Parcelable {
         dest.writeString(projectToken);
         dest.writeString(stockPercent);
         dest.writeString(projectTokenPrice);
+        dest.writeString(name);
     }
 
     @Override
@@ -81,6 +71,24 @@ public class TransBean implements Parcelable {
             return new TransBean[size];
         }
     };
+
+    @Override
+    public String toString() {
+        return "TransBean{" +
+                "projectName='" + projectName + '\'' +
+                ", projectId='" + projectId + '\'' +
+                ", entrCustId='" + entrCustId + '\'' +
+                ", inveCustId='" + inveCustId + '\'' +
+                ", entrRemark='" + entrRemark + '\'' +
+                ", inveRemark='" + inveRemark + '\'' +
+                ", tokenNum='" + tokenNum + '\'' +
+                ", payPassword='" + payPassword + '\'' +
+                ", projectToken='" + projectToken + '\'' +
+                ", stockPercent='" + stockPercent + '\'' +
+                ", projectTokenPrice='" + projectTokenPrice + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
 
     public String getProjectName() {
         return projectName;
@@ -170,20 +178,11 @@ public class TransBean implements Parcelable {
         this.projectTokenPrice = projectTokenPrice;
     }
 
-    @Override
-    public String toString() {
-        return "TransBean{" +
-                "projectName='" + projectName + '\'' +
-                ", projectId='" + projectId + '\'' +
-                ", entrCustId='" + entrCustId + '\'' +
-                ", inveCustId='" + inveCustId + '\'' +
-                ", entrRemark='" + entrRemark + '\'' +
-                ", inveRemark='" + inveRemark + '\'' +
-                ", tokenNum='" + tokenNum + '\'' +
-                ", payPassword='" + payPassword + '\'' +
-                ", projectToken='" + projectToken + '\'' +
-                ", stockPercent='" + stockPercent + '\'' +
-                ", projectTokenPrice='" + projectTokenPrice + '\'' +
-                '}';
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

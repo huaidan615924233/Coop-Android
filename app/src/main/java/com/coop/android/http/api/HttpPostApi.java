@@ -49,6 +49,8 @@ public class HttpPostApi extends BaseApi {
     public static final String SET_PAY_PASSWORD = "coopApi/password/pay/update";
     public static final String COOP_TRANS = "coopApi/account/trans";
     public static final String KAPTCHA = "kaptcha/";
+    public static final String AUTHENTICATION = "coopApi/authentication";
+    public static final String TRANS_DETAIL = "coopApi/account/trans/detail";
     private String requestUrl;
     //    接口需要传入的参数 可自定义不同类型
     private String phoneNumber;
@@ -61,6 +63,10 @@ public class HttpPostApi extends BaseApi {
     private String payPassword;
     private String salt;
     private TransBean transBean;
+    private String name;
+    private String cardNo;
+    private String account;
+    private String transNo;
 
     /**
      * 默认初始化需要给定回调和rx周期类
@@ -100,6 +106,10 @@ public class HttpPostApi extends BaseApi {
         } else if (requestUrl.equals(COOP_TRANS)) {
             return service.getCoopTrans(transBean.getEntrCustId(), transBean.getInveCustId(), transBean.getProjectId(),
                     transBean.getEntrRemark(), transBean.getInveRemark(), Integer.parseInt(transBean.getTokenNum()), transBean.getPayPassword());
+        } else if (requestUrl.equals(AUTHENTICATION)) {
+            return service.getAuthEntication(getUserId(), getName(), getCardNo());
+        } else if (requestUrl.equals(TRANS_DETAIL)) {
+            return service.getTransDetail(getAccount(), getTransNo(), getRoleType());
         } else
             return service.getLogin(getPhoneNumber(), getCode());
     }
@@ -182,5 +192,37 @@ public class HttpPostApi extends BaseApi {
 
     public void setTransBean(TransBean transBean) {
         this.transBean = transBean;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCardNo() {
+        return cardNo;
+    }
+
+    public void setCardNo(String cardNo) {
+        this.cardNo = cardNo;
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    public String getTransNo() {
+        return transNo;
+    }
+
+    public void setTransNo(String transNo) {
+        this.transNo = transNo;
     }
 }

@@ -83,6 +83,7 @@ public class LoginChooseActivity extends CBaseActivity implements View.OnClickLi
 
     @Override
     public void initView() {
+        tvBaseTitle.setText(getString(R.string.txt_title_login_user_iden));
         userNameET = findViewById(R.id.userNameET);
         usesOneBtn = findViewById(R.id.usesOneBtn);
         usesTwoBtn = findViewById(R.id.usesTwoBtn);

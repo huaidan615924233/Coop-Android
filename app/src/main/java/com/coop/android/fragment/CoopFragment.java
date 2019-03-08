@@ -73,7 +73,7 @@ public class CoopFragment extends BaseFragment implements OnLoadmoreListener, On
     private RecyclerView listRV;
     private SmartRefreshLayout refreshLayout;
     private CoopAdapter coopAdapter;
-    private TextView projectNameTV, projectTimeTV, projectTotalTV, tokenTotalTV, tokenPerTV,projectLabelTV;
+    private TextView projectNameTV, projectTimeTV, projectTotalTV, tokenTotalTV, tokenPerTV, projectLabelTV;
     private LinearLayout projectView, statusLLOne, statusLLTwo;
     private CoopListener coopListener;
     private ProjectBean projectBean;   //当前项目

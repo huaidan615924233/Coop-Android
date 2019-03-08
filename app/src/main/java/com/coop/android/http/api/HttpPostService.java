@@ -28,6 +28,7 @@ import com.coop.android.model.CoopPartnerResponseBean;
 import com.coop.android.model.CoopResponseBean;
 import com.coop.android.model.LoginResponseBean;
 import com.coop.android.model.ProjectDetailResponseBean;
+import com.coop.android.model.TransDetailBean;
 
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -79,4 +80,14 @@ public interface HttpPostService {
                                                       @Field("projectId") String projectId, @Field("entrRemark") String entrRemark,
                                                       @Field("inveRemark") String inveRemark, @Field("tokenNum") int tokenNum,
                                                       @Field("payPassword") String payPassword);
+
+    @FormUrlEncoded
+    @POST(HttpPostApi.AUTHENTICATION)
+    Observable<BaseResultEntity<String>> getAuthEntication(@Field("custId") String userId, @Field("name") String name,
+                                                           @Field("cardNo") String cardNo);
+
+    @FormUrlEncoded
+    @POST(HttpPostApi.TRANS_DETAIL)
+    Observable<BaseResultEntity<TransDetailBean>> getTransDetail(@Field("account") String account, @Field("transNo") String transNo,
+                                                                 @Field("roleType") String roleType);
 }

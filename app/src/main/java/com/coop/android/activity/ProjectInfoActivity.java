@@ -28,6 +28,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
@@ -36,9 +38,12 @@ import com.coop.android.AppConfigs;
 import com.coop.android.CBaseActivity;
 import com.coop.android.R;
 import com.coop.android.UserConfigs;
+import com.coop.android.adapter.AgreementAdapter;
 import com.coop.android.http.api.HttpPostApi;
+import com.coop.android.model.AgreementBean;
 import com.coop.android.model.ProjectBean;
 import com.coop.android.model.ProjectDetailResponseBean;
+import com.coop.android.model.TransVoucherBean;
 import com.coop.android.utils.GlideUtils;
 import com.coop.android.utils.NumUtils;
 import com.coop.android.utils.ToastUtil;
@@ -47,7 +52,9 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.umeng.analytics.MobclickAgent;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import retrofit_rx.http.HttpManager;
 import retrofit_rx.listener.HttpOnNextListener;
@@ -64,6 +71,8 @@ public class ProjectInfoActivity extends CBaseActivity {
     private TextView projectNameTV, projectTimeTV, tokenPerTV, projectTotalTV, tokenTotalTV, projectDescTV, projectMemberNameTV, expandTV, projectLabelTV;
     private CircleImageView projectHeaderImg;
     private SmartRefreshLayout refreshLayout;
+    private RecyclerView listRV;
+    private AgreementAdapter adapter;
     private boolean isExpanded = false;
 
     /**
@@ -102,9 +111,12 @@ public class ProjectInfoActivity extends CBaseActivity {
         projectHeaderImg = findViewById(R.id.projectHeaderImg);
         expandTV = findViewById(R.id.expandTV);
         refreshLayout = findViewById(R.id.refreshLayout);
+        listRV = findViewById(R.id.listRV);
         refreshLayout.setEnableLoadmoreWhenContentNotFull(false);//取消内容不满一页时开启上拉加载功能
         refreshLayout.setEnableLoadmore(false); //禁用下拉加载
         refreshLayout.setEnableRefresh(false);
+        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
+        listRV.setLayoutManager(linearLayoutManager);
     }
 
     @Override
@@ -135,6 +147,11 @@ public class ProjectInfoActivity extends CBaseActivity {
                 return;
             }
             final ProjectBean projectBean = projectDetailResponseBean.getProject();
+
+            adapter = new AgreementAdapter(mContext, projectBean.getFile_list(), null);
+            listRV.setAdapter(adapter);
+            listRV.setHasFixedSize(true);
+
             String projectName = projectBean.getName();
             projectNameTV.setText(projectName == null ? " " : projectName);
             String projectTime = projectBean.getFoundTime();
