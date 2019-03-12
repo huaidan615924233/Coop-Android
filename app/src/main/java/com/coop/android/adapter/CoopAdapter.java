@@ -90,7 +90,11 @@ public class CoopAdapter extends RecyclerView.Adapter<CoopAdapter.FeedHolder> {
                 Log.e(TAG, e.getMessage());
             }
         }
-        String photourl = AppConfigs.APP_BASE_URL + HttpPostApi.KAPTCHA + bean.getInveAvatar();
+        String photourl;
+        if (StringUtil.isEmpty(bean.getInveAvatar()))
+            photourl = "";
+        else
+            photourl = AppConfigs.APP_BASE_URL + HttpPostApi.KAPTCHA + bean.getInveAvatar();
         GlideUtils.loadImage(context, photourl, holder.userHeaderImg, R.mipmap.default_home_header);
         holder.tranTokenTV.setText(bean.getTokenNum());
         holder.hasTokenTV.setText(bean.getBalanceAmount());

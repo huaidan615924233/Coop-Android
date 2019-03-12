@@ -39,9 +39,10 @@
                 android:layout_marginBottom="@dimen/dp_75"
                 android:background="@color/transparent"
                 android:gravity="center_horizontal|bottom"
-                android:text="出示该二维码\n对方扫描后即可进行通证转让"
+                android:text="出示该二维码\n对方扫描后即可进行通证转让\n\n通证禁止进行现金交易"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp_14" />
+
         </LinearLayout>
 
         <android.support.v7.widget.Toolbar

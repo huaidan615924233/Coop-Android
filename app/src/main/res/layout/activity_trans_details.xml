@@ -33,18 +33,33 @@
                 android:layout_marginLeft="@dimen/dp_20"
                 android:src="@mipmap/back_left_btn" />
 
-            <android.support.design.widget.TabLayout
+            <com.coop.android.view.xtablayout.XTabLayout
                 android:id="@+id/tablayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:layout_marginRight="@dimen/dp_35"
-                app:tabBackground="@drawable/tab_selector"
-                app:tabIndicatorHeight="0dp"
-                app:tabMode="fixed"
-                app:tabSelectedTextColor="@color/white"
-                app:tabTextAppearance="@style/MyTabLayoutTextAppearance"
-                app:tabTextColor="@color/color_ffffff_80" />
+                app:x_tabGravity="center"
+                app:x_tabIndicatorAnimation="true"
+                app:x_tabIndicatorColor="@color/white"
+                app:x_tabIndicatorHeight="@dimen/dp_2"
+                app:x_tabIndicatorWidth="@dimen/dp_30"
+                app:x_tabMode="fixed"
+                app:x_tabSelectedTextColor="@color/white"
+                app:x_tabTextAppearance="@style/MyTabLayoutTextAppearance"
+                app:x_tabTextColor="@color/color_ffffff_80" />
+            <!--<android.support.design.widget.TabLayout-->
+            <!--android:id="@+id/tablayout"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="@dimen/dp_10"-->
+            <!--android:layout_marginRight="@dimen/dp_35"-->
+            <!--app:tabBackground="@drawable/tab_selector"-->
+            <!--app:tabIndicatorHeight="0dp"-->
+            <!--app:tabMode="fixed"-->
+            <!--app:tabSelectedTextColor="@color/white"-->
+            <!--app:tabTextAppearance="@style/MyTabLayoutTextAppearance"-->
+            <!--app:tabTextColor="@color/color_ffffff_80" />-->
         </LinearLayout>
 
         <android.support.v4.view.ViewPager
@@ -52,6 +67,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/tabLL"
-            android:layout_margin="@dimen/dp_15"/>
+            android:layout_margin="@dimen/dp_15" />
     </RelativeLayout>
 </LinearLayout>

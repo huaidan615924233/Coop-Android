@@ -58,6 +58,7 @@ import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
 import zuo.biao.library.util.CommonUtil;
 import zuo.biao.library.util.Log;
+import zuo.biao.library.util.StringUtil;
 
 /**
  * Created by MR-Z on 2018/12/11.
@@ -113,7 +114,11 @@ public class PersionalActivity extends CBaseActivity implements View.OnClickList
     @Override
     public void initData() {
         userName.setText(UserConfigs.getInstance().getNickName());
-        String photourl = AppConfigs.APP_BASE_URL + HttpPostApi.KAPTCHA + UserConfigs.getInstance().getAvatar();
+        String photourl;
+        if (StringUtil.isEmpty(UserConfigs.getInstance().getAvatar()))
+            photourl = "";
+        else
+            photourl = AppConfigs.APP_BASE_URL + HttpPostApi.KAPTCHA + UserConfigs.getInstance().getAvatar();
         GlideUtils.loadImage(mContext, photourl, userHeaderImg, R.mipmap.default_home_header);
         userId.setText("ID:" + UserConfigs.getInstance().getCustNo());
         if (ConstantUtil.ENTERIDEN.equals(UserConfigs.getInstance().getLastLoginRole())) {

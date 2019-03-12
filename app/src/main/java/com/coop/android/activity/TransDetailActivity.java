@@ -48,6 +48,7 @@ import com.coop.android.fragment.ProjectInfoFragment;
 import com.coop.android.fragment.TransInfoFragment;
 import com.coop.android.utils.ToastUtil;
 import com.coop.android.view.CommonPopupWindow;
+import com.coop.android.view.xtablayout.XTabLayout;
 import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
@@ -60,7 +61,8 @@ import zuo.biao.library.util.CommonUtil;
  */
 public class TransDetailActivity extends CBaseActivity implements CommonPopupWindow.ViewInterface {
     private static final String TAG = "TransDetailActivity";
-    private TabLayout tabLayout = null;
+//    private TabLayout tabLayout = null;
+    private XTabLayout tabLayout = null;
 
     private ViewPager viewPager;
 

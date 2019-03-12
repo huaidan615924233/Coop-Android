@@ -86,7 +86,11 @@ public class PartnerAdapter extends RecyclerView.Adapter<PartnerAdapter.FeedHold
                 Log.e(TAG, e.getMessage());
             }
         }
-        String photourl = AppConfigs.APP_BASE_URL + HttpPostApi.KAPTCHA + bean.getInveAvatar();
+        String photourl;
+        if (StringUtil.isEmpty(bean.getLogo()))
+            photourl = "";
+        else
+            photourl = AppConfigs.APP_BASE_URL + HttpPostApi.KAPTCHA + bean.getLogo();
         GlideUtils.loadImage(context, photourl, holder.userHeaderImg, R.mipmap.default_home_header);
         holder.tranTokenTV.setText(bean.getTokenNum());
         holder.tranDescTV.setText(bean.getReceiveRemark());

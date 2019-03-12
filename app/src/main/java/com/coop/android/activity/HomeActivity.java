@@ -148,7 +148,11 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
     @Override
     public void initData() {
         homeUserName.setText(UserConfigs.getInstance().getNickName());
-        String photourl = AppConfigs.APP_BASE_URL + HttpPostApi.KAPTCHA + UserConfigs.getInstance().getAvatar();
+        String photourl;
+        if (StringUtil.isEmpty(UserConfigs.getInstance().getAvatar()))
+            photourl = "";
+        else
+            photourl = AppConfigs.APP_BASE_URL + HttpPostApi.KAPTCHA + UserConfigs.getInstance().getAvatar();
         GlideUtils.loadImage(mContext, photourl, homeHeaderImg, R.mipmap.default_home_header);
         if (ConstantUtil.ENTERIDEN.equals(UserConfigs.getInstance().getLastLoginRole())) {
             scanBtn.setVisibility(View.VISIBLE);

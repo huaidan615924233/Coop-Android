@@ -18,6 +18,15 @@ public class TransInfoBean {
     private String payRemark;
     private String receiveRemark;
     private String projectName;
+    private String logo;
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
 
     public String getId() {
         return id;
@@ -148,6 +157,7 @@ public class TransInfoBean {
                 ", payRemark='" + payRemark + '\'' +
                 ", receiveRemark='" + receiveRemark + '\'' +
                 ", projectName='" + projectName + '\'' +
+                ", logo='" + logo + '\'' +
                 '}';
     }
 }

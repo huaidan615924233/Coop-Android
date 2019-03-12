@@ -3,7 +3,7 @@
     <!-- 整个背景色-->
     <item>
         <shape>
-            <solid android:color="@color/transparent" />
+            <solid android:color="@color/transparent"/>
         </shape>
     </item>
     <!-- 底部圆角,参数是固定的 -->

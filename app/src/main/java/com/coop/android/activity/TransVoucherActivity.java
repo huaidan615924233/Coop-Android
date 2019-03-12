@@ -29,8 +29,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.app.NotificationCompatSideChannelService;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
@@ -41,6 +43,8 @@ import android.widget.TextView;
 
 import com.coop.android.CBaseActivity;
 import com.coop.android.R;
+import com.coop.android.UserConfigs;
+import com.coop.android.utils.ConstantUtil;
 import com.coop.android.utils.ToastUtil;
 import com.umeng.analytics.MobclickAgent;
 
@@ -101,11 +105,18 @@ public class TransVoucherActivity extends CBaseActivity implements View.OnClickL
 
     @Override
     public void initData() {
-        SpannableStringBuilder sb = new SpannableStringBuilder("    恭喜您完成了与  " + voucherName + "  进行的通证交易，此为交易凭证。");
-        sb.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.color_003F8D)), 13, 13 + voucherName.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        sb.setSpan(new UnderlineSpan(), 13, 13 + voucherName.length(), 0);
-        transVoucherTV.setText(sb);
-        transCountTV.setText(transNum + " " + tokenName);
+        SpannableStringBuilder spannableStringBuilder;
+        if (ConstantUtil.ENTERIDEN.equals(UserConfigs.getInstance().getLastLoginRole())) {
+            spannableStringBuilder = new SpannableStringBuilder("    恭喜您完成了与  " + inveRealName + "  进行的通证交易，此为交易凭证。");
+            spannableStringBuilder.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.color_003F8D)), 13, 13 + inveRealName.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            spannableStringBuilder.setSpan(new UnderlineSpan(), 13, 13 + inveRealName.length(), 0);
+        } else {
+            spannableStringBuilder = new SpannableStringBuilder("    恭喜您完成了与  " + entrRealName + "  进行的通证交易，此为交易凭证。");
+            spannableStringBuilder.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.color_003F8D)), 13, 13 + entrRealName.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            spannableStringBuilder.setSpan(new UnderlineSpan(), 13, 13 + entrRealName.length(), 0);
+        }
+        transVoucherTV.setText(spannableStringBuilder);
+        transCountTV.setText(transNum);
         transDateTV.setText(transDate);
         enterNameTV.setText(entrRealName);
         partnerNameTV.setText(inveRealName);
@@ -156,6 +167,8 @@ public class TransVoucherActivity extends CBaseActivity implements View.OnClickL
             fos.flush();
             fos.close();
             ToastUtil.showShortToast(mContext, "图片已保存到本地");
+            //这个广播的目的就是更新图库，发了这个广播进入相册就可以找到你保存的图片了！
+            mContext.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE).setData(Uri.fromFile(file)));
 
         } catch (Exception e) {
             Log.e(TAG, e.getMessage());
@@ -192,9 +205,9 @@ public class TransVoucherActivity extends CBaseActivity implements View.OnClickL
     public static String getRootDir(Context context) {
         String rootDir;
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            rootDir = Environment.getExternalStorageDirectory().getAbsolutePath();
+            rootDir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/coop/";
         } else {
-            rootDir = context.getApplicationContext().getCacheDir().getAbsolutePath();
+            rootDir = context.getApplicationContext().getCacheDir().getAbsolutePath() + "/coop/";
         }
         return rootDir;
     }

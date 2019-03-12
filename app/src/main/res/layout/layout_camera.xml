@@ -20,7 +20,7 @@
         app:inner_margintop="180dp"
         app:inner_scan_bitmap="@drawable/scan_image"
         app:inner_scan_iscircle="false"
-        app:inner_scan_speed="10"
+        app:inner_scan_speed="1"
         app:inner_width="200dp" />
 
     <LinearLayout
@@ -47,7 +47,7 @@
             android:layout_weight="1"
             android:background="@drawable/bg_radius_black"
             android:gravity="center"
-            android:text="通证禁止进行金钱交易"
+            android:text="通证禁止进行现金交易"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_16" />
     </LinearLayout>

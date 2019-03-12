@@ -110,7 +110,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/dp_30"
         android:gravity="center"
-        android:text="完成转让后，您托付给CO-OP平台的通证将成功转⾄\n对⽅账户中，一旦完成转让 不不可反悔!"
+        android:text="完成转让后，您托付给CO-OP平台的通证将成功转⾄\n对⽅账户中，一旦完成转让 不可撤回!"
         android:textSize="@dimen/sp_13" />
 
     <Button

@@ -77,7 +77,7 @@ public class TransDetailForEnterActivity extends CBaseActivity implements View.O
     private RecyclerView listRV;
     private AgreementAdapter adapter;
     private CommonPopupWindow popupWindow;
-    private TextView checkBlockChinaBtn;
+    private TextView checkBlockChinaBtn, tokenLabelTV;
     private String hashStr;
 
     /**
@@ -111,6 +111,8 @@ public class TransDetailForEnterActivity extends CBaseActivity implements View.O
         tranTokenTV = findViewById(R.id.tranTokenTV);
         hasTokenTV = findViewById(R.id.hasTokenTV);
         blockChinaHashTV = findViewById(R.id.blockChinaHashTV);
+        tokenLabelTV = findViewById(R.id.tokenLabelTV);
+        tokenLabelTV.setText("转出通证");
         heightTV = findViewById(R.id.heightTV);
         dateTV = findViewById(R.id.dateTV);
         listRV = findViewById(R.id.listRV);

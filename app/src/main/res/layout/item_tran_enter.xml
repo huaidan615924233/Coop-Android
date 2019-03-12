@@ -100,7 +100,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_5"
-                    android:text="转让通证" />
+                    android:text="转出通证" />
             </LinearLayout>
 
             <LinearLayout
