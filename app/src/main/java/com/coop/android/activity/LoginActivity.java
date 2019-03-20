@@ -246,7 +246,7 @@ public class LoginActivity extends CBaseActivity implements View.OnClickListener
 
         @Override
         public void onError(Throwable e) {
-            ToastUtil.showShortToast(getApplicationContext(), getResources().getString(R.string.txt_server_error));
+            ToastUtil.showShortToast(getApplicationContext(), e.getMessage());
             Log.e(TAG, getResources().getString(R.string.txt_server_error) + e.getMessage());
         }
     };
@@ -259,7 +259,7 @@ public class LoginActivity extends CBaseActivity implements View.OnClickListener
 
         @Override
         public void onError(Throwable e) {
-            ToastUtil.showShortToast(getApplicationContext(), getResources().getString(R.string.txt_server_error));
+            ToastUtil.showShortToast(getApplicationContext(), e.getMessage());
             Log.e(TAG, getResources().getString(R.string.txt_server_error) + e.getMessage());
         }
     };

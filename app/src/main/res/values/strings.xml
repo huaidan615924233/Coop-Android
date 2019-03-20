@@ -21,6 +21,7 @@
     <string name="txt_title_user_iden">已进行实名认证</string>
     <string name="txt_title_trans_info_pop">追溯区块方式</string>
     <string name="txt_title_trans_detail">交易详情</string>
+    <string name="txt_title_browser">查询区块链</string>
     <!--登录注册-->
     <string name="txt_login_number_one">请验证账户身份:</string>
     <string name="txt_login_number_two">请设置6位数交易密码:</string>

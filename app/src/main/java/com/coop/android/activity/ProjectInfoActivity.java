@@ -208,7 +208,7 @@ public class ProjectInfoActivity extends CBaseActivity {
 
         @Override
         public void onError(Throwable e) {
-            ToastUtil.showShortToast(context, getResources().getString(R.string.txt_server_error));
+            ToastUtil.showShortToast(context, e.getMessage());
             Log.e(TAG, getResources().getString(R.string.txt_server_error) + e.getMessage());
         }
     };

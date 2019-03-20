@@ -230,7 +230,7 @@ public class CoopFragment extends BaseFragment implements OnLoadmoreListener, On
             statusLLOne.setVisibility(View.GONE);
             statusLLTwo.setVisibility(View.GONE);
             coopListener.setScanVisibility(false);
-            ToastUtil.showShortToast(context, getResources().getString(R.string.txt_server_error));
+            ToastUtil.showShortToast(context, e.getMessage());
             Log.e(TAG, getResources().getString(R.string.txt_server_error) + e.getMessage());
         }
     };

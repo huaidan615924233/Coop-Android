@@ -36,6 +36,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -183,7 +184,7 @@ public class TransDetailForEnterActivity extends CBaseActivity implements View.O
 
         @Override
         public void onError(Throwable e) {
-            ToastUtil.showShortToast(context, getResources().getString(R.string.txt_server_error));
+            ToastUtil.showShortToast(context, e.getMessage());
             Log.e(TAG, getResources().getString(R.string.txt_server_error) + e.getMessage());
         }
     };
@@ -245,6 +246,15 @@ public class TransDetailForEnterActivity extends CBaseActivity implements View.O
                         clipboardManager.setPrimaryClip(ClipData.newPlainText(null, blockChinaHashTV.getText().toString()));
                         ToastUtil.showShortToast(mContext, "哈希串已复制到剪贴板");
                         return true;
+                    }
+                });
+                Button nextBtn = view.findViewById(R.id.nextBtn);
+                nextBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (popupWindow != null && popupWindow.isShowing())
+                            popupWindow.dismiss();
+                        startActivity(BrowserActivity.createIntent(mContext));
                     }
                 });
                 break;

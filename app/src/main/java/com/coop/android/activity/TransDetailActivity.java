@@ -37,6 +37,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -61,7 +62,7 @@ import zuo.biao.library.util.CommonUtil;
  */
 public class TransDetailActivity extends CBaseActivity implements CommonPopupWindow.ViewInterface {
     private static final String TAG = "TransDetailActivity";
-//    private TabLayout tabLayout = null;
+    //    private TabLayout tabLayout = null;
     private XTabLayout tabLayout = null;
 
     private ViewPager viewPager;
@@ -173,6 +174,15 @@ public class TransDetailActivity extends CBaseActivity implements CommonPopupWin
                         clipboardManager.setPrimaryClip(ClipData.newPlainText(null, blockChinaHashTV.getText().toString()));
                         ToastUtil.showShortToast(mContext, "哈希串已复制到剪贴板");
                         return true;
+                    }
+                });
+                Button nextBtn = view.findViewById(R.id.nextBtn);
+                nextBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (popupWindow != null && popupWindow.isShowing())
+                            popupWindow.dismiss();
+                        startActivity(BrowserActivity.createIntent(mContext));
                     }
                 });
                 break;

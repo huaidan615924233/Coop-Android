@@ -153,6 +153,8 @@ public class ProgressSubscriber<T extends BaseResultEntity<R>, R> extends Subscr
         if (mSubscriberOnNextListener.get() != null) {
             if (t.getCode() == 500)
                 mSubscriberOnNextListener.get().onError(new Exception(t.getMessage()));
+            else if (t.getCode() == 509)
+                mSubscriberOnNextListener.get().onError(new Exception(t.getMessage()));
             else
                 mSubscriberOnNextListener.get().onNext(t.getData(), t.getCode());
         }
