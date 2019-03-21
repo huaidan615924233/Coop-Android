@@ -229,7 +229,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
                         return;
                     }
                     transBean.setProjectId(coopFragment.getProject().getId());
-                    transBean.setProjectToken(coopFragment.getProject().getProjectToken());
+                    transBean.setProjectToken(coopFragment.getProject().getList() == null ?
+                            coopFragment.getProject().getProjectToken() : coopFragment.getProject().getList().get(0).getBalanceAmount());
                     transBean.setStockPercent(String.format("%.0f", Double.parseDouble(coopFragment.getProject().getStockPercent()) * 100) + "%");
                     transBean.setProjectTokenPrice(coopFragment.getProject().getProjectPercent());
                     startActivity(PayTokenActivity.createIntent(mContext, transBean));

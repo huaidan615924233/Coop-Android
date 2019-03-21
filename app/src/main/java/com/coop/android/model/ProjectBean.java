@@ -34,6 +34,7 @@ public class ProjectBean {
     private String custRoleId;
     private String nickName;
 
+
     public List<AgreementBean> getFile_list() {
         return file_list;
     }
