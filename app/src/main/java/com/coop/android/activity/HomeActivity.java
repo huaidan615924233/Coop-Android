@@ -217,11 +217,11 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
                         transBean.setName(jsonObject.getString("name"));
                         if (StringUtil.isEmpty(jsonObject.getString("desc")) || StringUtil.isEmpty(jsonObject.getString("userId"))
                                 || StringUtil.isEmpty(jsonObject.getString("userName")) || StringUtil.isEmpty(jsonObject.getString("name"))) {
-                            ToastUtil.showShortToast(mContext, "二维码不正确!");
+                            ToastUtil.showShortToast(mContext, "解析二维码失败!");
                             return;
                         }
                     } catch (Exception e) {
-                        ToastUtil.showShortToast(mContext, "二维码不正确!");
+                        ToastUtil.showShortToast(mContext, "解析二维码失败!");
                         return;
                     }
                     if (coopFragment == null || coopFragment.getProject() == null) {
