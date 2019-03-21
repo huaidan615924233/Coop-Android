@@ -15,6 +15,7 @@ import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 
 import rx.Subscriber;
+import zuo.biao.library.util.Log;
 
 /**
  * 用于在Http请求开始时，自动显示一个ProgressDialog
@@ -23,6 +24,7 @@ import rx.Subscriber;
  * Created by WZG on 2016/7/16.
  */
 public class ProgressSubscriber<T extends BaseResultEntity<R>, R> extends Subscriber<T> {
+    private static final String TAG = "ProgressSubscriber";
     /*是否弹框*/
     private boolean showPorgress = true;
     /* 软引用回调接口*/
@@ -136,11 +138,13 @@ public class ProgressSubscriber<T extends BaseResultEntity<R>, R> extends Subscr
         } else if (e instanceof ConnectException) {
             Toast.makeText(context, "网络中断，请检查您的网络状态", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(context, "错误" + e.getMessage(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(context, "错误" + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "网络异常", Toast.LENGTH_SHORT).show();
+            Log.e(TAG, "网络异常" + e.getMessage());
         }
-        if (mSubscriberOnNextListener.get() != null) {
-            mSubscriberOnNextListener.get().onError(e);
-        }
+//        if (mSubscriberOnNextListener.get() != null) {
+//            mSubscriberOnNextListener.get().onError(e);
+//        }
     }
 
     /**
