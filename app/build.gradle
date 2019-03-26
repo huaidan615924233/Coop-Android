@@ -16,6 +16,18 @@ android {
                 arguments = [moduleName: project.getName()]
             }
         }
+
+        ndk {
+            //选择要添加的对应 cpu 类型的 .so 库。
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a'
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
+        }
+
+        manifestPlaceholders = [
+                JPUSH_PKGNAME : applicationId,
+                JPUSH_APPKEY : "13c83bcfb4e1c47889664c5a", //JPush 上注册的包名对应的 Appkey.
+                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+        ]
     }
     signingConfigs {
         _release {
@@ -55,6 +67,7 @@ android {
             outputFileName = "${rootProject.ext.appName}_${variant.applicationId}_v${variant.versionName}_${variant.buildType.name}.apk"
         }
     }
+
 }
 
 dependencies {
@@ -66,4 +79,7 @@ dependencies {
     api 'com.umeng.sdk:common:latest.integration'
     api 'com.umeng.sdk:analytics:latest.integration'
     api 'com.umeng.umsdk:utdid:latest.integration'
+    //极光推送
+    api 'cn.jiguang.sdk:jpush:3.1.6'  // 此处以JPush 3.1.6 版本为例。
+    api 'cn.jiguang.sdk:jcore:1.2.5'  // 此处以JCore 1.2.5 版本为例。
 }

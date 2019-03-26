@@ -105,7 +105,8 @@ public class HttpPostApi extends BaseApi {
             return service.getSetPayPassword(getPhoneNumber(), getPayPassword(), getSalt(), getCode());
         } else if (requestUrl.equals(COOP_TRANS)) {
             return service.getCoopTrans(transBean.getEntrCustId(), transBean.getInveCustId(), transBean.getProjectId(),
-                    transBean.getEntrRemark(), transBean.getInveRemark(), Integer.parseInt(transBean.getTokenNum()), transBean.getPayPassword());
+                    transBean.getEntrRemark(), transBean.getInveRemark(), Integer.parseInt(transBean.getTokenNum())
+                    , transBean.getPayPassword(), transBean.getRegistrationId());
         } else if (requestUrl.equals(AUTHENTICATION)) {
             return service.getAuthEntication(getUserId(), getName(), getCardNo());
         } else if (requestUrl.equals(TRANS_DETAIL)) {

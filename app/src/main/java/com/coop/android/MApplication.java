@@ -29,6 +29,7 @@ import android.app.Application;
 import com.umeng.commonsdk.UMConfigure;
 import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 
+import cn.jpush.android.api.JPushInterface;
 import retrofit_rx.RxRetrofitApp;
 
 /**
@@ -44,5 +45,7 @@ public class MApplication extends Application {
         UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, "");
         ZXingLibrary.initDisplayOpinion(this);
         RxRetrofitApp.init(this, AppConfigs.APP_DEBUG);
+        JPushInterface.setDebugMode(AppConfigs.APP_DEBUG); 	// 设置开启日志,发布时请关闭日志
+        JPushInterface.init(this);     		// 初始化 JPush
     }
 }

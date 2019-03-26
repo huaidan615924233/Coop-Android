@@ -1,1 +1,1 @@
-include ':app','lib-zxing',':ZBLibrary'
+include ':app', 'lib-zxing', ':ZBLibrary'

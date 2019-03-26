@@ -79,7 +79,7 @@ public interface HttpPostService {
     Observable<BaseResultEntity<String>> getCoopTrans(@Field("entrCustId") String entrCustId, @Field("inveCustId") String inveCustId,
                                                       @Field("projectId") String projectId, @Field("entrRemark") String entrRemark,
                                                       @Field("inveRemark") String inveRemark, @Field("tokenNum") int tokenNum,
-                                                      @Field("payPassword") String payPassword);
+                                                      @Field("payPassword") String payPassword,@Field("registrationId") String registrationId);
 
     @FormUrlEncoded
     @POST(HttpPostApi.AUTHENTICATION)

@@ -211,15 +211,17 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
                     TransBean transBean = new TransBean();
                     try {
                         JSONObject jsonObject = JSON.parseObject(result);
+                        if (StringUtil.isEmpty(jsonObject.getString("desc")) || StringUtil.isEmpty(jsonObject.getString("userId"))
+                                || StringUtil.isEmpty(jsonObject.getString("userName")) || StringUtil.isEmpty(jsonObject.getString("name"))
+                                || StringUtil.isEmpty(jsonObject.getString("registrationId"))) {
+                            ToastUtil.showShortToast(mContext, "解析二维码失败!");
+                            return;
+                        }
                         transBean.setProjectName(jsonObject.getString("userName"));
                         transBean.setInveCustId(jsonObject.getString("userId"));
                         transBean.setInveRemark(jsonObject.getString("desc"));
                         transBean.setName(jsonObject.getString("name"));
-                        if (StringUtil.isEmpty(jsonObject.getString("desc")) || StringUtil.isEmpty(jsonObject.getString("userId"))
-                                || StringUtil.isEmpty(jsonObject.getString("userName")) || StringUtil.isEmpty(jsonObject.getString("name"))) {
-                            ToastUtil.showShortToast(mContext, "解析二维码失败!");
-                            return;
-                        }
+                        transBean.setRegistrationId(jsonObject.getString("registrationId"));
                     } catch (Exception e) {
                         ToastUtil.showShortToast(mContext, "解析二维码失败!");
                         return;
@@ -229,7 +231,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
                         return;
                     }
                     transBean.setProjectId(coopFragment.getProject().getId());
-                    transBean.setProjectToken(coopFragment.getProject().getList() == null ?
+                    transBean.setProjectToken(coopFragment.getProject().getList() == null || coopFragment.getProject().getList().size() == 0 ?
                             coopFragment.getProject().getProjectToken() : coopFragment.getProject().getList().get(0).getBalanceAmount());
                     transBean.setStockPercent(String.format("%.0f", Double.parseDouble(coopFragment.getProject().getStockPercent()) * 100) + "%");
                     transBean.setProjectTokenPrice(coopFragment.getProject().getProjectPercent());

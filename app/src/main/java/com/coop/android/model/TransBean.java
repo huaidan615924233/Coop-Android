@@ -19,9 +19,9 @@ public class TransBean implements Parcelable {
     private String stockPercent;
     private String projectTokenPrice;
     private String name;
+    private String registrationId;
 
     public TransBean() {
-
     }
 
     protected TransBean(Parcel in) {
@@ -37,6 +37,7 @@ public class TransBean implements Parcelable {
         stockPercent = in.readString();
         projectTokenPrice = in.readString();
         name = in.readString();
+        registrationId = in.readString();
     }
 
     @Override
@@ -53,6 +54,7 @@ public class TransBean implements Parcelable {
         dest.writeString(stockPercent);
         dest.writeString(projectTokenPrice);
         dest.writeString(name);
+        dest.writeString(registrationId);
     }
 
     @Override
@@ -71,24 +73,6 @@ public class TransBean implements Parcelable {
             return new TransBean[size];
         }
     };
-
-    @Override
-    public String toString() {
-        return "TransBean{" +
-                "projectName='" + projectName + '\'' +
-                ", projectId='" + projectId + '\'' +
-                ", entrCustId='" + entrCustId + '\'' +
-                ", inveCustId='" + inveCustId + '\'' +
-                ", entrRemark='" + entrRemark + '\'' +
-                ", inveRemark='" + inveRemark + '\'' +
-                ", tokenNum='" + tokenNum + '\'' +
-                ", payPassword='" + payPassword + '\'' +
-                ", projectToken='" + projectToken + '\'' +
-                ", stockPercent='" + stockPercent + '\'' +
-                ", projectTokenPrice='" + projectTokenPrice + '\'' +
-                ", name='" + name + '\'' +
-                '}';
-    }
 
     public String getProjectName() {
         return projectName;
@@ -184,5 +168,32 @@ public class TransBean implements Parcelable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getRegistrationId() {
+        return registrationId;
+    }
+
+    public void setRegistrationId(String registrationId) {
+        this.registrationId = registrationId;
+    }
+
+    @Override
+    public String toString() {
+        return "TransBean{" +
+                "projectName='" + projectName + '\'' +
+                ", projectId='" + projectId + '\'' +
+                ", entrCustId='" + entrCustId + '\'' +
+                ", inveCustId='" + inveCustId + '\'' +
+                ", entrRemark='" + entrRemark + '\'' +
+                ", inveRemark='" + inveRemark + '\'' +
+                ", tokenNum='" + tokenNum + '\'' +
+                ", payPassword='" + payPassword + '\'' +
+                ", projectToken='" + projectToken + '\'' +
+                ", stockPercent='" + stockPercent + '\'' +
+                ", projectTokenPrice='" + projectTokenPrice + '\'' +
+                ", name='" + name + '\'' +
+                ", registrationId='" + registrationId + '\'' +
+                '}';
     }
 }
