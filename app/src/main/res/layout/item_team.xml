@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ExpandableTextViewAttr="http://schemas.android.com/tools"
+    android:id="@+id/rootView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/dp_10"
+    android:paddingBottom="@dimen/dp_10">
+
+
+    <com.coop.android.view.CircleImageView
+        android:id="@+id/memberHeaderImg"
+        android:layout_width="@dimen/dp_66"
+        android:layout_height="@dimen/dp_66"
+        android:layout_gravity="center_horizontal"
+        android:src="@mipmap/default_enter_user_header" />
+
+    <TextView
+        android:id="@+id/projectMemberNameTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dp_5"
+        android:text="Jasper"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_16" />
+</LinearLayout>

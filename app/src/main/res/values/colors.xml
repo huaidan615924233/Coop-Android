@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- APP 的主色调 -->
+    <color name="colorPrimary">#2E26D9</color>
+    <color name="colorPrimaryDark">#5751E0</color>
+    <!-- APP 强调色 -->
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="color_000000_100">#FF000000</color>
+    <color name="color_000000_95">#F2000000</color>
+    <color name="color_000000_90">#E6000000</color>
+    <color name="color_000000_85">#D9000000</color>
+    <color name="color_000000_80">#CC000000</color>
+    <color name="color_000000_75">#BF000000</color>
+    <color name="color_000000_70">#B3000000</color>
+    <color name="color_000000_65">#A6000000</color>
+    <color name="color_000000_60">#99000000</color>
+    <color name="color_000000_55">#8C000000</color>
+    <color name="color_000000_50">#80000000</color>
+    <color name="color_000000_45">#73000000</color>
+    <color name="color_000000_40">#66000000</color>
+    <color name="color_000000_35">#59000000</color>
+    <color name="color_000000_30">#4D000000</color>
+    <color name="color_000000_25">#40000000</color>
+    <color name="color_000000_20">#33000000</color>
+    <color name="color_000000_15">#26000000</color>
+    <color name="color_000000_10">#1A000000</color>
+    <color name="color_000000_05">#0D000000</color>
+
+    <color name="color_ffffff_100">#FFFFFFFF</color>
+    <color name="color_ffffff_95">#F2FFFFFF</color>
+    <color name="color_ffffff_90">#E6FFFFFF</color>
+    <color name="color_ffffff_85">#D9FFFFFF</color>
+    <color name="color_ffffff_80">#CCFFFFFF</color>
+    <color name="color_ffffff_75">#BFFFFFFF</color>
+    <color name="color_ffffff_70">#B3FFFFFF</color>
+    <color name="color_ffffff_65">#A6FFFFFF</color>
+    <color name="color_ffffff_60">#99FFFFFF</color>
+    <color name="color_ffffff_55">#8CFFFFFF</color>
+    <color name="color_ffffff_50">#80FFFFFF</color>
+    <color name="color_ffffff_45">#73FFFFFF</color>
+    <color name="color_ffffff_40">#66FFFFFF</color>
+    <color name="color_ffffff_35">#59FFFFFF</color>
+    <color name="color_ffffff_30">#4DFFFFFF</color>
+    <color name="color_ffffff_25">#40FFFFFF</color>
+    <color name="color_ffffff_20">#33FFFFFF</color>
+    <color name="color_ffffff_15">#26FFFFFF</color>
+    <color name="color_ffffff_10">#1AFFFFFF</color>
+    <color name="color_ffffff_05">#0DFFFFFF</color>
+
+    <color name="color_efefef">#EFEFEF</color>
+    <color name="color_FF5400">#FF5400</color>
+    <color name="text_color">#525252</color>
+
+    <color name="body_text_1">#de000000</color>
+    <color name="body_text_2">#8a000000</color>
+    <color name="body_text_3">#60000000</color>
+    <color name="body_text_4">#8aFFFFFF</color>
+    <color name="body_text_5">#60FFFFFF</color>
+
+    <color name="color_transparent">#00000000</color>
+    <color name="color_55e3e3e3">#55ffffff</color>
+
+    <color name="color_ffffff">#ffffff</color>
+    <color name="color_6c6c6c">#6c6c6c</color>
+    <color name="color_636363">#636363</color>
+    <color name="color_919191">#919191</color>
+    <color name="color_a6a6a6">#a6a6a6</color>
+    <color name="color_c6c6c6">#c6c6c6</color>
+    <color name="color_d6d6d6">#d6d6d6</color>
+    <color name="color_c3c3c3">#c3c3c3</color>
+    <color name="color_cccccc">#cccccc</color>
+    <color name="color_dcdcdc">#dcdcdc</color>
+    <color name="color_e3e3e3">#e3e3e3</color>
+    <color name="color_aaaaaa">#aaaaaa</color>
+    <color name="color_1aaaaaaa">#1aaaaaaa</color>
+
+    <color name="color_000000">#000000</color>
+    <color name="color_454D5E">#454D5E</color>
+    <color name="color_0ED6D5">#0ED6D5</color>
+    <color name="color_181818">#181818</color>
+    <color name="color_333333">#333333</color>
+    <color name="color_666666">#666666</color>
+    <color name="color_999999">#999999</color>
+    <color name="color_797979">#797979</color>
+    <color name="color_747474">#747474</color>
+    <color name="color_8b8b8b">#8b8b8b</color>
+    <color name="color_f8f8f8">#f8f8f8</color>
+    <color name="color_F8F9FB">#F8F9FB</color>
+    <color name="color_FB7646">#FB7646</color>
+    <color name="color_f5f5f5">#f5f5f5</color>
+    <color name="color_dedede">#dedede</color>
+    <color name="color_afec01">#AFEC01</color>
+    <color name="color_BBB9F0">#BBB9F0</color>
+    <color name="color_65ce00">#65CE00</color>
+    <color name="color_A7ABB3">#A7ABB3</color>
+    <color name="color_d8d8d8">#d8d8d8</color>
+    <color name="color_969696">#969696</color>
+    <color name="color_58ACFF">#58ACFF</color>
+    <color name="color_E8E7FF">#E8E7FF</color>
+    <color name="color_E4E8EC">#E4E8EC</color>
+    <color name="color_E46184">#E46184</color>
+    <color name="color_2E26D9">#2E26D9</color>
+    <color name="color_EDEDED">#EDEDED</color>
+    <color name="color_F2F5F8">#F2F5F8</color>
+    <color name="color_F2F2F2">#F2F2F2</color>
+    <color name="color_FAFAFA">#FAFAFA</color>
+    <color name="color_F0F0F0">#F0F0F0</color>
+    <color name="color_F9F9F9">#F9F9F9</color>
+    <color name="color_F2C60D">#F2C60D</color>
+    <color name="color_3EFFCE">#3EFFCE</color>
+    <color name="color_FF5858">#FF5858</color>
+    <color name="color_909090">#909090</color>
+    <color name="color_566172">#566172</color>
+    <color name="color_F7F7F7">#F7F7F7</color>
+    <color name="color_09ACFF">#09ACFF</color>
+    <color name="color_FE6671">#FE6671</color>
+    <color name="color_232D41">#232D41</color>
+    <color name="color_3DD89B">#3DD89B</color>
+    <color name="color_003F8D">#003F8D</color>
+    <color name="color_B9C1CF">#B9C1CF</color>
+    <color name="color_CCCDC8">#CCCDC8</color>
+    <color name="color_475366">#475366</color>
+    <color name="color_D8D8D8">#D8D8D8</color>
+    <color name="transparent">#00000000</color>
+    <color name="white">#fff</color>
+    <color name="background_yellow">#fbd415</color>
+    <color name="textcolor_black">#163045</color>
+    <!-- 引导页面的文字样式 -->
+    <color name="color_guide_text_color">@color/color_333333</color>
+    <color name="color_guide_text_desc_color">@color/colorPrimary</color>
+
+    <!-- 引导页面的按钮样式 -->
+    <color name="colorGuildeBtnText">@color/colorPrimary</color>
+    <color name="colorGuildeBtnBackground">@color/color_transparent</color>
+    <color name="colorGuildeBtnBorder">@color/colorPrimary</color>
+    <color name="color_guide_selector_select_color">@color/colorPrimary</color>
+    <color name="color_guide_selector_un_select_color">@color/color_d8d8d8</color>
+
+</resources>

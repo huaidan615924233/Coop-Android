@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_head_img" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:background="@color/color_F2F5F8" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_25"
+        android:layout_marginTop="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_25"
+        android:layout_marginBottom="@dimen/dp_15"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_25"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="交易哈希值:"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:id="@+id/transBlockHashTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="3"
+            android:gravity="center_vertical"
+            android:text="56cfe*****"
+            android:textSize="@dimen/sp_13" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_marginLeft="@dimen/dp_25"
+        android:layout_marginRight="@dimen/dp_25"
+        android:background="@color/color_E4E8EC" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_25"
+        android:layout_marginTop="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_25"
+        android:layout_marginBottom="@dimen/dp_15"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_25"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="交易流水号:"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:id="@+id/transNoTV"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_25"
+            android:layout_weight="3"
+            android:gravity="center_vertical"
+            android:text="201904151430459885"
+            android:textSize="@dimen/sp_13" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_marginLeft="@dimen/dp_25"
+        android:layout_marginRight="@dimen/dp_25"
+        android:background="@color/color_E4E8EC" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_25"
+        android:layout_marginTop="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_25"
+        android:layout_marginBottom="@dimen/dp_15"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_25"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="交易类型:"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:id="@+id/transTypeTV"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_25"
+            android:layout_weight="3"
+            android:gravity="center_vertical"
+            android:text="转让"
+            android:textSize="@dimen/sp_13" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_marginLeft="@dimen/dp_25"
+        android:layout_marginRight="@dimen/dp_25"
+        android:background="@color/color_E4E8EC" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_25"
+        android:layout_marginTop="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_25"
+        android:layout_marginBottom="@dimen/dp_15"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_25"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="资产类型:"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:id="@+id/assetTypeTV"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_25"
+            android:layout_weight="3"
+            android:gravity="center_vertical"
+            android:text="个人资产"
+            android:textSize="@dimen/sp_13" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_marginLeft="@dimen/dp_25"
+        android:layout_marginRight="@dimen/dp_25"
+        android:background="@color/color_E4E8EC" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_25"
+        android:layout_marginTop="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_25"
+        android:layout_marginBottom="@dimen/dp_15"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_25"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="交易发起方:"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:id="@+id/transEnterTV"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_25"
+            android:layout_weight="3"
+            android:gravity="center_vertical"
+            android:text="王璐飞"
+            android:textSize="@dimen/sp_13" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_marginLeft="@dimen/dp_25"
+        android:layout_marginRight="@dimen/dp_25"
+        android:background="@color/color_E4E8EC" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_25"
+        android:layout_marginTop="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_25"
+        android:layout_marginBottom="@dimen/dp_15"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_25"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="交易接收方:"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:id="@+id/transPartnerTV"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_25"
+            android:layout_weight="3"
+            android:gravity="center_vertical"
+            android:text="王璐飞"
+            android:textSize="@dimen/sp_13" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_marginLeft="@dimen/dp_25"
+        android:layout_marginRight="@dimen/dp_25"
+        android:background="@color/color_E4E8EC" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_25"
+        android:layout_marginTop="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_25"
+        android:layout_marginBottom="@dimen/dp_15"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_25"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="交易数量:"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:id="@+id/transTokenTV"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_25"
+            android:layout_weight="3"
+            android:gravity="center_vertical"
+            android:text="10"
+            android:textSize="@dimen/sp_13" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_marginLeft="@dimen/dp_25"
+        android:layout_marginRight="@dimen/dp_25"
+        android:background="@color/color_E4E8EC" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_25"
+        android:layout_marginTop="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_25"
+        android:layout_marginBottom="@dimen/dp_15"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_25"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="高        度:"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:id="@+id/transBlockHeightTV"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_25"
+            android:layout_weight="3"
+            android:gravity="center_vertical"
+            android:text="109"
+            android:textSize="@dimen/sp_13" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_marginLeft="@dimen/dp_25"
+        android:layout_marginRight="@dimen/dp_25"
+        android:background="@color/color_E4E8EC" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_25"
+        android:layout_marginTop="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_25"
+        android:layout_marginBottom="@dimen/dp_15"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_25"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="交易时间:"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:id="@+id/transTimeTV"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_25"
+            android:layout_weight="3"
+            android:gravity="center_vertical"
+            android:text="2019.04.15  14:30:45"
+            android:textSize="@dimen/sp_13" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_marginLeft="@dimen/dp_25"
+        android:layout_marginRight="@dimen/dp_25"
+        android:background="@color/color_E4E8EC" />
+
+</LinearLayout>

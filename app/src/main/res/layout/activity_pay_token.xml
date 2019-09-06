@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_head_img" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:background="@color/color_F2F2F2" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/dp_20">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="选择资产:"
+                android:textColor="@color/color_454D5E"
+                android:textSize="@dimen/sp_16" />
+
+            <TextView
+                android:id="@+id/assetNameTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:text="个人资产"
+                android:textColor="@color/color_454D5E" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_20"
+            android:background="@color/color_F2F2F2" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/dp_20">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="数字权证数量:"
+                android:textColor="@color/color_454D5E"
+                android:textSize="@dimen/sp_16" />
+
+            <EditText
+                android:id="@+id/payTokenNumberET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:background="@color/transparent"
+                android:hint="请输入转让数量"
+                android:inputType="number"
+                android:textColor="@color/color_454D5E"
+                android:textSize="@dimen/sp_14" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_20"
+            android:background="@color/color_F2F2F2" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/dp_20">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="交易备注:"
+                android:textColor="@color/color_454D5E"
+                android:textSize="@dimen/sp_16" />
+
+            <EditText
+                android:id="@+id/descET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:background="@color/transparent"
+                android:hint="自行输入交易备注（如：技术支持）"
+                android:textColor="@color/color_454D5E"
+                android:textSize="@dimen/sp_14" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_20"
+            android:background="@color/color_F2F2F2" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="以下常用备注可能会帮到你，选择一个"
+            android:textColor="@color/color_566172" />
+
+        <co.lujun.androidtagview.TagContainerLayout
+            android:id="@+id/tagContainerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_10"
+            android:padding="10dp"
+            app:container_background_color="@color/white"
+            app:container_border_color="@color/white"
+            app:container_border_radius="5dp"
+            app:container_enable_drag="false"
+            app:horizontal_interval="10dp"
+            app:tag_background_color="@color/white"
+            app:tag_border_color="@color/color_B9C1CF"
+            app:tag_clickable="true"
+            app:tag_corner_radius="5dp"
+            app:tag_horizontal_padding="10dp"
+            app:tag_text_color="@color/color_B9C1CF"
+            app:tag_theme="none"
+            app:tag_vertical_padding="10dp"
+            app:vertical_interval="10dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="fitXY"
+            android:src="@mipmap/paytoken_desc" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/payConfimBtn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/dp_50"
+        android:background="@drawable/btn_background_border_new"
+        android:text="@string/txt_login_confim"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_16" />
+</RelativeLayout>

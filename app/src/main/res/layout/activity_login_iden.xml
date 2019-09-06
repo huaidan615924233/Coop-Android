@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/backgroundImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:src="@mipmap/iden_background" />
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_head_nobg" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/backgroundImg"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_20"
+        android:layout_marginBottom="@dimen/dp_50"
+        android:orientation="vertical"
+        android:padding="@dimen/dp_20">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="@string/txt_login_iden"
+            android:textColor="@color/color_232D41"
+            android:textSize="@dimen/sp_14" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_50"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="用户姓名: "
+                android:textColor="@color/color_999999"
+                android:textSize="@dimen/sp_14" />
+
+            <EditText
+                android:id="@+id/userNameET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:hint="@string/txt_login_name_hint"
+                android:paddingLeft="@dimen/dp_20"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/sp_16"
+                android:theme="@style/MyEditText" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_20"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="身份证号: "
+                android:textColor="@color/color_999999"
+                android:textSize="@dimen/sp_14" />
+
+            <EditText
+                android:id="@+id/userIdenNumberET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:hint="@string/txt_login_iden_number_hint"
+                android:maxLength="18"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/dp_20"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/sp_16"
+                android:theme="@style/MyEditText" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_20"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="创建昵称: "
+                android:textColor="@color/color_999999"
+                android:textSize="@dimen/sp_14" />
+
+            <EditText
+                android:id="@+id/userNickNameET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:hint="@string/txt_login_nickname_hint"
+                android:paddingLeft="@dimen/dp_20"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/sp_16"
+                android:theme="@style/MyEditText" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_20"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/idenLableTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="请输入正确的身份证号码!"
+                android:textColor="@color/red"
+                android:textSize="@dimen/sp_14"
+                android:visibility="invisible" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/nextBtn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/dp_50"
+        android:background="@drawable/btn_background_border_new"
+        android:text="@string/txt_next"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_16" />
+</RelativeLayout>
