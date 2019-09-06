@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.mob.sdk'
 
 android {
     compileSdkVersion rootProject.ext.compile_sdk_version
@@ -24,9 +25,9 @@ android {
         }
 
         manifestPlaceholders = [
-                JPUSH_PKGNAME : applicationId,
+                JPUSH_PKGNAME: applicationId,
                 JPUSH_APPKEY : "13c83bcfb4e1c47889664c5a", //JPush 上注册的包名对应的 Appkey.
-                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+                JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
         ]
     }
     signingConfigs {
@@ -40,8 +41,8 @@ android {
     buildTypes {
         debug {
             buildConfigField "boolean", "APP_DEBUG", "true"
-            buildConfigField "String", "APP_BASE_URL", '"http://39.96.36.106:8080/"'
-            buildConfigField "String", "APP_BASE_FILE_URL", '"http://39.96.36.106:8081/"'
+            buildConfigField "String", "APP_BASE_URL", '"https://wxxcx.51coop.cn/program/"'
+            buildConfigField "String", "APP_BASE_FILE_URL", '"https://wxxcx.51coop.cn/upload/"'
 //            buildConfigField "String", "APP_BASE_URL", '"http://192.168.50.32:8080/"'
             minifyEnabled true // 混淆
             zipAlignEnabled true // Zipalign优化
@@ -53,18 +54,40 @@ android {
         }
         release {
             buildConfigField "boolean", "APP_DEBUG", "false"
-            buildConfigField "String", "APP_BASE_URL", '"http://39.96.36.106:8080/"'
-            buildConfigField "String", "APP_BASE_FILE_URL", '"http://39.96.36.106:8081/"'
+            buildConfigField "String", "APP_BASE_URL", '"https://www.51coop.cn/program/"'
+            buildConfigField "String", "APP_BASE_FILE_URL", '"https://www.51coop.cn/upload/"'
+//            buildConfigField "String", "APP_BASE_URL", '"https://wxxcx.51coop.cn/program/"'
+//            buildConfigField "String", "APP_BASE_FILE_URL", '"https://wxxcx.51coop.cn/upload/"'
             minifyEnabled true
             zipAlignEnabled true
             shrinkResources true
             signingConfig signingConfigs._release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            aaptOptions.cruncherEnabled = false
+            aaptOptions.useNewCruncher = false
         }
     }
     android.applicationVariants.all { variant ->
         variant.outputs.all {
             outputFileName = "${rootProject.ext.appName}_${variant.applicationId}_v${variant.versionName}_${variant.buildType.name}.apk"
+        }
+    }
+}
+
+MobSDK {
+    appKey "2be09efaa7ebf"
+    appSecret "6cb3611366e78e3afbb0bce67da0c488"
+//    gui false
+    ShareSDK {
+        devInfo {
+            Wechat {
+                appId "wxfcf88f27b43a3a05"
+                appSecret "06470b0220179c2318767baad1152aa1"
+            }
+            WechatMoments {
+                appId "wxfcf88f27b43a3a05"
+                appSecret "06470b0220179c2318767baad1152aa1"
+            }
         }
     }
 
@@ -76,10 +99,12 @@ dependencies {
     implementation project(':lib-zxing')
     implementation project(':ZBLibrary')
     //友盟统计
-    api 'com.umeng.sdk:common:latest.integration'
-    api 'com.umeng.sdk:analytics:latest.integration'
-    api 'com.umeng.umsdk:utdid:latest.integration'
+    //    api 'com.umeng.sdk:common:latest.integration'
+    //    api 'com.umeng.sdk:analytics:latest.integration'
+    //    api 'com.umeng.umsdk:utdid:latest.integration'
     //极光推送
-    api 'cn.jiguang.sdk:jpush:3.1.6'  // 此处以JPush 3.1.6 版本为例。
-    api 'cn.jiguang.sdk:jcore:1.2.5'  // 此处以JCore 1.2.5 版本为例。
+    api 'cn.jiguang.sdk:jpush:3.1.6'
+    // 此处以JPush 3.1.6 版本为例。
+    api 'cn.jiguang.sdk:jcore:1.2.5'
+    // 此处以JCore 1.2.5 版本为例。
 }
